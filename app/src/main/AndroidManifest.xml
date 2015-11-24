@@ -12,7 +12,8 @@
         <activity android:name=".MainActivity" >
 
         </activity>
-        <activity android:name=".Registration" >
+        <activity android:name=".Registration"
+            android:windowSoftInputMode="stateVisible">
         </activity>
         <activity android:name=".HomeActivity" >
         </activity>

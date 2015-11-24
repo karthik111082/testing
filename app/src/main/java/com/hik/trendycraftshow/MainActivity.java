@@ -8,17 +8,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.hik.trendycraftshow.JSON.Api;
 import com.hik.trendycraftshow.JSON.WebServiceRequest;
 import com.hik.trendycraftshow.Utils.Consts;
 import com.hik.trendycraftshow.Utils.IsTablet;
+import com.hik.trendycraftshow.Utils.Validation;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MainActivity extends Activity {
     boolean isTablet;
@@ -67,31 +66,29 @@ public class MainActivity extends Activity {
                 signin.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //showDialog();
-                        boolean e = false;
-                        boolean p = false;
-
-
-                        final String name = email.getText().toString();
-                        if (!isValidEmail(name)) {
-                            e = false;
-                            email.setError("Invalid Email Id");
-                        } else {
-                            e = true;
+                       boolean username=false,pass=false;
+                        Username = email.getText().toString();
+                        Password = psw.getText().toString();
+                        if(Validation.isValidEmail(Username))
+                        {
+                            username=true;
+                        }else{
+                            username=false;
+                            email.setError("Invalid Email");
                         }
-                        final String pswd = psw.getText().toString();
-
-                        if (!isValidPassword(pswd)) {
-                            p = false;
+                        if(Validation.isValidPassword(Password))
+                        {
+                            pass=true;
+                        }else{
+                            pass=false;
                             psw.setError("Invalid Password");
-                        } else {
-                            p = true;
                         }
 
 
-                        if (e && p) {
-                            Username=email.getText().toString();
-                            Password=psw.getText().toString();
+                        if (username && pass) {
+                            Username = email.getText().toString();
+                            Password = psw.getText().toString();
+                            showDialog();
                             Login();
 
                         }
@@ -100,8 +97,7 @@ public class MainActivity extends Activity {
                 });
 
     }
-    public void showDialog()
-    {
+    public void showDialog() {
         pDialog = new ProgressDialog(MainActivity.this);
         pDialog.setMessage("Please wait ...");
         pDialog.setIndeterminate(false);
@@ -128,26 +124,30 @@ public class MainActivity extends Activity {
                 if (responseCode == 200) {
                     try {
                         JSONObject obj = new JSONObject(responseMessage);
+                        Log.d("response", responseMessage.toString());
+                        String status = obj.getString("msg");
 
-                       /* Log.d("response", responseMessage.toString());
-                        String res = obj.getString("msg");
-                        String uname = obj.getString("UserName");
-                        Log.d("user",uname);
-                        Log.d("String", res);
-                        if (res.equalsIgnoreCase("failed")) {
-                            Log.d("response inner", responseMessage);
-                            //hideDialog();
-                            Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
-
-                        } if(uname.length()>0) {*/
-
-                            Consts.UserName = obj.getString("UserName");
-                            Consts.Password = obj.getString("Password");
-                            //hideDialog();
+                        if (status.equalsIgnoreCase("success")) {
+                            Consts.UserName=obj.getString("username");
+                            Consts.Password=obj.getString("Password");
+                            Consts.FirstName=obj.getString("Firstname");
+                            Consts.Phone=obj.getString("Phone");
+                            Consts.Street=obj.getString("Street");
+                            Consts.City=obj.getString("City");
+                            Consts.State=obj.getString("State");
+                            Consts.Zip=obj.getString("Zipcode");
+                            Consts.Photo=obj.getString("photo").getBytes();
+                            hideDialog();
                             Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                             startActivity(i);
 
-                       // }
+                        } else {
+
+                            hideDialog();
+                            Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
+
+
+                        }
 
 
                     } catch (JSONException e) {
@@ -158,21 +158,5 @@ public class MainActivity extends Activity {
         loginRequest.execute();
     }
 
-    // validating email id
-    private boolean isValidEmail(String email) {
-        String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
-        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
-    }
-
-    // validating password with retype password
-    private boolean isValidPassword(String pass) {
-        if (pass != null && pass.length() > 5) {
-            return true;
-        }
-        return false;
-    }
 }
