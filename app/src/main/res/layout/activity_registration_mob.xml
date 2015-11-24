@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+<LinearLayout
+    android:id="@+id/signUpLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible"
+    android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#ffffff"
+            android:layout_weight="1"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:text="@string/create_account"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="#ffffff"
+                android:paddingBottom="10dp"
+                android:gravity="bottom|center"
+                android:background="#ff0000"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="15dp"
+                >
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/fname"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:padding="5dp"
+                            android:hint="@string/first_last_name"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <EditText
+                            android:id="@+id/email"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:padding="5dp"
+                            android:hint="@string/emailid"
+                            android:inputType="textEmailAddress"
+                            />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <EditText
+                            android:id="@+id/psw"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:padding="5dp"
+                            android:hint="@string/password"
+                            android:inputType="textPassword"
+                            />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <EditText
+                            android:id="@+id/cnfrm"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:padding="5dp"
+                            android:hint="@string/confirmpassword"
+                            android:inputType="textPassword"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/phoneno"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:padding="5dp"
+                            android:hint="@string/phone_number"
+                            android:inputType="phone"
+                            android:maxLength="10"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <EditText
+                            android:id="@+id/street_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:padding="5dp"
+                            android:hint="@string/street_address"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <EditText
+                            android:id="@+id/city"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:padding="5dp"
+                            android:hint="@string/city"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:text="@string/state"
+                            android:textSize="15dp"
+                            android:textColor="#000000"
+                            android:gravity="center"/>
+                        <LinearLayout
+                            android:layout_width="140dp"
+                            android:layout_height="50dp"
+                            android:background="@drawable/titlestyle1"
+                            android:layout_marginLeft="5dp"
+                            >
+                            <Spinner
+                                android:id="@+id/state"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:entries="@array/spinner"
+                                >
+
+                            </Spinner>
+
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:text="@string/zip"
+                            android:layout_marginLeft="5dp"
+                            android:textSize="15dp"
+                            android:textColor="#000000"
+                            android:gravity="center"/>
+                        <EditText
+                            android:id="@+id/zip"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:hint="@string/zip"
+                            android:layout_marginLeft="5dp"
+                            android:padding="5dp"
+                            android:background="@drawable/titlestyle1"
+                            android:inputType="number"
+                            android:maxLength="6"
+                            />
+
+
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/crtaccount"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:background="#ff0000"
+                android:textColor="#ffffff"
+                android:text="@string/create_account"
+                android:layout_marginTop="90dp"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:hint="@string/terms"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:hint="@string/privacy"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/OtpLayout"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/bg"
+            >
+
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="130dp"
+                android:background="@drawable/logo"
+                android:layout_marginBottom="30dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:layout_marginBottom="30dp"
+                android:gravity="center"
+                android:text="@string/Congragulations"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="#ffffff"
+                android:layout_marginBottom="30dp"
+                android:gravity="center"
+                android:text="@string/created"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:text="@string/emailhasbeen"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:text="@string/activation"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:layout_marginBottom="20dp"
+                >
+
+
+                <EditText
+                    android:id="@+id/otp"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="#ffffff"
+                    android:gravity="left"
+                    android:inputType="number"
+                    android:layout_gravity="center"
+                    android:padding="20dp"
+                    android:textSize="20dp"
+                    android:hint="@string/entercode"
+                    />
+
+
+            </LinearLayout>
+
+
+
+                <ImageButton
+                    android:id="@+id/siginin_otp"
+                    android:background="@drawable/cntue"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:textStyle="bold"
+                    />
+
+
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>
