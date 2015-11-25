@@ -5,14 +5,17 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hik.trendycraftshow.JSON.Api;
 import com.hik.trendycraftshow.JSON.WebServiceRequest;
 import com.hik.trendycraftshow.Utils.Consts;
+import com.hik.trendycraftshow.Utils.InternetStatus;
 import com.hik.trendycraftshow.Utils.IsTablet;
 import com.hik.trendycraftshow.Utils.Validation;
 
@@ -27,6 +30,9 @@ public class MainActivity extends Activity {
     ProgressDialog pDialog;
     String Username,Password;
     EditText email,psw;
+    TextView Forgot;
+    InternetStatus internetStatus;
+    boolean internet;
     ImageButton signin,signup,guest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +44,10 @@ public class MainActivity extends Activity {
         else{
             setContentView(R.layout.activity_main_mob);
         }
+        internetStatus=new InternetStatus();
         email = (EditText) findViewById(R.id.email);
         psw = (EditText) findViewById(R.id.psw);
+        Forgot=(TextView)findViewById(R.id.forgot);
 
         signin = (ImageButton) findViewById(R.id.sign_in);
         signup = (ImageButton) findViewById(R.id.sign_up);
@@ -50,15 +58,27 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
 
                 Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                finish();
                 startActivity(i);
             }
         });
+        Forgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(getApplicationContext(), ForgotPassword.class);
+                finish();
+                startActivity(i);
+            }
+        });
+
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent i = new Intent(getApplicationContext(), Registration.class);
+                finish();
                 startActivity(i);
             }
         });
@@ -88,8 +108,14 @@ public class MainActivity extends Activity {
                         if (username && pass) {
                             Username = email.getText().toString();
                             Password = psw.getText().toString();
-                            showDialog();
-                            Login();
+
+                            if(internetStatus.InternetStatus(getApplicationContext())) {
+                                showDialog();
+                                Login();
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(),"Don't have internet",Toast.LENGTH_SHORT).show();
+                            }
 
                         }
 
@@ -128,7 +154,7 @@ public class MainActivity extends Activity {
                         String status = obj.getString("msg");
 
                         if (status.equalsIgnoreCase("success")) {
-                            Consts.UserName=obj.getString("username");
+                            Consts.UserName=obj.getString("UserName");
                             Consts.Password=obj.getString("Password");
                             Consts.FirstName=obj.getString("Firstname");
                             Consts.Phone=obj.getString("Phone");
@@ -139,6 +165,7 @@ public class MainActivity extends Activity {
                             Consts.Photo=obj.getString("photo").getBytes();
                             hideDialog();
                             Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                            finish();
                             startActivity(i);
 
                         } else {
@@ -151,12 +178,22 @@ public class MainActivity extends Activity {
 
 
                     } catch (JSONException e) {
+                        hideDialog();
+                        Log.d("Login Error", e.toString());
                     }
                 }
             }
         });
         loginRequest.execute();
     }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode== KeyEvent.KEYCODE_BACK) {
+           finish();
 
+        }
+        return false;
+
+    }
 
 }

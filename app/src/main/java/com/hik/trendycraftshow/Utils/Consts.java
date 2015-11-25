@@ -1,13 +1,37 @@
 package com.hik.trendycraftshow.Utils;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+
 /**
  * Created by DHARMA on 11/24/2015.
  */
 public class Consts {
 
+    ProgressDialog pDialog;
+    Context context;
+    public static String UserName,Password,FirstName,LastName,Phone,Street,City,State,Zip,AccessCode,ForgotPwd;
 
-    public static String UserName,Password,FirstName,LastName,Phone,Street,City,State,Zip,AccessCode;
+    public Consts(Context context) {
+        this.context = context;
+    }
+
     public static byte[] Photo;
+    public void showDialog(Context context) {
+        pDialog = new ProgressDialog(context);
+        pDialog.setMessage("Please wait ...");
+        pDialog.setIndeterminate(false);
+        pDialog.setCancelable(false);
+        pDialog.show();
+    }
+    public void hideDialog()
+    {
+        if(pDialog.isShowing())
+        {
+            pDialog.dismiss();
+        }
+    }
+
 
     public static String getUserName() {
         return UserName;

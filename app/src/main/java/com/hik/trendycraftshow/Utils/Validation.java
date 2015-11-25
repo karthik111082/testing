@@ -49,7 +49,7 @@ public class Validation {
     }
     //
     public static boolean isEmpty(String val) {
-        if (val == null ||val.length()==6) {
+        if (val == null ||val.length()==0) {
             return true;
         }
         return false;

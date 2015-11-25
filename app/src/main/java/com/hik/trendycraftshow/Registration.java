@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +33,7 @@ public class Registration extends Activity {
     LinearLayout SignUpLayout,OtpLayout;
     EditText otp;
     Spinner state;
+    ImageButton back;
 
 
     private WebServiceRequest.HttpURLCONNECTION signup;
@@ -52,6 +54,7 @@ public class Registration extends Activity {
         }
         SignUpLayout=(LinearLayout)findViewById(R.id.signUpLayout);
         OtpLayout=(LinearLayout)findViewById(R.id.OtpLayout);
+        back=(ImageButton)findViewById(R.id.back);
         fname=(EditText)findViewById(R.id.fname);
         email = (EditText) findViewById(R.id.email);
         psw = (EditText) findViewById(R.id.psw);
@@ -71,6 +74,15 @@ public class Registration extends Activity {
             public void onClick(View v) {
 
                 Validation();
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               Intent i=new Intent(getApplicationContext(),MainActivity.class);
+                finish();
+                startActivity(i);
             }
         });
 
@@ -146,10 +158,10 @@ public class Registration extends Activity {
                             hideDialog();
                         if (status.equalsIgnoreCase("User Already Exists")) {
                             Toast.makeText(getApplicationContext(), "User already exists", Toast.LENGTH_SHORT).show();
-                        } else if (status.equalsIgnoreCase("signup failed")) {
+                        } if (status.equalsIgnoreCase("signup failed")) {
                             Toast.makeText(getApplicationContext(), "Server Failed", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Consts.UserName=obj.getString("username");
+                        } if(status.equalsIgnoreCase("success")) {
+                            Consts.UserName=obj.getString("UserName");
                             Consts.Password=obj.getString("Password");
                             Consts.FirstName=obj.getString("Firstname");
                             Consts.Phone=obj.getString("Phone");
@@ -158,7 +170,6 @@ public class Registration extends Activity {
                             Consts.State=obj.getString("State");
                             Consts.Zip=obj.getString("Zipcode");
                             Consts.Photo=obj.getString("photo").getBytes();
-
                             Consts.AccessCode = obj.getString("code");
                             Log.d("ConsValue",Consts.AccessCode);
                             OTPValue = obj.getString("code");
@@ -172,6 +183,7 @@ public class Registration extends Activity {
 
                     } catch (JSONException e) {
                         hideDialog();
+                        Log.d("Registration Error",e.toString());
                     }
                 }
             }
@@ -280,6 +292,15 @@ public class Registration extends Activity {
         }
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode== KeyEvent.KEYCODE_BACK) {
+            Intent i=new Intent(getApplicationContext(),MainActivity.class);
+            finish();
+            startActivity(i);
+        }
+        return false;
 
+    }
 
 }
