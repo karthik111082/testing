@@ -86,6 +86,7 @@ public class ForgotPassword extends Activity {
                         JSONObject obj = new JSONObject(responseMessage);
                         Log.d("response", responseMessage.toString());
                         String status = obj.getString("msg");
+                        Log.d("Status",status);
 
                         if (status.equalsIgnoreCase("success")) {
                             Consts.UserName = obj.getString("UserName");
