@@ -11,7 +11,8 @@ public class HomeActivity extends Activity {
     ImageButton back;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         back=(ImageButton)findViewById(R.id.back);
