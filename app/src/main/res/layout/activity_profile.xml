@@ -77,7 +77,14 @@
             android:paddingRight="15dp"
             android:paddingTop="15dp"
             >
-
+            <EditText
+                android:id="@+id/companyname"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:padding="7dp"
+                android:hint="@string/companyname"
+                android:inputType="textEmailAddress"
+                />
 
 
             <EditText
@@ -97,6 +104,24 @@
                 android:layout_height="80dp"
                 android:padding="7dp"
                 android:hint="@string/phone_number"
+                android:inputType="phone"
+                android:maxLength="10"
+                />
+            <EditText
+                android:id="@+id/officeno"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:padding="7dp"
+                android:hint="@string/office_number"
+                android:inputType="phone"
+                android:maxLength="10"
+                />
+            <EditText
+                android:id="@+id/paypalemail"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:padding="7dp"
+                android:hint="@string/paypalemail"
                 android:inputType="phone"
                 android:maxLength="10"
                 />

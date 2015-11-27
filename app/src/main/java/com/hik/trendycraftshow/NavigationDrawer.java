@@ -88,6 +88,10 @@ public class NavigationDrawer extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.nav_profile) {
 
+
+            Intent i=new Intent(getApplicationContext(),ProfileActivity.class);
+
+            startActivity(i);
         } else if (id == R.id.nav_inbox) {
 
         } else if (id == R.id.nav_payment) {
