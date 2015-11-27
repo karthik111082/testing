@@ -57,7 +57,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                Intent i = new Intent(getApplicationContext(), NavigationDrawer.class);
                 finish();
                 startActivity(i);
             }
@@ -164,7 +164,7 @@ public class MainActivity extends Activity {
                             Consts.Zip=obj.getString("Zipcode");
                             Consts.Photo=obj.getString("photo").getBytes();
                             hideDialog();
-                            Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                            Intent i = new Intent(getApplicationContext(), NavigationDrawer.class);
                             finish();
                             startActivity(i);
 

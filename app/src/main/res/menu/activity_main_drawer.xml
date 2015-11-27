@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/homeicon"
+
+            android:title="HOME" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/homeicon"
+            android:title="PROFILE" />
+        <item
+            android:id="@+id/nav_inbox"
+            android:icon="@drawable/homeicon"
+            android:title="INBOX" />
+        <item
+            android:id="@+id/nav_payment"
+
+            android:icon="@drawable/homeicon"
+            android:title="PAYMENT AND PURCHASE" />
+        <item
+            android:id="@+id/nav_wishlist"
+            android:icon="@drawable/homeicon"
+            android:title="WISHLIST" />
+        <item
+            android:id="@+id/nav_businesscard"
+            android:icon="@drawable/homeicon"
+            android:title="MY BUSINESS CARD" />
+        <item
+            android:id="@+id/nav_mysales"
+            android:icon="@drawable/homeicon"
+
+            android:title="MY SALES" />
+        <item
+            android:id="@+id/nav_advertisment"
+            android:icon="@drawable/homeicon"
+            android:title="POST ADVERTISMENT" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/homeicon"
+            android:title="LOGOUT" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/homeicon"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/homeicon"
+                android:title="Send" />
+        </menu>
+    </item>
+
+</menu>

@@ -114,7 +114,7 @@ public class Registration extends Activity {
                                         }else
                                         {
 
-                                            Intent i=new Intent(getApplicationContext(),HomeActivity.class);
+                                            Intent i=new Intent(getApplicationContext(),NavigationDrawer.class);
                                             startActivity(i);
                                         }
 
