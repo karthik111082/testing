@@ -8,10 +8,6 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="create_account">Create Account</string>
-    <string name="market_search">Trendy Market Search</string>
-    <string name="market_sale">Trendy Market Sale</string>
-    <string name="search">Search</string>
-    <string name="business_search">Business Directory Search</string>
     <string name="send">SEND</string>
     <string name="forgot_password_label">Please enter your email address, You will receive a new temporary password</string>
     <string name="forgot_pwd">Forgot Password</string>
@@ -63,16 +59,4 @@
         <item>New Mexico</item>
         <item>New York</item>
     </string-array>
-    <string name="title_activity_main2">Main2Activity</string>
-
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="action_example">Example action</string>
-
-    <string name="action_settings">Settings</string>
 </resources>
