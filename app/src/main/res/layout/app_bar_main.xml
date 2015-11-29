@@ -27,7 +27,18 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#4b1e16"
+        android:background="#00a05f"
         app:popupTheme="@style/AppTheme.PopupOverlay" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+       android:id="@+id/titletoolbar"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:layout_weight="1"
+
+        android:textColor="#ffffff"
+        android:gravity="center_horizontal|center_vertical|center"
+        />
 
 </android.support.design.widget.CoordinatorLayout>

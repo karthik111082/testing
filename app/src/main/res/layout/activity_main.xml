@@ -50,8 +50,23 @@
                 android:inputType="textPassword"
                 android:textSize="20dp"
                 android:hint="@string/password"
-                />
+                android:layout_marginBottom="2dp"
 
+                />
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <CheckBox
+                android:id="@+id/remember_radio"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#ffffff"
+                android:gravity="left|center_vertical"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:textSize="20dp"
+                android:hint="@string/remember"
+                /></RadioGroup>
 
 
         </LinearLayout>
@@ -68,7 +83,7 @@
             >
             <ImageButton
                 android:id="@+id/sign_in"
-                android:background="@drawable/signin2"
+                android:background="@drawable/login2"
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:textStyle="bold"

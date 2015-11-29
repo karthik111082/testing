@@ -3,6 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent"
@@ -28,12 +32,12 @@
                <LinearLayout
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:background="#ff0000"
+                   android:background="#00a05f"
                    android:orientation="horizontal">
                    <ImageButton
                        android:id="@+id/back"
                        android:layout_width="30dp"
-                       android:layout_height="60dp"
+                       android:layout_height="30dp"
                        android:visibility="visible"
                        android:layout_marginLeft="10dp"
                        android:layout_gravity="center_vertical"
@@ -49,7 +53,7 @@
                        android:layout_marginRight="40dp"
                        android:textColor="#ffffff"
                        android:gravity="center_horizontal|center_vertical|center"
-                       android:background="#ff0000"
+                       android:background="#00a05f"
                        />
 
                </LinearLayout>
@@ -110,6 +114,16 @@
                                android:hint="@string/confirmpassword"
                                android:inputType="textPassword"
                                />
+                       <EditText
+
+                           android:id="@+id/phoneno_cell"
+                           android:layout_width="match_parent"
+                           android:layout_height="70dp"
+                           android:padding="15dp"
+                           android:hint="@string/home_number"
+                           android:inputType="phone"
+                           android:maxLength="10"
+                           />
 
                            <EditText
 
@@ -137,69 +151,67 @@
                                android:padding="15dp"
                                android:hint="@string/city"
                                />
-
-                       <LinearLayout
+                       <Spinner
+                           android:id="@+id/state"
                            android:layout_width="match_parent"
                            android:layout_height="70dp"
-                           android:orientation="horizontal">
-                           <LinearLayout
-                               android:layout_width="match_parent"
-                               android:layout_height="match_parent"
-                               android:orientation="horizontal"
-                               android:layout_weight="0.9">
-                           <TextView
-                               android:layout_width="wrap_content"
-                               android:layout_height="70dp"
-                               android:padding="10dp"
-                               android:text="@string/state"
-                               android:textSize="25dp"
-                               android:textColor="#000000"
-                               android:gravity="center"/>
+                           android:entries="@array/spinner"
 
-                               <Spinner
-                                   android:id="@+id/state"
-                                   android:layout_width="match_parent"
-                                   android:layout_height="match_parent"
-                                   android:entries="@array/spinner"
-                                   android:background="@drawable/titlestyle1"
-                                   android:paddingLeft="2dp"
-                                   >
+                           android:paddingLeft="2dp"
+                           >
 
-                               </Spinner>
+                       </Spinner>
+                       <EditText
+                           android:id="@+id/zip"
+                           android:layout_width="match_parent"
+                           android:layout_height="70dp"
 
-                           </LinearLayout>
-                           <LinearLayout
-                               android:layout_width="match_parent"
-                               android:layout_height="match_parent"
-                               android:orientation="horizontal"
-                               android:layout_weight="1">
-                           <TextView
-                               android:layout_width="wrap_content"
-                               android:layout_height="70dp"
-                               android:padding="15dp"
-                               android:text="@string/zip"
-                               android:layout_marginLeft="5dp"
-                               android:textSize="25dp"
-                               android:textColor="#000000"
-                               android:gravity="center"/>
-                           <EditText
-                               android:id="@+id/zip"
-                               android:layout_width="match_parent"
-                               android:layout_height="match_parent"
-                               android:padding="15dp"
-                               android:hint="@string/zip"
-                               android:layout_marginLeft="5dp"
-                               android:background="@drawable/titlestyle1"
-                               android:inputType="number"
-                               android:maxLength="5"
-                               />
+                           android:hint="@string/zip"
+                           android:layout_marginLeft="5dp"
 
-                           </LinearLayout>
-                       </LinearLayout>
+                           android:inputType="number"
+                           android:maxLength="5"
+                           />
+
+
 
 
                    </LinearLayout>
 
+               </LinearLayout>
+
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:gravity="center_horizontal"
+                   android:orientation="horizontal"
+                   android:layout_marginTop="5dp">
+                   <TextView
+                       android:layout_width="wrap_content"
+
+                       android:layout_height="wrap_content"
+                       android:padding="5dp"
+                       android:gravity="center"
+                       android:text="@string/terms"
+                       />
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:padding="5dp"
+                       android:id="@+id/terms"
+
+                       android:gravity="center"
+                       android:textColor="@color/blue"
+                       android:text="Terms and Privacy "
+                       />
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:padding="5dp"
+                       android:gravity="center"
+                       android:text="Policies."
+                       />
                </LinearLayout>
 
                <Button
@@ -208,39 +220,14 @@
                    android:layout_height="70dp"
                    android:padding="15dp"
                    android:textSize="25dp"
-                   android:background="#ff0000"
+                   android:background="#00a05f"
                    android:textColor="#ffffff"
                    android:text="@string/create_account"
-                   android:layout_marginTop="90dp"
+                   android:layout_marginTop="20dp"
                    android:layout_gravity="center"
                    android:textStyle="bold"
                    />
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:orientation="vertical"
-                   android:layout_marginTop="20dp">
-                   <TextView
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:padding="5dp"
-                       android:gravity="center"
-                       android:hint="@string/terms"
-                       />
-               </LinearLayout>
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:orientation="vertical"
-                   android:layout_marginTop="5dp">
-                   <TextView
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:padding="5dp"
-                       android:gravity="center"
-                       android:hint="@string/privacy"
-                       />
-               </LinearLayout>
+
 
            </LinearLayout>
 
@@ -261,14 +248,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@drawable/bg"
-        android:gravity="bottom|center"
         >
 
         <ImageView
             android:layout_width="500dp"
             android:layout_height="200dp"
             android:background="@drawable/logo"
-            android:layout_marginBottom="100dp"
+            android:layout_gravity="center"
+
             />
 
         <TextView
@@ -277,31 +264,27 @@
             android:textSize="40dp"
             android:textColor="#ffffff"
             android:textStyle="bold"
-            android:layout_marginBottom="60dp"
+            android:layout_marginTop="70dp"
             android:gravity="center"
             android:text="@string/Congragulations"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:textSize="30dp"
             android:textColor="#ffffff"
-            android:layout_marginBottom="80dp"
             android:gravity="center"
             android:text="@string/created"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+
             android:textSize="30dp"
             android:textColor="#ffffff"
             android:gravity="center"
             android:text="@string/emailhasbeen"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:textColor="#ffffff"
-            android:gravity="center"
-            android:text="@string/activation"/>
+
 
 
         <LinearLayout
@@ -318,6 +301,8 @@
                 android:id="@+id/otp"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+
                 android:background="#ffffff"
                 android:gravity="left|center_vertical"
                 android:inputType="number"
@@ -338,7 +323,7 @@
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="90dp"
             android:paddingRight="20dp"
             android:paddingLeft="20dp"
 
@@ -358,5 +343,102 @@
     </LinearLayout>
 
 </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:id="@+id/congratulation">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@drawable/bg"
+                >
+
+                <ImageView
+                    android:layout_width="500dp"
+                    android:layout_height="200dp"
+                    android:background="@drawable/logo"
+                    android:layout_gravity="center"
+
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:padding="30dp"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/continuebg"
+                    android:layout_height="400dp">
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="40dp"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+
+                    android:gravity="center"
+                    android:text="@string/Congragulations"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:textSize="30dp"
+                    android:textColor="#000000"
+                    android:gravity="center"
+                    android:text="@string/created"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+
+                    android:textSize="30dp"
+                    android:textColor="#000000"
+                    android:gravity="center"
+                    android:text="@string/beforeyou"/>
+                </LinearLayout>
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="90dp"
+                    android:paddingRight="20dp"
+                    android:paddingLeft="20dp"
+
+
+                    >
+                    <ImageButton
+                        android:id="@+id/continue_otp"
+                        android:background="@drawable/cntue"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:textStyle="bold"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:text="Copyright &#169; 2015, William Fuller. All Rights Reserved."/>
 </RelativeLayout>

@@ -38,7 +38,7 @@ public class ProfileActivity extends Activity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                Intent i = new Intent(getApplicationContext(), NavigationDrawer.class);
                 finish();
                 startActivity(i);
 
@@ -58,7 +58,7 @@ public class ProfileActivity extends Activity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode== KeyEvent.KEYCODE_BACK) {
-            Intent i=new Intent(getApplicationContext(),ProfileActivity.class);
+            Intent i=new Intent(getApplicationContext(),NavigationDrawer.class);
             finish();
             startActivity(i);
         }

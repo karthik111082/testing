@@ -12,17 +12,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class NavigationDrawer extends AppCompatActivity
+
+
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    TextView title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigationmain);
      Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Trendy Craft Show");
-        toolbar.setTitleTextColor(Color.WHITE);
+        title=(TextView)findViewById(R.id.titletoolbar);
+        title.setText("TRENDY CRAFT SHOW");
+       /* toolbar.setTitle("Trendy Craft Show");
+        toolbar.setTitleTextColor(Color.WHITE);*/
+
         //setSupportActionBar(toolbar);
 
      /*   FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -85,12 +92,14 @@ public class NavigationDrawer extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
+
+
             // Handle the camera action
         } else if (id == R.id.nav_profile) {
 
 
             Intent i=new Intent(getApplicationContext(),ProfileActivity.class);
-
+            finish();
             startActivity(i);
         } else if (id == R.id.nav_inbox) {
 
@@ -106,7 +115,9 @@ public class NavigationDrawer extends AppCompatActivity
         }else if (id == R.id.nav_advertisment) {
 
         }else if (id == R.id.nav_logout) {
-
+            Intent i=new Intent(getApplicationContext(),LoginActivity.class);
+            finish();
+            startActivity(i);
         }
 
 
@@ -117,9 +128,9 @@ public class NavigationDrawer extends AppCompatActivity
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode== KeyEvent.KEYCODE_BACK) {
-            Intent i=new Intent(getApplicationContext(),MainActivity.class);
+         /*   Intent i=new Intent(getApplicationContext(),MainActivity.class);
             finish();
-            startActivity(i);
+            startActivity(i);*/
         }
         return false;
 

@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hik.trendycraftshow.JSON.Api;
@@ -26,14 +27,15 @@ import org.json.JSONObject;
 public class Registration extends Activity {
     boolean isTablet;
     IsTablet tablet;
-    EditText fname,email,psw,cnfrm_psw,phone,street,city,zip;
-    String Fname,Email,Pwd,cPwd,Phone,Street,City,Zip,State;
+    EditText fname,email,psw,cnfrm_psw,phone,street,city,zip,cellphone;
+    String Fname,Email,Pwd,cPwd,Phone,Street,City,Zip,State,CellNo;
     Button createaccount;
     ImageButton OTP;
-    LinearLayout SignUpLayout,OtpLayout;
+    LinearLayout SignUpLayout,OtpLayout,Congrats;
     EditText otp;
     Spinner state;
-    ImageButton back;
+    ImageButton back,OTPContinue;
+    TextView terms;
 
 
     private WebServiceRequest.HttpURLCONNECTION signup;
@@ -57,7 +59,12 @@ public class Registration extends Activity {
         back=(ImageButton)findViewById(R.id.back);
         fname=(EditText)findViewById(R.id.fname);
         email = (EditText) findViewById(R.id.email);
+        terms = (TextView) findViewById(R.id.terms);
+
+        OTPContinue=(ImageButton)findViewById(R.id.continue_otp);
+        cellphone=(EditText)findViewById(R.id.phoneno_cell);
         psw = (EditText) findViewById(R.id.psw);
+        Congrats=(LinearLayout)findViewById(R.id.congratulation);
         state=(Spinner)findViewById(R.id.state);
         otp=(EditText)findViewById(R.id.otp);
         cnfrm_psw=(EditText)findViewById(R.id.cnfrm);
@@ -80,9 +87,28 @@ public class Registration extends Activity {
             @Override
             public void onClick(View v) {
 
-               Intent i=new Intent(getApplicationContext(),MainActivity.class);
+               Intent i=new Intent(getApplicationContext(),LoginActivity.class);
                 finish();
                 startActivity(i);
+            }
+        });
+        terms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i=new Intent(getApplicationContext(),TermsActivity.class);
+                finish();
+                startActivity(i);
+
+            }
+        });
+        OTPContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Congrats.setVisibility(View.GONE);
+                OtpLayout.setVisibility(View.VISIBLE);
+                SignUpLayout.setVisibility(View.GONE);
             }
         });
 
@@ -110,12 +136,14 @@ public class Registration extends Activity {
                                         hideDialog();
                                         if(status.equalsIgnoreCase("Activation Failed"))
                                         {
-                                            Toast.makeText(getApplicationContext(),"Activation Failed",Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(),"We encountered an error while connecting to the server, please try after sometime!!!",Toast.LENGTH_SHORT).show();
                                         }else
                                         {
 
                                             Intent i=new Intent(getApplicationContext(),NavigationDrawer.class);
+                                            finish();
                                             startActivity(i);
+
                                         }
 
 
@@ -131,11 +159,11 @@ public class Registration extends Activity {
 
 
                     }else{
-                        otp.setError("Invalid OTP");
+                        otp.setError("The activation code doesn't match our records. Please check your email!!!");
                     }
                 }
                 else {
-                    otp.setError("Enter OTP");
+                    otp.setError("Please check your email for activation code!!!");
                 }
             }
         });
@@ -143,7 +171,7 @@ public class Registration extends Activity {
 
     public void SignUp()
     {
-        String params = "username=" + Email + "&password="+cPwd+ "&firstname="+Fname+ "&phone="+Phone+ "&street="+Street+ "&city="+City+ "&state="+State+ "&zipcode="+Zip+ "&photo="+"0";
+        String params = "username=" + Email + "&password="+cPwd+ "&firstname="+Fname+ "&phone="+Phone+ "&street="+Street+ "&city="+City+ "&state="+State+ "&zipcode="+Zip+ "&photo="+"0"+ "&cellphone="+CellNo;
         params=params.replaceAll(" ","%20");
         Log.d("parameters", params);
         signup = api.REGISTRATION(params, new WebServiceRequest.Callback() {
@@ -174,8 +202,9 @@ public class Registration extends Activity {
                             Log.d("ConsValue",Consts.AccessCode);
                             OTPValue = obj.getString("code");
                             hideDialog();
-                            OtpLayout.setVisibility(View.VISIBLE);
+                            OtpLayout.setVisibility(View.GONE);
                             SignUpLayout.setVisibility(View.GONE);
+                            Congrats.setVisibility(View.VISIBLE);
 
 
                         }
@@ -205,7 +234,7 @@ public class Registration extends Activity {
     }
     public void Validation()
     {
-       boolean VName=false,VEmail=false,VPass=false,VcPass=false,VPhone=false,VCity=false,VStreet=false,VZip=false;
+       boolean VName=false,VEmail=false,VPass=false,VcPass=false,VPhone=false,VCity=false,VStreet=false,VZip=false,VState=false;
         Fname = fname.getText().toString();
         Email=email.getText().toString();
         Pwd=psw.getText().toString();
@@ -215,13 +244,14 @@ public class Registration extends Activity {
         City=city.getText().toString();
         State=state.getSelectedItem().toString();
         Zip=zip.getText().toString();
+        CellNo=cellphone.getText().toString();
         if(Validation.isValidName(Fname))
         {
             VName=true;
         }
         else {
             VName=false;
-            fname.setError("Enter Valid Name");
+            fname.setError("Please enter valid name!!!");
         }
         if(Validation.isValidEmail(Email))
         {
@@ -229,7 +259,7 @@ public class Registration extends Activity {
         }
         else {
             VEmail=false;
-            email.setError("Enter Valid Email Address");
+            email.setError("Please enter valid email-address!!!");
         }
         if(Validation.isValidPassword(Pwd))
         {
@@ -237,7 +267,7 @@ public class Registration extends Activity {
         }
         else {
             VPass=false;
-            psw.setError("Password Should be more then 6 characters");
+            psw.setError("Password should be more then 5 digits!!!");
         }
 
         if(Validation.isValidConfirmPassword(Pwd, cPwd))
@@ -246,15 +276,15 @@ public class Registration extends Activity {
         }
         else {
             VcPass=false;
-            cnfrm_psw.setError("Password does not match");
+            cnfrm_psw.setError("Password & Confirm password doesn't match. Please check!!!");
         }
         if(Validation.isValidPhone(Phone))
         {
             VPhone=true;
         }
         else {
-            VPhone=false;
-            zip.setError("Invalid phone number");
+            VPhone=true;
+            //zip.setError("Invalid phone number");
         }
         if(Validation.isZip(Zip))
         {
@@ -262,12 +292,12 @@ public class Registration extends Activity {
         }
         else {
             VZip=false;
-            zip.setError("Invalid zip code");
+            zip.setError("Please enter valid zip code!!!");
         }
         if(Validation.isEmpty(Street))
         {
             VStreet=false;
-            street.setError("Enter Street");
+            street.setError("Please enter valid street address!!!");
         }
         else {
            VStreet=true;
@@ -275,17 +305,26 @@ public class Registration extends Activity {
         if(Validation.isEmpty(City))
         {
             VCity=false;
-            city.setError("Enter city");
+            city.setError("Please enter valid city!!!");
         }
         else {
             VCity=true;
+        }
+        if(state.getSelectedItemPosition()>0)
+        {
+            VState=true;
+        }
+        else
+        {
+            VState=false;
+           Toast.makeText(getApplicationContext(),"Please choose a valid state!!!",Toast.LENGTH_SHORT).show();
         }
 
 
 
         Log.d("Status",""+VName+VEmail+VPass+VcPass+VPhone+VZip+VStreet+VCity);
 
-        if (VName && VEmail && VPass && VcPass && VPhone && VZip && VStreet && VCity )
+        if (VName && VEmail && VPass && VcPass && VPhone && VZip && VStreet && VCity &&VState)
         {
             showDialog();
             SignUp();
@@ -295,7 +334,7 @@ public class Registration extends Activity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode== KeyEvent.KEYCODE_BACK) {
-            Intent i=new Intent(getApplicationContext(),MainActivity.class);
+            Intent i=new Intent(getApplicationContext(),LoginActivity.class);
             finish();
             startActivity(i);
         }

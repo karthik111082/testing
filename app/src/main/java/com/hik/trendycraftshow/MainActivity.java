@@ -2,19 +2,31 @@ package com.hik.trendycraftshow;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.CharArrayBuffer;
+import android.database.ContentObserver;
+import android.database.Cursor;
+import android.database.DataSetObserver;
+import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hik.trendycraftshow.JSON.Api;
 import com.hik.trendycraftshow.JSON.WebServiceRequest;
 import com.hik.trendycraftshow.Utils.Consts;
+import com.hik.trendycraftshow.Utils.Dbhelper;
 import com.hik.trendycraftshow.Utils.InternetStatus;
 import com.hik.trendycraftshow.Utils.IsTablet;
 import com.hik.trendycraftshow.Utils.Validation;
@@ -34,6 +46,9 @@ public class MainActivity extends Activity {
     InternetStatus internetStatus;
     boolean internet;
     ImageButton signin,signup,guest;
+    Dbhelper mHelper;
+    SQLiteDatabase database;
+    CheckBox remember;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +59,10 @@ public class MainActivity extends Activity {
         else{
             setContentView(R.layout.activity_main_mob);
         }
+        mHelper=new Dbhelper(getApplicationContext());
+        database=mHelper.getWritableDatabase();
         internetStatus=new InternetStatus();
+        remember=(CheckBox)findViewById(R.id.remember_radio);
         email = (EditText) findViewById(R.id.email);
         psw = (EditText) findViewById(R.id.psw);
         Forgot=(TextView)findViewById(R.id.forgot);
@@ -52,7 +70,7 @@ public class MainActivity extends Activity {
         signin = (ImageButton) findViewById(R.id.sign_in);
         signup = (ImageButton) findViewById(R.id.sign_up);
         guest= (ImageButton)findViewById(R.id.guest);
-
+Getdata();
         guest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +100,12 @@ public class MainActivity extends Activity {
                 startActivity(i);
             }
         });
+       remember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+           @Override
+           public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+           }
+       });
 
                 signin.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -94,14 +118,14 @@ public class MainActivity extends Activity {
                             username=true;
                         }else{
                             username=false;
-                            email.setError("Invalid Email");
+                            email.setError("Please check your email address!!!");
                         }
                         if(Validation.isValidPassword(Password))
                         {
                             pass=true;
                         }else{
                             pass=false;
-                            psw.setError("Invalid Password");
+                            psw.setError("The password should be more than 5 digits. Please check!!!");
                         }
 
 
@@ -114,7 +138,7 @@ public class MainActivity extends Activity {
                                 Login();
                             }
                             else{
-                                Toast.makeText(getApplicationContext(),"Don't have internet",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),"Trendy Craft Show requires internet. Please check!!!",Toast.LENGTH_SHORT).show();
                             }
 
                         }
@@ -137,7 +161,25 @@ public class MainActivity extends Activity {
             pDialog.dismiss();
         }
     }
+public void Getdata()
+{
+    String sql = "SELECT * FROM "+Dbhelper.TABLE_NAME;
+    Log.d("query", sql);
+    Cursor cursor  = database.rawQuery(sql,null);
 
+    if (cursor.moveToNext())
+    {
+        email.setText(cursor.getString(cursor.getColumnIndex(Dbhelper.KEY_UNAME)));
+        psw.setText(cursor.getString(cursor.getColumnIndex(Dbhelper.KEY_PASSWORD)));
+        remember.setChecked(true);
+        remember.setClickable(true);
+
+    }else{
+        remember.setChecked(false);
+        remember.setClickable(true);
+    }
+
+}
     public void Login()
     {
         String params = "uname=" + Username + "&pass="+Password;
@@ -164,6 +206,19 @@ public class MainActivity extends Activity {
                             Consts.Zip=obj.getString("Zipcode");
                             Consts.Photo=obj.getString("photo").getBytes();
                             hideDialog();
+                            if(remember.isChecked())
+                            {
+                                String sql="delete from "+Dbhelper.TABLE_NAME;
+                                database.execSQL(sql);
+                                ContentValues value=new ContentValues();
+                                value.put(Dbhelper.KEY_UNAME,Consts.UserName);
+                                value.put(Dbhelper.KEY_PASSWORD,Consts.Password);
+                                database.insert(Dbhelper.TABLE_NAME,null,value);
+                            }else
+                            {
+                                String sql="delete from "+Dbhelper.TABLE_NAME;
+                                database.execSQL(sql);
+                            }
                             Intent i = new Intent(getApplicationContext(), NavigationDrawer.class);
                             finish();
                             startActivity(i);
@@ -171,7 +226,7 @@ public class MainActivity extends Activity {
                         } else {
 
                             hideDialog();
-                            Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Your username or password doesn't match our records. Please check!!!", Toast.LENGTH_SHORT).show();
 
 
                         }
@@ -189,7 +244,9 @@ public class MainActivity extends Activity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode== KeyEvent.KEYCODE_BACK) {
-           finish();
+            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+            finish();
+            startActivity(i);
 
         }
         return false;

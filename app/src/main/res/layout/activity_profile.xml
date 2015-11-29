@@ -13,7 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ff0000"
+            android:background="@color/green"
             android:orientation="horizontal">
             <ImageButton
                 android:id="@+id/back"
@@ -34,7 +34,7 @@
                 android:layout_marginRight="40dp"
                 android:textColor="#ffffff"
                 android:gravity="center_horizontal|center_vertical|center"
-                android:background="#ff0000"
+                android:background="@color/green"
                 />
 
         </LinearLayout>
@@ -43,7 +43,7 @@
             android:id="@+id/l1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/red"
+            android:background="@color/green"
             android:gravity="center_horizontal"
             android:orientation="vertical">
             <ImageView
@@ -60,7 +60,7 @@
                 android:text="@string/change_photo"
                 android:textColor="@color/white"
                 android:textSize="35dp"
-                android:background="@color/red"
+                android:background="@color/green"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
                 />

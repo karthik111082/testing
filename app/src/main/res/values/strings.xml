@@ -1,16 +1,24 @@
 <resources>
+    <string name="sign_in">SIGNIN</string>
+    <string name="sign_up">SIGNUP</string>
+    <string name="home">HOME</string>
+    <string name="remember">Remember me</string>
+
     <string name="app_name">Trendy Craft Show</string>
     <string name="firstname">First Name</string>
     <string name="lastname">Last Name</string>
     <string name="age">Age</string>
-    <string name="phone_number">Mobile Phone Number</string>
+    <string name="phone_number">Cell Phone (optional)</string>
+    <string name="home_number">Home Phone (optional)</string>
+
     <string name="office_number">Office Number</string>
-    <string name="emailid">Email Id</string>
+    <string name="emailid">Email</string>
     <string name="paypalemail">Paypal Email Id</string>
     <string name="companyname">Comapny Name</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="create_account">Create Account</string>
+    <string name="termsandcondition">Terms &amp; Conditions</string>
     <string name="change_photo">Change Photo</string>
     <string name="market_sale">Trendy Market Sale</string>
     <string name="search">Search</string>
@@ -20,7 +28,7 @@
     <string name="market_search">Market Search</string>
     <string name="business_search">Business Directory Search</string>
     <string name="send">SEND</string>
-    <string name="forgot_password_label">Please enter your email address, You will receive a new temporary password</string>
+    <string name="forgot_password_label">Please enter your email address! You will receive a new temporary password.</string>
     <string name="forgot_pwd">Forgot Password</string>
     <string name="forgot_pwd1">Forgot Password?</string>
     <string name="first_last_name">First and Last Name</string>
@@ -29,16 +37,21 @@
     <string name="street_address">Street Address</string>
     <string name="city">City</string>
     <string name="state">State</string>
-    <string name="zip">Zip</string>
+    <string name="zip">Zip code</string>
     <string name="confirmpassword">Confirm Password</string>
     <string name="entercode">Enter code here</string>
-    <string name="Congragulations">Congragulations!!!</string>
+    <string name="Congragulations">Congratulations!!!</string>
     <string name="created">Your Account is Created Successfully!</string>
-    <string name="emailhasbeen">An email has been sent you with</string>
+    <string name="fairs_festivels">FAIRS &amp; FESTIVELS</string>
+    <string name="emailhasbeen">An email has been sent you with Activation Code</string>
+    <string name="beforeyou">Before you start using Trendy Craft Show we need to verify your
+email adress.</string>
     <string name="activation">Activation Code</string>
-    <string name="terms">By signing up, I accept the Terms and</string>
+    <string name="terms">By signing up,  I accept the </string>
     <string name="privacy">Privacy Policies.</string>
+
     <string-array name="spinner">
+        <item>Choose State</item>
         <item>Alabama</item>
         <item>Alaska</item>
         <item>Arizona</item>
@@ -46,8 +59,10 @@
         <item>California</item>
         <item>Colorado</item>
         <item>Connecticut</item>
+        <item>Delaware</item>
         <item>District Of Columbia</item>
         <item>Florida</item>
+        <item>Georgia</item>
         <item>Hawaii</item>
         <item>Idaho</item>
         <item>Illinois</item>
@@ -55,19 +70,39 @@
         <item>Iowa</item>
         <item>Kansas</item>
         <item>Kentucky</item>
-        <item>Kansas</item>
         <item>Louisiana</item>
         <item>Maine</item>
         <item>Maryland</item>
         <item>Michigan</item>
         <item>Massachusetts</item>
+        <item>Michigan</item>
         <item>Minnesota</item>
         <item>Mississippi</item>
         <item>Missouri</item>
         <item>Montana</item>
+        <item>Nebraska</item>
         <item>Nevada</item>
+        <item>New Hampshire</item>
         <item>New Jersey</item>
         <item>New Mexico</item>
         <item>New York</item>
+        <item>North Carolina</item>
+        <item>North Dakota</item>
+        <item>Ohio</item>
+        <item>Oklahoma</item>
+        <item>Oregon</item>
+        <item>Pennsylvania</item>
+        <item>Rhode Island</item>
+        <item>South Carolina</item>
+        <item>South Dakota</item>
+        <item>Tennessee</item>
+        <item>Texas</item>
+        <item>Utah</item>
+        <item>Vermont</item>
+        <item>Virginia</item>
+        <item>Washington</item>
+        <item>West Virginia</item>
+        <item>Wisconsin</item>
+        <item>Wyoming</item>
     </string-array>
 </resources>
