@@ -80,7 +80,7 @@
         >
 
         <ImageButton
-            android:id="@+id/guest"
+            android:id="@+id/loginguest"
             android:layout_weight="1"
             android:background="@drawable/guest_home"
             android:layout_width="match_parent"

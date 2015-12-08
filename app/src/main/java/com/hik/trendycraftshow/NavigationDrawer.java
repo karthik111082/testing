@@ -12,7 +12,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import com.hik.trendycraftshow.Utils.Consts;
+import com.hik.trendycraftshow.Utils.IsTablet;
 
 public class NavigationDrawer extends AppCompatActivity
 
@@ -20,17 +24,28 @@ public class NavigationDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView title;
+   public FrameLayout container;
+    IsTablet tablet;
+    boolean isTablet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigationmain);
      Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         title=(TextView)findViewById(R.id.titletoolbar);
-        title.setText("TRENDY CRAFT SHOW");
+        title.setText("TRENDY CRAFT SHOWS");
+        isTablet = tablet.isTablet(getApplicationContext());
+        container=(FrameLayout)findViewById(R.id.container);
        /* toolbar.setTitle("Trendy Craft Show");
         toolbar.setTitleTextColor(Color.WHITE);*/
 
         //setSupportActionBar(toolbar);
+        if(isTablet)
+        {
+            getLayoutInflater().inflate(R.layout.activity_home, container);
+        }else{
+            getLayoutInflater().inflate(R.layout.activity_home_mob, container);
+        }
 
      /*   FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -93,14 +108,17 @@ public class NavigationDrawer extends AppCompatActivity
 
         if (id == R.id.nav_home) {
 
-
+            Intent i=new Intent(getApplicationContext(),HomeActivity.class);
+            finish();
+            startActivity(i);
             // Handle the camera action
         } else if (id == R.id.nav_profile) {
 
 
-            Intent i=new Intent(getApplicationContext(),ProfileActivity.class);
-            finish();
-            startActivity(i);
+//           Intent i=new Intent(getApplicationContext(),ProfileActivity.class);
+//            finish();
+//            startActivity(i);
+
         } else if (id == R.id.nav_inbox) {
 
         } else if (id == R.id.nav_payment) {
@@ -117,6 +135,17 @@ public class NavigationDrawer extends AppCompatActivity
         }else if (id == R.id.nav_logout) {
             Intent i=new Intent(getApplicationContext(),LoginActivity.class);
             finish();
+
+            Consts.FirstName="";
+            Consts.UserName="";
+            Consts.Password="";
+            Consts.Phone="";
+            Consts.Cellphone="";
+            Consts.City="";
+            Consts.Zip="";
+            Consts.Street="";
+            Consts.SpinnerItem=0;
+
             startActivity(i);
         }
 

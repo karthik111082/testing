@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.hik.trendycraftshow.JSON.Api;
 import com.hik.trendycraftshow.JSON.WebServiceRequest;
 import com.hik.trendycraftshow.Utils.Consts;
+import com.hik.trendycraftshow.Utils.InternetStatus;
+import com.hik.trendycraftshow.Utils.IsTablet;
 import com.hik.trendycraftshow.Utils.Validation;
 
 import org.json.JSONException;
@@ -28,11 +30,19 @@ public class ForgotPassword extends Activity {
     Consts consts;
     Api api;
     ImageButton back;
+    boolean isTablet;
+    IsTablet tablet;
+    InternetStatus internetStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forgot_password);
+        isTablet = tablet.isTablet(getApplicationContext());
+        if (isTablet) {
+            setContentView(R.layout.activity_forgot_password);
+        } else {
+            setContentView(R.layout.activity_forgot_password_mob);
+        }
         back=(ImageButton)findViewById(R.id.back);
         send=(Button)findViewById(R.id.send);
         email=(EditText)findViewById(R.id.email);
@@ -50,18 +60,25 @@ public class ForgotPassword extends Activity {
             @Override
             public void onClick(View v) {
                 Email_Address=email.getText().toString();
+
                 if(Validation.isEmpty(Email_Address))
                 {
-                    email.setError("Enter Email Address");
+                    email.setError("Please enter valid email-address!!!");
                 }
                 else{
                     if(Validation.isValidEmail(Email_Address))
                     {
-                        consts.showDialog(ForgotPassword.this);
-                        ForgotPwd();
+                        if(internetStatus.InternetStatus(getApplicationContext())) {
+                            consts.showDialog(ForgotPassword.this);
+                            ForgotPwd();
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(),"Trendy Craft Show requires internet. Please check!!!",Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                     else{
-                        email.setError("Invalid Email Address");
+                        email.setError("Please enter valid email-address!!!");
                     }
 
                 }
@@ -106,7 +123,7 @@ public class ForgotPassword extends Activity {
                         } else {
 
                             consts.hideDialog();
-                            Toast.makeText(getApplicationContext(), "Invalid Email Address", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Please enter valid email-address!!!", Toast.LENGTH_SHORT).show();
 
 
                         }

@@ -26,6 +26,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="inbox">Search</string>
     <string name="market_search">Market Search</string>
+    <string name="post_advertisement">Post Advertisement </string>
     <string name="business_search">Business Directory Search</string>
     <string name="send">SEND</string>
     <string name="forgot_password_label">Please enter your email address! You will receive a new temporary password.</string>
@@ -42,7 +43,7 @@
     <string name="entercode">Enter code here</string>
     <string name="Congragulations">Congratulations!!!</string>
     <string name="created">Your Account is Created Successfully!</string>
-    <string name="fairs_festivels">FAIRS &amp; FESTIVELS</string>
+    <string name="fairs_festivels">FAIRS &amp; FESTIVALS</string>
     <string name="emailhasbeen">An email has been sent you with Activation Code</string>
     <string name="beforeyou">Before you start using Trendy Craft Show we need to verify your
 email adress.</string>

@@ -21,8 +21,19 @@
 
     </android.support.design.widget.AppBarLayout>-->
 
-    <include layout="@layout/activity_home"
-        />
+ <!--   <include layout="@layout/activity_home"
+
+        />-->
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:layout_height="match_parent">
+        <include layout="@layout/activity_home"/>
+
+    </FrameLayout>
+
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -34,7 +45,7 @@
         android:layout_height="?attr/actionBarSize"
        android:id="@+id/titletoolbar"
         android:textStyle="bold"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:layout_weight="1"
 
         android:textColor="#ffffff"

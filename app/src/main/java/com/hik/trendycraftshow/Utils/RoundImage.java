@@ -9,6 +9,8 @@ import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.Shader;
 
+import com.hik.trendycraftshow.ProfileActivity;
+
 public class RoundImage {
     public static Bitmap getRoundedShape(Bitmap scaleBitmapImage,int width) {
         // TODO Auto-generated method stub
@@ -38,8 +40,8 @@ public class RoundImage {
             return null;
         }
 
-        final int width = bitmap.getWidth() + borderWidth;
-        final int height = bitmap.getHeight() + borderWidth;
+        final int width = ProfileActivity.ivImage.getWidth() + borderWidth;
+        final int height = ProfileActivity.ivImage.getHeight() + borderWidth;
 
         Bitmap canvasBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         BitmapShader shader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);

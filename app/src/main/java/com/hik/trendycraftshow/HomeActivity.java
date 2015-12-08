@@ -7,14 +7,24 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class HomeActivity extends Activity {
+import com.hik.trendycraftshow.Utils.IsTablet;
 
+public class HomeActivity extends NavigationDrawer {
 
+    boolean isTablet;
+    IsTablet tablet;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+
+        isTablet = tablet.isTablet(getApplicationContext());
+        if (isTablet) {
+            getLayoutInflater().inflate(R.layout.activity_home, container);
+        } else {
+            getLayoutInflater().inflate(R.layout.activity_home_mob, container);
+        }
+
 
 
     }

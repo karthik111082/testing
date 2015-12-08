@@ -94,10 +94,16 @@ Getdata();
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(internetStatus.InternetStatus(getApplicationContext())) {
+                    Intent i = new Intent(getApplicationContext(), Registration.class);
+                    finish();
+                    startActivity(i);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"Trendy Craft Show requires internet. Please check!!!",Toast.LENGTH_SHORT).show();
+                }
 
-                Intent i = new Intent(getApplicationContext(), Registration.class);
-                finish();
-                startActivity(i);
+
             }
         });
        remember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

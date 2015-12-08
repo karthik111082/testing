@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.hik.trendycraftshow.JSON.Api;
 import com.hik.trendycraftshow.JSON.WebServiceRequest;
 import com.hik.trendycraftshow.Utils.Consts;
+import com.hik.trendycraftshow.Utils.InternetStatus;
 import com.hik.trendycraftshow.Utils.IsTablet;
 import com.hik.trendycraftshow.Utils.Validation;
 
@@ -36,6 +37,8 @@ public class Registration extends Activity {
     Spinner state;
     ImageButton back,OTPContinue;
     TextView terms;
+    Intent intent;
+    InternetStatus internetStatus;
 
 
     private WebServiceRequest.HttpURLCONNECTION signup;
@@ -62,12 +65,12 @@ public class Registration extends Activity {
         terms = (TextView) findViewById(R.id.terms);
 
         OTPContinue=(ImageButton)findViewById(R.id.continue_otp);
-        cellphone=(EditText)findViewById(R.id.phoneno_cell);
         psw = (EditText) findViewById(R.id.psw);
         Congrats=(LinearLayout)findViewById(R.id.congratulation);
         state=(Spinner)findViewById(R.id.state);
         otp=(EditText)findViewById(R.id.otp);
         cnfrm_psw=(EditText)findViewById(R.id.cnfrm);
+        cellphone=(EditText)findViewById(R.id.phoneno_cell);
         phone=(EditText)findViewById(R.id.phoneno);
         street=(EditText)findViewById(R.id.street_address);
         city=(EditText)findViewById(R.id.city);
@@ -76,6 +79,7 @@ public class Registration extends Activity {
         OTP=(ImageButton)findViewById(R.id.siginin_otp);
         OtpLayout.setVisibility(View.GONE);
         SignUpLayout.setVisibility(View.VISIBLE);
+        getdata();
         createaccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,6 +93,17 @@ public class Registration extends Activity {
 
                Intent i=new Intent(getApplicationContext(),LoginActivity.class);
                 finish();
+
+                Consts.FirstName="";
+                Consts.UserName="";
+                Consts.Password="";
+                Consts.Phone="";
+                Consts.Cellphone="";
+                Consts.City="";
+                Consts.Zip="";
+                Consts.Street="";
+                Consts.SpinnerItem=0;
+
                 startActivity(i);
             }
         });
@@ -97,7 +112,18 @@ public class Registration extends Activity {
             public void onClick(View v) {
 
                 Intent i=new Intent(getApplicationContext(),TermsActivity.class);
+                Consts.FirstName=fname.getText().toString();
+                Consts.UserName=email.getText().toString();
+                Consts.Password=psw.getText().toString();
+                Consts.Phone=phone.getText().toString();
+                Consts.Cellphone=cellphone.getText().toString();
+                Consts.Street=street.getText().toString();
+                Consts.City=city.getText().toString();
+                Consts.Zip=zip.getText().toString();
+                Consts.SpinnerItem=state.getSelectedItemPosition();
+
                 finish();
+             
                 startActivity(i);
 
             }
@@ -119,7 +145,8 @@ public class Registration extends Activity {
                 if(otp.getText().toString().length()>0)
                 {
                     if(otp.getText().toString().equals(OTPValue))
-                    {
+                    {if(internetStatus.InternetStatus(getApplicationContext())) {
+
                         String params = "username=" + Email;
                         Log.d("parameters", params);
                         params=params.replaceAll(" ", "%20");
@@ -142,6 +169,17 @@ public class Registration extends Activity {
 
                                             Intent i=new Intent(getApplicationContext(),NavigationDrawer.class);
                                             finish();
+                                            //Erase Data
+                                            Consts.FirstName="";
+                                            Consts.UserName="";
+                                            Consts.Password="";
+                                            Consts.Phone="";
+                                            Consts.Cellphone="";
+                                            Consts.City="";
+                                            Consts.Zip="";
+                                            Consts.Street="";
+                                            Consts.SpinnerItem=0;
+
                                             startActivity(i);
 
                                         }
@@ -155,7 +193,10 @@ public class Registration extends Activity {
                             }
                         });
                         activate.execute();
-
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),"Trendy Craft Show requires internet. Please check!!!",Toast.LENGTH_SHORT).show();
+                    }
 
 
                     }else{
@@ -167,6 +208,7 @@ public class Registration extends Activity {
                 }
             }
         });
+
     }
 
     public void SignUp()
@@ -232,6 +274,20 @@ public class Registration extends Activity {
             pDialog.dismiss();
         }
     }
+    public void getdata(){
+
+        fname.setText(Consts.FirstName);
+        email.setText(Consts.UserName);
+        psw.setText(Consts.Password);
+        cnfrm_psw.setText(Consts.Password);
+        phone.setText(Consts.Phone);
+        cellphone.setText(Consts.Cellphone);
+        street.setText(Consts.Street);
+        city.setText(Consts.City);
+        zip.setText(Consts.Zip);
+        state.setSelection(Consts.SpinnerItem);
+
+    }
     public void Validation()
     {
        boolean VName=false,VEmail=false,VPass=false,VcPass=false,VPhone=false,VCity=false,VStreet=false,VZip=false,VState=false;
@@ -245,13 +301,15 @@ public class Registration extends Activity {
         State=state.getSelectedItem().toString();
         Zip=zip.getText().toString();
         CellNo=cellphone.getText().toString();
-        if(Validation.isValidName(Fname))
+        if(Validation.isEmpty(Fname))
         {
-            VName=true;
-        }
-        else {
             VName=false;
             fname.setError("Please enter valid name!!!");
+        }
+        else {
+
+            VName=true;
+
         }
         if(Validation.isValidEmail(Email))
         {
@@ -325,9 +383,14 @@ public class Registration extends Activity {
         Log.d("Status",""+VName+VEmail+VPass+VcPass+VPhone+VZip+VStreet+VCity);
 
         if (VName && VEmail && VPass && VcPass && VPhone && VZip && VStreet && VCity &&VState)
-        {
+        {  if(internetStatus.InternetStatus(getApplicationContext())) {
             showDialog();
             SignUp();
+        }
+        else{
+            Toast.makeText(getApplicationContext(),"Trendy Craft Show requires internet. Please check!!!",Toast.LENGTH_SHORT).show();
+        }
+
         }
     }
 

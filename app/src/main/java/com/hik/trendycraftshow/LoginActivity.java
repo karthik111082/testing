@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.hik.trendycraftshow.Utils.InternetStatus;
 import com.hik.trendycraftshow.Utils.IsTablet;
 
 /**
@@ -20,6 +22,7 @@ public class LoginActivity extends Activity {
     Button login,signup;
     TextView intro;
     ImageButton guest;
+    InternetStatus internetStatus;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -46,9 +49,15 @@ public class LoginActivity extends Activity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), Registration.class);
-                finish();
-                startActivity(i);
+                if(internetStatus.InternetStatus(getApplicationContext())) {
+                    Intent i = new Intent(getApplicationContext(), Registration.class);
+                    finish();
+                    startActivity(i);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Trendy Craft Show requires internet. Please check!!!", Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         });

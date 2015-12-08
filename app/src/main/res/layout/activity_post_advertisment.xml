@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.hik.trendycraftshow.PostAdvertisment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/green"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="@string/post_advertisement"
+            android:textStyle="bold"
+            android:textSize="35dp"
+            android:layout_weight="1"
+            android:textColor="#ffffff"
+            android:gravity="center_horizontal|center_vertical|center"
+            android:background="@color/green"
+            />
+
+    </LinearLayout>
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="@color/black"
+    android:textSize="25dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginLeft="20dp"
+    android:text="Add 4 Photos(99$)"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+          <ImageView
+              android:layout_width="130dp"
+              android:layout_height="130dp"
+              android:id="@+id/img1"
+              android:background="@color/black"/>
+            <ImageView
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/img2"
+                android:background="@color/black"/>
+            <ImageView
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/img3"
+                android:background="@color/black"/>
+            <ImageView
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/img4"
+                android:background="@color/black"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</RelativeLayout>

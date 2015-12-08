@@ -10,7 +10,8 @@ public class Consts {
 
     ProgressDialog pDialog;
     Context context;
-    public static String UserName,Password,FirstName,LastName,Phone,Street,City,State,Zip,AccessCode,ForgotPwd;
+    public static int SpinnerItem;
+    public static String UserName,Password,FirstName,LastName,Phone,Street,City,State,Zip,AccessCode,ForgotPwd,Cellphone;
 
     public Consts(Context context) {
         this.context = context;

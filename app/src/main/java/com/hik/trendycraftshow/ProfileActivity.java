@@ -11,11 +11,19 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.hik.trendycraftshow.Utils.IsTablet;
+import com.hik.trendycraftshow.Utils.RoundImage;
+import com.hik.trendycraftshow.Utils.Validation;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -23,48 +31,65 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class ProfileActivity extends Activity {
-    ImageButton back;
+public class ProfileActivity extends NavigationDrawer {
+    boolean isTablet;
+    IsTablet tablet;
 
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;
-    Button btnSelect;
-    ImageView ivImage;
+    public static ImageView ivImage;
+
+    EditText fname,email,phone,street,city,zip,cellphone;
+    String Fname,Email,Phone,Street,City,Zip,State,CellNo;
+    Spinner state;
+
+    RoundImage roundImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
-        back=(ImageButton)findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
+
+
+
+        isTablet = tablet.isTablet(getApplicationContext());
+        if (isTablet) {
+            getLayoutInflater().inflate(R.layout.activity_profile, container);
+        } else {
+            getLayoutInflater().inflate(R.layout.activity_profile_mob, container);
+        }
+
+        fname=(EditText)findViewById(R.id.fname);
+        email = (EditText) findViewById(R.id.email);
+        cellphone=(EditText)findViewById(R.id.phoneno_cell);
+        phone=(EditText)findViewById(R.id.phoneno);
+        street=(EditText)findViewById(R.id.street_address);
+        city=(EditText)findViewById(R.id.city);
+        zip=(EditText)findViewById(R.id.zip);
+        roundImage=new RoundImage();
+
+        ivImage = (ImageView) findViewById(R.id.profile_image);
+        ivImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), NavigationDrawer.class);
-                finish();
-                startActivity(i);
 
-                btnSelect = (Button) findViewById(R.id.btnSelectPhoto);
-                btnSelect.setOnClickListener(new View.OnClickListener() {
+                selectImage();
 
-                    @Override
-                    public void onClick(View v) {
-                        selectImage();
-                    }
-                });
-                ivImage = (ImageView) findViewById(R.id.profile_image);
             }
         });
 
+
     }
+
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode== KeyEvent.KEYCODE_BACK) {
-            Intent i=new Intent(getApplicationContext(),NavigationDrawer.class);
-            finish();
-            startActivity(i);
+        if(keyCode== KeyEvent.KEYCODE_BACK)
+        {
+
         }
         return false;
 
     }
+
     private void selectImage() {
         final CharSequence[] items = { "Take Photo", "Choose from Library",
                 "Cancel" };
@@ -124,6 +149,7 @@ public class ProfileActivity extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        thumbnail=roundImage.getCircularBorder(thumbnail, 10);
 
         ivImage.setImageBitmap(thumbnail);
     }
@@ -152,6 +178,96 @@ public class ProfileActivity extends Activity {
         options.inJustDecodeBounds = false;
         bm = BitmapFactory.decodeFile(selectedImagePath, options);
 
+       bm= roundImage.getCircularBorder(bm,10);
+
+
         ivImage.setImageBitmap(bm);
+    }
+
+
+    public void Validation()
+    {
+        boolean VName=false,VEmail=false,VPass=false,VcPass=false,VPhone=false,VCity=false,VStreet=false,VZip=false,VState=false;
+        Fname = fname.getText().toString();
+        Email=email.getText().toString();
+
+        Phone=phone.getText().toString();
+        Street=street.getText().toString();
+        City=city.getText().toString();
+        State=state.getSelectedItem().toString();
+        Zip=zip.getText().toString();
+        CellNo=cellphone.getText().toString();
+        if(Validation.isEmpty(Fname))
+        {
+            VName=false;
+            fname.setError("Please enter valid name!!!");
+        }
+        else {
+
+            VName=true;
+
+        }
+        if(Validation.isValidEmail(Email))
+        {
+            VEmail=true;
+        }
+        else {
+            VEmail=false;
+            email.setError("Please enter valid email-address!!!");
+        }
+
+
+        if(Validation.isValidPhone(Phone))
+        {
+            VPhone=true;
+        }
+        else {
+            VPhone=true;
+            //zip.setError("Invalid phone number");
+        }
+        if(Validation.isZip(Zip))
+        {
+            VZip=true;
+        }
+        else {
+            VZip=false;
+            zip.setError("Please enter valid zip code!!!");
+        }
+        if(Validation.isEmpty(Street))
+        {
+            VStreet=false;
+            street.setError("Please enter valid street address!!!");
+        }
+        else {
+            VStreet=true;
+        }
+        if(Validation.isEmpty(City))
+        {
+            VCity=false;
+            city.setError("Please enter valid city!!!");
+        }
+        else {
+            VCity=true;
+        }
+        if(state.getSelectedItemPosition()>0)
+        {
+            VState=true;
+        }
+        else
+        {
+            VState=false;
+            Toast.makeText(getApplicationContext(), "Please choose a valid state!!!", Toast.LENGTH_SHORT).show();
+        }
+
+
+
+        Log.d("Status", "" + VName + VEmail + VPass + VcPass + VPhone + VZip + VStreet + VCity);
+
+        if (VName && VEmail  && VPhone && VZip && VStreet && VCity &&VState)
+        {
+
+
+
+        }
     }
 }
