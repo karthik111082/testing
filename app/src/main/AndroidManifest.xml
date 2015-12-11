@@ -30,7 +30,7 @@
             android:name=".ProfileActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LauncherActivity"
+            android:name=".PostAdvertismentTrendyMarket"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,7 +50,12 @@
         <activity
             android:name=".TermsActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".PostAdvertisment"></activity>
+        <activity android:name=".LauncherActivity" />
+        <activity android:name=".PostAdvertisment" />
+        <activity android:name=".ProductDetail" />
+        <activity android:name=".PaymentMethod" />
+        <activity android:name=".Wishlist" />
+        <activity android:name=".Mysales"></activity>
     </application>
 
 </manifest>

@@ -136,7 +136,7 @@ public class ProfileActivity extends NavigationDrawer {
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
 
         File destination = new File(Environment.getExternalStorageDirectory(),
-                System.currentTimeMillis() + ".jpg");
+                System.currentTimeMillis() + ".png");
 
         FileOutputStream fo;
         try {

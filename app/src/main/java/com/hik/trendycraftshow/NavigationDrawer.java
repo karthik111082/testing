@@ -115,26 +115,45 @@ public class NavigationDrawer extends AppCompatActivity
         } else if (id == R.id.nav_profile) {
 
 
-//           Intent i=new Intent(getApplicationContext(),ProfileActivity.class);
-//            finish();
-//            startActivity(i);
+           Intent i=new Intent(getApplicationContext(),ProfileActivity.class);
+            finish();
+           startActivity(i);
 
         } else if (id == R.id.nav_inbox) {
+            Intent i=new Intent(getApplicationContext(),InboxActivity.class);
+            finish();
+            startActivity(i);
 
         } else if (id == R.id.nav_payment) {
 
         } else if (id == R.id.nav_wishlist) {
-
+            Intent i=new Intent(getApplicationContext(),Wishlist.class);
+            finish();
+            startActivity(i);
         }
         else if (id == R.id.nav_businesscard) {
 
+
         }else if (id == R.id.nav_mysales) {
+            Intent i=new Intent(getApplicationContext(),Mysales.class);
+            finish();
+            startActivity(i);
+        }
+        else if (id == R.id.nav_paymentmethod) {
+            Intent i=new Intent(getApplicationContext(),PaymentMethod.class);
+            finish();
+            startActivity(i);
 
         }else if (id == R.id.nav_advertisment) {
+            Intent i=new Intent(getApplicationContext(),PostAdvertisment.class);
+            finish();
+            startActivity(i);
 
         }else if (id == R.id.nav_logout) {
             Intent i=new Intent(getApplicationContext(),LoginActivity.class);
             finish();
+            startActivity(i);
+
 
             Consts.FirstName="";
             Consts.UserName="";
