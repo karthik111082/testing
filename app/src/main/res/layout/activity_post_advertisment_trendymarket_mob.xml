@@ -20,11 +20,12 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="50dp"
                 android:text="@string/post_advertisement"
                 android:textStyle="bold"
-                android:textSize="35dp"
+                android:textSize="20dp"
                 android:layout_weight="1"
+                android:layout_marginRight="30dp"
                 android:textColor="#ffffff"
                 android:gravity="center_horizontal|center_vertical|center"
                 android:background="@color/green"
@@ -35,7 +36,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="22dp"
+            android:layout_marginLeft="18dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
@@ -43,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@color/black"
-                android:textSize="25dp"
+                android:textSize="18dp"
                 android:layout_marginLeft="8dp"
                 android:drawableLeft="@drawable/hmecpy"
                 android:gravity="center_vertical"
@@ -52,32 +53,32 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="22dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:id="@+id/aimg1"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:id="@+id/img1"
                 android:background="@color/black"/>
             <ImageView
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:layout_marginLeft="10dp"
-                android:id="@+id/aimg2"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="8dp"
+                android:id="@+id/img2"
                 android:background="@color/black"/>
             <ImageView
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:layout_marginLeft="10dp"
-                android:id="@+id/aimg3"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="8dp"
+                android:id="@+id/img3"
                 android:background="@color/black"/>
             <ImageView
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:layout_marginLeft="10dp"
-                android:id="@+id/aimg4"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="8dp"
+                android:id="@+id/img4"
                 android:background="@color/black"/>
         </LinearLayout>
         <ScrollView
@@ -94,8 +95,8 @@
                     android:layout_marginTop="30dp"
                     android:orientation="horizontal">
                     <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:background="@color/black"/>
                     <Spinner
                         android:layout_width="match_parent"
@@ -104,14 +105,14 @@
                         android:textSize="25dp"
                         android:layout_marginRight="18dp"
                         android:layout_marginLeft="8dp"
-                        android:entries="@array/category"
+                        android:entries="@array/trendycat"
                         android:gravity="center_vertical"
                         android:text="Choose Category"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="22dp"
+                    android:layout_marginLeft="18dp"
                     android:layout_marginTop="30dp"
                     android:orientation="horizontal">
 
@@ -119,10 +120,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
-                        android:textSize="25dp"
+                        android:textSize="18dp"
                         android:drawableLeft="@drawable/hmecpy"
                         android:layout_marginRight="18dp"
-                        android:layout_marginLeft="8dp"
+
                         android:entries="@array/category"
                         android:gravity="center_vertical"
                         android:hint="Add Title"/>
@@ -130,7 +131,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="22dp"
+                    android:layout_marginLeft="18dp"
                     android:layout_marginTop="30dp"
                     android:orientation="horizontal">
 
@@ -138,10 +139,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
-                        android:textSize="25dp"
+                        android:textSize="20dp"
                         android:drawableLeft="@drawable/hmecpy"
                         android:layout_marginRight="18dp"
-                        android:layout_marginLeft="8dp"
+
                         android:entries="@array/category"
                         android:gravity="center_vertical"
                         android:hint="Price"/>
@@ -149,7 +150,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="22dp"
+                    android:layout_marginLeft="18dp"
                     android:layout_marginTop="30dp"
                     android:orientation="horizontal">
 
@@ -157,10 +158,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
-                        android:textSize="25dp"
+                        android:textSize="20dp"
                         android:layout_marginRight="18dp"
 
-                        android:layout_marginLeft="8dp"
+
                         android:entries="@array/category"
                         android:gravity="center_vertical"
                         android:hint="City"/>
@@ -168,7 +169,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="22dp"
+                    android:layout_marginLeft="18dp"
                     android:layout_marginTop="30dp"
                     android:orientation="horizontal">
 
@@ -178,7 +179,7 @@
                         android:textColor="@color/black"
                         android:textSize="25dp"
                         android:layout_marginRight="18dp"
-                        android:layout_marginLeft="8dp"
+
                         android:entries="@array/spinner"
                         android:gravity="center_vertical"
                         android:text="State"/>
@@ -186,7 +187,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="22dp"
+                    android:layout_marginLeft="18dp"
                     android:layout_marginTop="30dp"
                     android:orientation="horizontal">
 
@@ -194,9 +195,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
-                        android:textSize="25dp"
+                        android:textSize="20dp"
                         android:layout_marginRight="18dp"
-                        android:layout_marginLeft="8dp"
+
                         android:entries="@array/category"
                         android:gravity="center_vertical"
                         android:hint="Zip-Code"/>
@@ -204,7 +205,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="22dp"
+                    android:layout_marginLeft="18dp"
                     android:layout_marginTop="30dp"
                     android:orientation="horizontal">
 
@@ -212,13 +213,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
-                        android:textSize="25dp"
+                        android:textSize="20dp"
                         android:drawableLeft="@drawable/hmecpy"
                         android:layout_marginRight="18dp"
-                        android:layout_marginLeft="8dp"
+
                         android:entries="@array/category"
                         android:gravity="center_vertical"
-                        android:text="Add event period"/>
+                        android:text="Add event sale period"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -228,11 +229,14 @@
                     android:layout_gravity="center"
                     android:orientation="horizontal">
                     <DatePicker
-                        android:layout_width="250dp"
+                        android:layout_width="120dp"
                         android:layout_height="50dp"
+                        android:textColor="@color/black"
                         android:textSize="25dp"
+                        android:background="@color/green"
                         android:startYear="2015"
                         android:endYear="2030"
+
                         />
                     <TextView
                         android:layout_width="wrap_content"
@@ -241,14 +245,14 @@
                         android:layout_marginLeft="20dp"
                         android:text="to"/>
                     <DatePicker
-                        android:layout_width="250dp"
+                        android:layout_width="120dp"
                         android:layout_height="50dp"
-
-                        android:textSize="25dp"
-                        android:background="@color/green"
-                        android:layout_marginLeft="20dp"
+                        android:textColor="@color/black"
                         android:startYear="2015"
                         android:endYear="2030"
+                        android:background="@color/green"
+                        android:layout_marginLeft="20dp"
+
                         android:gravity="end"
                         />
                 </LinearLayout>
@@ -257,7 +261,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:layout_marginRight="18dp"
                     android:layout_marginLeft="22dp"
                     android:textColor="@color/black"
@@ -266,7 +270,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:layout_marginRight="18dp"
                     android:layout_marginLeft="22dp"
                     android:textColor="@color/black"
@@ -281,16 +285,16 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:layout_width="200dp"
-                android:layout_height="80dp"
+                android:layout_width="130dp"
+                android:layout_height="60dp"
                 android:text="Cancel"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="25dp"
                 android:background="@drawable/roundrectaglebutton"/>
             <Button
-                android:layout_width="200dp"
-                android:layout_height="80dp"
+                android:layout_width="130dp"
+                android:layout_height="60dp"
                 android:layout_marginLeft="20dp"
                 android:text="Submit"
                 android:textAllCaps="false"

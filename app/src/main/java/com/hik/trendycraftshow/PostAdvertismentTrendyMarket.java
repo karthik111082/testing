@@ -24,9 +24,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class PostAdvertisment extends AppCompatActivity {
-
-    ImageView aimg1,aimg2,aimg3,aimg4;
+public class PostAdvertismentTrendyMarket extends AppCompatActivity {
+    ImageView img1,img2,img3,img4;
     int REQUEST_CAMERA1 = 11,REQUEST_CAMERA2 = 22,REQUEST_CAMERA3 = 33,REQUEST_CAMERA4 = 44, SELECT_FILE = 1, SELECT_FILE2 = 2;
     IsTablet tablet;
     boolean isTablet;
@@ -39,21 +38,21 @@ public class PostAdvertisment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         isTablet=tablet.isTablet(getApplicationContext());
         if(isTablet){
-            setContentView(R.layout.activity_post_advertisment);
+            setContentView(R.layout.activity_post_advertisment_trendymarket);
         }else {
-            setContentView(R.layout.activity_post_advertisment_mob);
+            setContentView(R.layout.activity_post_advertisment_trendymarket_mob);
 
         }
 
         //setContentView(R.layout.activity_post_advertisment_trendymarket);
 
-        aimg1=(ImageView)findViewById(R.id.aimg1);
-        aimg2=(ImageView)findViewById(R.id.aimg2);
-        aimg3=(ImageView)findViewById(R.id.aimg3);
-        aimg4=(ImageView)findViewById(R.id.aimg4);
+        img1=(ImageView)findViewById(R.id.img1);
+        img2=(ImageView)findViewById(R.id.img2);
+        img3=(ImageView)findViewById(R.id.img3);
+        img4=(ImageView)findViewById(R.id.img4);
 
 
-        aimg1.setOnClickListener(new View.OnClickListener() {
+        img1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -61,20 +60,20 @@ public class PostAdvertisment extends AppCompatActivity {
             }
         });
 
-        aimg2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectImage(2);
-            }
-        });
-        aimg3.setOnClickListener(new View.OnClickListener() {
+        img2.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+         selectImage(2);
+    }
+});
+        img3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 selectImage(3);
             }
         });
-        aimg4.setOnClickListener(new View.OnClickListener() {
+        img4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -89,7 +88,7 @@ public class PostAdvertisment extends AppCompatActivity {
         final CharSequence[] items = { "Take Photo", "Choose from Library",
                 "Cancel" };
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(PostAdvertisment.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(PostAdvertismentTrendyMarket.this);
         builder.setTitle("Add Photo!");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
@@ -206,19 +205,19 @@ public class PostAdvertisment extends AppCompatActivity {
 
             switch (image) {
                 case 1:
-                    aimg1.setImageBitmap(thumbnail);
+                    img1.setImageBitmap(thumbnail);
                     BitmapToByte(thumbnail,1);
                     break;
                 case 2:
-                    aimg2.setImageBitmap(thumbnail);
+                    img2.setImageBitmap(thumbnail);
                     BitmapToByte(thumbnail, 2);
                     break;
                 case 3:
-                    aimg3.setImageBitmap(thumbnail);
+                    img3.setImageBitmap(thumbnail);
                     BitmapToByte(thumbnail, 3);
                     break;
                 case 4:
-                    aimg4.setImageBitmap(thumbnail);
+                    img4.setImageBitmap(thumbnail);
                     BitmapToByte(thumbnail,4);
 
 
@@ -242,19 +241,19 @@ public class PostAdvertisment extends AppCompatActivity {
         bitmap = BitmapFactory.decodeFile(selectedImagePath);
         switch (image) {
             case 1:
-                aimg1.setImageBitmap(bitmap);
+                img1.setImageBitmap(bitmap);
                 BitmapToByte(bitmap, 1);
                 break;
             case 2:
-                aimg2.setImageBitmap(bitmap);
+                img2.setImageBitmap(bitmap);
                 BitmapToByte(bitmap, 2);
                 break;
             case 3:
-                aimg3.setImageBitmap(bitmap);
+                img3.setImageBitmap(bitmap);
                 BitmapToByte(bitmap, 3);
                 break;
             case 4:
-                aimg4.setImageBitmap(bitmap);
+                img4.setImageBitmap(bitmap);
                 BitmapToByte(bitmap, 4);
 
 

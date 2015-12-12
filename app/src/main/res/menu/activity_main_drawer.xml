@@ -34,6 +34,11 @@
 
             android:title="MY SALES" />
         <item
+            android:id="@+id/nav_paymentmethod"
+            android:icon="@drawable/homeicon"
+
+            android:title="MY PAYMENT METHOD" />
+        <item
             android:id="@+id/nav_advertisment"
             android:icon="@drawable/homeicon"
             android:title="POST ADVERTISMENT" />

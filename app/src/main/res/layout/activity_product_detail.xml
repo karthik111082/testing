@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".PostAdvertismentTrendyMarket">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/green"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text="@string/product_detail"
+                android:textStyle="bold"
+                android:textSize="35dp"
+                android:layout_weight="1"
+                android:textColor="#ffffff"
+                android:gravity="center_horizontal|center_vertical|center"
+                android:background="@color/green"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="100dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:layout_marginLeft="8dp"
+                android:drawableLeft="@drawable/hmecpy"
+                android:gravity="center_vertical"
+
+                android:text="Add 4 Photos(99&#xa2;)"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="FURNITURE"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+               />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+              android:layout_marginTop="5dp"
+                android:text="Craft Show"
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="15 jan 2015-25 jan 2015"
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Location"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Date"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="match_parent">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Seller Online"
+                    android:textSize="20dp"
+                    android:textColor="@color/black"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="25dp"
+                    android:layout_marginRight="18dp"
+                    android:layout_marginLeft="22dp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="15dp"
+                    android:text="OTHER"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="25dp"
+                    android:layout_marginRight="18dp"
+                    android:layout_marginLeft="22dp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/brief"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+
+                    android:layout_marginTop="23dp"
+                    android:layout_height="wrap_content">
+
+                   <Button
+                       android:layout_width="match_parent"
+                       android:layout_height="70dp"
+                       android:text="VIEW MAP"
+                       android:textColor="@color/white"
+                       android:textSize="20dp"
+                       android:background="@color/green"
+                       android:layout_weight="1"/>
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:text="Contact"
+                        android:textSize="20dp"
+                        android:textColor="@color/white"
+                        android:background="@color/green"
+                        android:layout_height="70dp"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</RelativeLayout>

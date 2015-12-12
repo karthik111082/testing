@@ -40,6 +40,10 @@
     <string name="inbox">Search</string>
     <string name="market_search">Market Search</string>
     <string name="post_advertisement">Post Advertisement </string>
+    <string name="payment_method">Payment Method </string>
+    <string name="my_sales">My Sales</string>
+    <string name="wishlist">Wishlist </string>
+    <string name="product_detail">Craft Show</string>
     <string name="business_search">Business Directory Search</string>
     <string name="send">SEND</string>
     <string name="forgot_password_label">Please enter your email address! You will receive a new temporary password.</string>
@@ -69,6 +73,7 @@ email adress.</string>
     <string name="activation">Activation Code</string>
     <string name="terms">By signing up,  I accept the </string>
     <string name="privacy">Privacy Policies.</string>
+    <string name="brief">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pretium felis sed lacus rhoncus, ultricies suscipit risus convallis.</string>
 
     <string-array name="spinner">
         <item>Choose State</item>
@@ -124,5 +129,18 @@ email adress.</string>
         <item>West Virginia</item>
         <item>Wisconsin</item>
         <item>Wyoming</item>
+    </string-array>
+    <string-array name="category">
+        <item>Choose Category</item>
+        <item>Craft Show </item>
+        <item>Art Show </item>
+        <item>Expo</item>
+        <item>Fairs &amp; Festivals</item>
+    </string-array>
+    <string-array name="trendycat">
+        <item>Choose Category</item>
+        <item>Art Only</item>
+        <item>Craft Only</item>
+        <item>Direct Sale Only</item>
     </string-array>
 </resources>
