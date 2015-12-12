@@ -2,15 +2,10 @@ package com.hik.trendycraftshow;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.database.CharArrayBuffer;
-import android.database.ContentObserver;
 import android.database.Cursor;
-import android.database.DataSetObserver;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -19,7 +14,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,7 +64,9 @@ public class MainActivity extends Activity {
         signin = (ImageButton) findViewById(R.id.sign_in);
         signup = (ImageButton) findViewById(R.id.sign_up);
         guest= (ImageButton)findViewById(R.id.guest);
-Getdata();
+
+        Getdata();
+
         guest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +76,7 @@ Getdata();
                 startActivity(i);
             }
         });
+
         Forgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,6 +103,7 @@ Getdata();
 
             }
         });
+
        remember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
            @Override
            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -167,86 +165,86 @@ Getdata();
             pDialog.dismiss();
         }
     }
-public void Getdata()
-{
-    String sql = "SELECT * FROM "+Dbhelper.TABLE_NAME;
-    Log.d("query", sql);
-    Cursor cursor  = database.rawQuery(sql,null);
-
-    if (cursor.moveToNext())
+    public void Getdata()
     {
-        email.setText(cursor.getString(cursor.getColumnIndex(Dbhelper.KEY_UNAME)));
-        psw.setText(cursor.getString(cursor.getColumnIndex(Dbhelper.KEY_PASSWORD)));
-        remember.setChecked(true);
-        remember.setClickable(true);
+        String sql = "SELECT * FROM "+Dbhelper.TABLE_NAME;
+        Log.d("query", sql);
+        Cursor cursor  = database.rawQuery(sql,null);
 
-    }else{
-        remember.setChecked(false);
-        remember.setClickable(true);
+        if (cursor.moveToNext())
+        {
+            email.setText(cursor.getString(cursor.getColumnIndex(Dbhelper.KEY_UNAME)));
+            psw.setText(cursor.getString(cursor.getColumnIndex(Dbhelper.KEY_PASSWORD)));
+            remember.setChecked(true);
+            remember.setClickable(true);
+
+        }else{
+            remember.setChecked(false);
+            remember.setClickable(true);
+        }
+
     }
+        public void Login()
+        {
+            String params = "uname=" + Username + "&pass="+Password;
+            Log.d("parameters", params);
+            params=params.replaceAll(" ","%20");
+            loginRequest = api.LOGIN(params, new WebServiceRequest.Callback() {
+                @Override
+                public void onResult(int responseCode, String responseMessage, Exception exception) {
 
-}
-    public void Login()
-    {
-        String params = "uname=" + Username + "&pass="+Password;
-        Log.d("parameters", params);
-        params=params.replaceAll(" ","%20");
-        loginRequest = api.LOGIN(params, new WebServiceRequest.Callback() {
-            @Override
-            public void onResult(int responseCode, String responseMessage, Exception exception) {
+                    if (responseCode == 200) {
+                        try {
+                            JSONObject obj = new JSONObject(responseMessage);
+                            Log.d("response", responseMessage.toString());
+                            String status = obj.getString("msg");
 
-                if (responseCode == 200) {
-                    try {
-                        JSONObject obj = new JSONObject(responseMessage);
-                        Log.d("response", responseMessage.toString());
-                        String status = obj.getString("msg");
+                            if (status.equalsIgnoreCase("success")) {
+                                Consts.UserName=obj.getString("UserName");
+                                Consts.Password=obj.getString("Password");
+                                Consts.FirstName=obj.getString("Firstname");
+                                Consts.Phone=obj.getString("Phone");
+                                Consts.Street=obj.getString("Street");
+                                Consts.City=obj.getString("City");
+                                Consts.State=obj.getString("State");
+                                Consts.Zip=obj.getString("Zipcode");
+                                Consts.Photo=obj.getString("photo").getBytes();
+                                hideDialog();
+                                if(remember.isChecked())
+                                {
+                                    String sql="delete from "+Dbhelper.TABLE_NAME;
+                                    database.execSQL(sql);
+                                    ContentValues value=new ContentValues();
+                                    value.put(Dbhelper.KEY_UNAME,Consts.UserName);
+                                    value.put(Dbhelper.KEY_PASSWORD,Consts.Password);
+                                    database.insert(Dbhelper.TABLE_NAME,null,value);
+                                }else
+                                {
+                                    String sql="delete from "+Dbhelper.TABLE_NAME;
+                                    database.execSQL(sql);
+                                }
+                                Intent i = new Intent(getApplicationContext(), NavigationDrawer.class);
+                                finish();
+                                startActivity(i);
 
-                        if (status.equalsIgnoreCase("success")) {
-                            Consts.UserName=obj.getString("UserName");
-                            Consts.Password=obj.getString("Password");
-                            Consts.FirstName=obj.getString("Firstname");
-                            Consts.Phone=obj.getString("Phone");
-                            Consts.Street=obj.getString("Street");
-                            Consts.City=obj.getString("City");
-                            Consts.State=obj.getString("State");
-                            Consts.Zip=obj.getString("Zipcode");
-                            Consts.Photo=obj.getString("photo").getBytes();
-                            hideDialog();
-                            if(remember.isChecked())
-                            {
-                                String sql="delete from "+Dbhelper.TABLE_NAME;
-                                database.execSQL(sql);
-                                ContentValues value=new ContentValues();
-                                value.put(Dbhelper.KEY_UNAME,Consts.UserName);
-                                value.put(Dbhelper.KEY_PASSWORD,Consts.Password);
-                                database.insert(Dbhelper.TABLE_NAME,null,value);
-                            }else
-                            {
-                                String sql="delete from "+Dbhelper.TABLE_NAME;
-                                database.execSQL(sql);
+                            } else {
+
+                                hideDialog();
+                                Toast.makeText(getApplicationContext(), "Your username or password doesn't match our records. Please check!!!", Toast.LENGTH_SHORT).show();
+
+
                             }
-                            Intent i = new Intent(getApplicationContext(), NavigationDrawer.class);
-                            finish();
-                            startActivity(i);
 
-                        } else {
 
+                        } catch (JSONException e) {
                             hideDialog();
-                            Toast.makeText(getApplicationContext(), "Your username or password doesn't match our records. Please check!!!", Toast.LENGTH_SHORT).show();
-
-
+                            Log.d("Login Error", e.toString());
                         }
-
-
-                    } catch (JSONException e) {
-                        hideDialog();
-                        Log.d("Login Error", e.toString());
                     }
                 }
-            }
-        });
-        loginRequest.execute();
-    }
+            });
+            loginRequest.execute();
+        }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode== KeyEvent.KEYCODE_BACK) {

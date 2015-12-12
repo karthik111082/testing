@@ -14,9 +14,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -37,12 +35,12 @@ public class ProfileActivity extends NavigationDrawer {
 
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     public static ImageView ivImage;
+    RoundImage roundImage;
 
     EditText fname,email,phone,street,city,zip,cellphone;
     String Fname,Email,Phone,Street,City,Zip,State,CellNo;
     Spinner state;
 
-    RoundImage roundImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

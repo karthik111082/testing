@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
@@ -14,7 +14,8 @@
             android:layout_height="match_parent"
             android:background="@color/white"
             android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:visibility="visible">
             <LinearLayout
                 android:id="@+id/l1"
                 android:layout_width="match_parent"
@@ -23,6 +24,17 @@
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:layout_marginTop="25dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Karthik Dhanasekaran"
+                    android:textColor="@color/white"
+                    android:textSize="30dp"
+                    android:gravity="center_horizontal"
+                    android:background="@color/green"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    />
                 <ImageView
                     android:id="@+id/profile_image"
                     android:layout_width="220dp"
@@ -36,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/change_photo"
                     android:textColor="@color/white"
-                    android:textSize="30dp"
+                    android:textSize="25dp"
                     android:gravity="center_horizontal"
                     android:background="@color/green"
                     android:layout_marginBottom="10dp"
@@ -55,24 +67,27 @@
                 >
 
 
+
+
+                <TextView
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:padding="15dp"
+                    android:hint="kay@hikacademy.com"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold"
+                    />
+
                 <EditText
                     android:id="@+id/fname"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:padding="15dp"
-                    android:hint="@string/first_last_name"
+                    android:hint="@string/companyname"
+                    android:gravity="center_vertical"
+
                     />
-
-                <EditText
-                    android:id="@+id/email"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:padding="15dp"
-                    android:hint="@string/emailid"
-                    android:inputType="textEmailAddress"
-                    />
-
-
 
                 <EditText
                     android:id="@+id/phoneno_cell"
@@ -82,6 +97,8 @@
                     android:hint="@string/home_number"
                     android:inputType="phone"
                     android:maxLength="10"
+                    android:gravity="center_vertical"
+
                     />
 
                 <EditText
@@ -93,6 +110,18 @@
                     android:hint="@string/phone_number"
                     android:inputType="phone"
                     android:maxLength="10"
+                    android:gravity="center_vertical"
+
+                    />
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:paddingTop="15dp"
+                    android:hint="@string/address"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold"
+
                     />
 
                 <EditText
@@ -101,6 +130,8 @@
                     android:layout_height="70dp"
                     android:padding="15dp"
                     android:hint="@string/street_address"
+                    android:gravity="center_vertical"
+
                     />
 
                 <EditText
@@ -109,13 +140,15 @@
                     android:layout_height="70dp"
                     android:padding="15dp"
                     android:hint="@string/city"
+                    android:gravity="center_vertical"
+
                     />
                 <Spinner
                     android:id="@+id/state"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:entries="@array/spinner"
-
+                    android:textSize="17dp"
                     android:paddingLeft="2dp"
                     >
 
@@ -124,26 +157,155 @@
                     android:id="@+id/zip"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-
                     android:hint="@string/zip"
                     android:layout_marginLeft="5dp"
-
                     android:inputType="number"
                     android:maxLength="5"
                     />
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:gravity="center"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@color/green"
-                    android:text="Save Profile"
-                    android:textColor="@color/white"
-                    android:textSize="20dp"
-                    android:padding="10dp"
-                    android:layout_marginTop="10dp"/>
+                    android:id="@+id/change_psw"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:hint="@string/change_password"
+                    android:layout_marginLeft="5dp"
+                    android:textStyle="bold"
+
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="10dp">
+                    <Button
+                        android:layout_width="150dp"
+                        android:layout_height="55dp"
+                        android:gravity="center"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/green"
+                        android:text="@string/save"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:padding="10dp"
+                        android:layout_marginTop="10dp"/>
+                    <Button
+                        android:layout_width="150dp"
+                        android:layout_height="55dp"
+                        android:gravity="center"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/green"
+                        android:text="@string/cancel"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:padding="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"/>
+                </LinearLayout>
+
 
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-</ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:gravity="center_vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00a05f"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text="@string/change_password"
+                android:textStyle="bold"
+                android:textSize="35dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:textColor="#ffffff"
+                android:gravity="center_horizontal|center_vertical|center"
+                android:background="#00a05f"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible"
+            android:gravity="center_vertical"
+            android:layout_margin="10dp">
+            <EditText
+                android:id="@+id/current_password"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:hint="@string/current_password"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="15dp"
+                android:inputType="textPassword"
+
+                />
+            <EditText
+                android:id="@+id/new_password"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:hint="@string/new_password"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="15dp"
+                android:inputType="textPassword"
+
+
+                />
+            <EditText
+                android:id="@+id/conf_password"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:hint="@string/confirm_password"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="45dp"
+                android:inputType="textPassword"
+
+
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="55dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="@string/save"
+                    android:textColor="@color/white"
+                    android:background="@color/green"
+                    android:textStyle="bold"
+                    />
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="55dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="@string/cancel"
+                    android:textColor="@color/white"
+                    android:background="@color/green"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="10dp"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>
