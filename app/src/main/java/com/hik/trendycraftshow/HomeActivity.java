@@ -7,6 +7,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.hik.trendycraftshow.NavigationDrawer;
+import com.hik.trendycraftshow.R;
 import com.hik.trendycraftshow.Utils.IsTablet;
 
 public class HomeActivity extends NavigationDrawer {

@@ -2,6 +2,8 @@ package com.hik.trendycraftshow;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,8 +14,13 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.hik.trendycraftshow.Utils.IsTablet;
 import com.hik.trendycraftshow.Utils.RoundImage;
@@ -23,8 +30,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
 
-public class PostAdvertisment extends AppCompatActivity {
+public class PostAdvertisment extends NavigationDrawer {
 
     ImageView aimg1,aimg2,aimg3,aimg4;
     int REQUEST_CAMERA1 = 11,REQUEST_CAMERA2 = 22,REQUEST_CAMERA3 = 33,REQUEST_CAMERA4 = 44, SELECT_FILE = 1, SELECT_FILE2 = 2;
@@ -33,16 +41,22 @@ public class PostAdvertisment extends AppCompatActivity {
     RoundImage roundImage;
     Bitmap bitmap;
     byte[] image1,image2,image3,image4;
+    TextView et1,et2;
+    Calendar calendar;
+    int year,day,month;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        title=(TextView)findViewById(R.id.titletoolbar);
+        title.setText("POST ADVERTISMENT");
         isTablet=tablet.isTablet(getApplicationContext());
-        if(isTablet){
-            setContentView(R.layout.activity_post_advertisment);
-        }else {
-            setContentView(R.layout.activity_post_advertisment_mob);
-
+        isTablet = tablet.isTablet(getApplicationContext());
+        if (isTablet) {
+            getLayoutInflater().inflate(R.layout.activity_post_advertisment, container);
+        } else {
+            getLayoutInflater().inflate(R.layout.activity_post_advertisment_mob, container);
         }
 
         //setContentView(R.layout.activity_post_advertisment_trendymarket);
@@ -51,7 +65,8 @@ public class PostAdvertisment extends AppCompatActivity {
         aimg2=(ImageView)findViewById(R.id.aimg2);
         aimg3=(ImageView)findViewById(R.id.aimg3);
         aimg4=(ImageView)findViewById(R.id.aimg4);
-
+        et1=(TextView)findViewById(R.id.pd1);
+        et2=(TextView)findViewById(R.id.pd2);
 
         aimg1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +96,51 @@ public class PostAdvertisment extends AppCompatActivity {
                 selectImage(4);
             }
         });
+et1.setOnTouchListener(new View.OnTouchListener() {
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        showDialog(999);
+        return false;
+    }
+});
+        calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+    }
+    @SuppressWarnings("deprecation")
+    public void setDate(View view) {
+        showDialog(999);
 
+    }
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        // TODO Auto-generated method stub
+        if (id == 999) {
+            //return new DatePickerDialog(this, myDateListener, year, month, day);
+
+            DatePickerDialog dialog = new DatePickerDialog(this, myDateListener, year, month, day);
+            dialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+
+            return dialog;
+        }
+        return null;
+    }
+
+    private DatePickerDialog.OnDateSetListener myDateListener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
+            // TODO Auto-generated method stub
+            // arg1 = year
+            // arg2 = month
+            // arg3 = day
+            showDate(arg1, arg2+1, arg3);
+        }
+    };
+
+    private void showDate(int year, int month, int day) {
+        et1.setText(new StringBuilder().append(month).append("/")
+                .append(day).append("/").append(year));
     }
 
     private void selectImage(final int requestcode) {
@@ -259,5 +318,15 @@ public class PostAdvertisment extends AppCompatActivity {
 
 
         }
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode== KeyEvent.KEYCODE_BACK) {
+         Intent i=new Intent(getApplicationContext(),MainActivity.class);
+            finish();
+            startActivity(i);
+        }
+        return false;
+
     }
 }

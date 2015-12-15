@@ -1,7 +1,6 @@
 package com.hik.trendycraftshow;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -118,20 +117,30 @@ public class NavigationDrawer extends AppCompatActivity
            Intent i=new Intent(getApplicationContext(),ProfileActivity.class);
             finish();
            startActivity(i);
-
+            title=(TextView)findViewById(R.id.titletoolbar);
+            title.setText("MY PROFILE");
         } else if (id == R.id.nav_inbox) {
             Intent i=new Intent(getApplicationContext(),InboxActivity.class);
             finish();
             startActivity(i);
-
+            title=(TextView)findViewById(R.id.titletoolbar);
+            title.setText("INBOX");
         } else if (id == R.id.nav_payment) {
-
+            Intent i=new Intent(getApplicationContext(),PaymentMethod.class);
+            finish();
+            startActivity(i);
+            title.setText("PAYMENT AND PURCHASE");
         } else if (id == R.id.nav_wishlist) {
             Intent i=new Intent(getApplicationContext(),Wishlist.class);
             finish();
             startActivity(i);
         }
         else if (id == R.id.nav_businesscard) {
+
+            Intent i=new Intent(getApplicationContext(),MyBusinessCard.class);
+            finish();
+            startActivity(i);
+        }else if (id == R.id.nav_followup) {
 
 
         }else if (id == R.id.nav_mysales) {

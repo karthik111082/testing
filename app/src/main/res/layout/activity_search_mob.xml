@@ -1,40 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
+        android:layout_marginTop="30dp"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/green"
-            android:orientation="horizontal">
-            <ImageButton
-                android:id="@+id/back"
-                android:layout_width="20dp"
-                android:layout_height="40dp"
-                android:visibility="visible"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/back"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="@string/search"
-                android:textStyle="bold"
-                android:textSize="20dp"
-                android:layout_weight="1"
-                android:layout_marginRight="30dp"
-                android:textColor="#ffffff"
-                android:gravity="center_horizontal|center_vertical|center"
-                android:background="@color/green"
-                />
 
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,28 +21,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:textColor="@color/black"
                 android:layout_marginLeft="20dp"
-                android:text="Select Categoery"/>
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-
-                android:layout_marginTop="10dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/black"
-                android:layout_marginLeft="20dp"
-                android:text="Location"/>
+                android:text="Keyword"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
+                android:id="@+id/keyword_c"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/titlestyle1"
@@ -76,13 +37,46 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="20dp"
+                android:text="Street Address"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:id="@+id/sac"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/titlestyle1"
+                android:layout_marginTop="10dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="20dp"
+                android:text="City"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/city_c"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/titlestyle1"
+                android:layout_marginTop="10dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:layout_marginTop="20dp"
                 android:textColor="@color/black"
                 android:layout_marginLeft="20dp"
                 android:text="Zip code"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
+                android:id="@+id/zipcode_c"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/titlestyle1"
@@ -91,7 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:textColor="@color/black"
                 android:layout_marginLeft="20dp"
                 android:text="Within distance"/>
@@ -103,23 +97,49 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
                 android:paddingBottom="30dp"
-                android:layout_height="90dp">
-                <TextView
+                android:layout_height="wrap_content">
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="18dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/black"
-
-                    android:text="0 miles"/>
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="20dp"
+                        android:textColor="@color/black"
+                        android:text="0 miles"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:id="@+id/tx1_c"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:textColor="@color/black"
+                        android:text="0 miles"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="20dp"
+                        android:textColor="@color/black"
+                        android:text="100 miles"/>
+                </LinearLayout>
                 <SeekBar
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:paddingLeft="10dp"
                     android:paddingBottom="15dp"
+                    android:id="@+id/seek_c"
                     android:paddingTop="10dp"
                     android:thumb="@drawable/seekbarroundmob"
                     android:layout_marginTop="5dp"/>
@@ -128,28 +148,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:textColor="@color/black"
                 android:layout_marginLeft="20dp"
-                android:text="Date"/>
+                android:text="Event Date"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <EditText
                     android:layout_width="100dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/etd1"
                     android:background="@drawable/titlestyle1"
                     android:layout_height="30dp"></EditText>
                 <ImageButton
                     android:layout_width="30dp"
                     android:background="@drawable/calender"
                     android:layout_marginLeft="10dp"
+                    android:id="@+id/date1"
+                    android:layout_gravity="center_vertical"
                     android:layout_height="30dp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp"
+                    android:textSize="20dp"
 
                     android:textColor="@color/black"
                     android:layout_marginLeft="20dp"
@@ -157,23 +180,28 @@
                 <EditText
                     android:layout_width="100dp"
                     android:layout_marginLeft="20dp"
+                    android:id="@+id/etd2"
                     android:background="@drawable/titlestyle1"
                     android:layout_height="30dp"></EditText>
                 <ImageButton
                     android:layout_width="30dp"
                     android:background="@drawable/calender"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/date2"
                     android:layout_height="30dp" />
             </LinearLayout>
 
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="30dp"
                 android:textColor="@color/white"
                 android:textSize="15dp"
+                android:id="@+id/search_c"
                 android:background="@color/green"
                 android:text="SEARCH NOW"/>
 
@@ -182,4 +210,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</ScrollView>

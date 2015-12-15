@@ -10,7 +10,7 @@
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/homeicon"
-            android:title="PROFILE" />
+            android:title="MY PROFILE" />
         <item
             android:id="@+id/nav_inbox"
             android:icon="@drawable/homeicon"
@@ -28,6 +28,11 @@
             android:id="@+id/nav_businesscard"
             android:icon="@drawable/homeicon"
             android:title="MY BUSINESS CARD" />
+        <item
+            android:id="@+id/nav_followup"
+            android:icon="@drawable/homeicon"
+
+            android:title="MY FOLLOW-UP" />
         <item
             android:id="@+id/nav_mysales"
             android:icon="@drawable/homeicon"

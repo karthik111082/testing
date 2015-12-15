@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,25 +12,7 @@
         android:orientation="vertical">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/green"
-        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:text="@string/post_advertisement"
-            android:textStyle="bold"
-            android:textSize="35dp"
-            android:layout_weight="1"
-            android:textColor="#ffffff"
-            android:gravity="center_horizontal|center_vertical|center"
-            android:background="@color/green"
-            />
-
-    </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -93,10 +75,7 @@
             android:layout_marginLeft="22dp"
             android:layout_marginTop="30dp"
             android:orientation="horizontal">
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@color/black"/>
+
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -125,7 +104,7 @@
                 android:layout_marginLeft="8dp"
                 android:entries="@array/category"
                 android:gravity="center_vertical"
-                android:hint="Add Title"/>
+                android:hint="  Add Title"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -144,14 +123,35 @@
                 android:layout_marginLeft="8dp"
                 android:entries="@array/category"
                 android:gravity="center_vertical"
-                android:hint="Price"/>
+                android:hint="  Price"/>
         </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="22dp"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black"
+                    android:textSize="25dp"
+                    android:layout_marginRight="18dp"
+
+                    android:layout_marginLeft="8dp"
+                    android:entries="@array/category"
+                    android:gravity="center_vertical"
+                    android:hint="  Street Address"/>
+            </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="22dp"
             android:layout_marginTop="30dp"
             android:orientation="horizontal">
+
 
             <EditText
                 android:layout_width="match_parent"
@@ -172,7 +172,7 @@
             android:layout_marginTop="30dp"
             android:orientation="horizontal">
 
-            <Spinner
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@color/black"
@@ -181,7 +181,7 @@
                 android:layout_marginLeft="8dp"
                 android:entries="@array/spinner"
                 android:gravity="center_vertical"
-                android:text="State"/>
+                android:hint="State"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -218,7 +218,7 @@
                 android:layout_marginLeft="8dp"
                 android:entries="@array/category"
                 android:gravity="center_vertical"
-                android:text="Add event sale period"/>
+                android:text="  Add event sale period"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -257,7 +257,7 @@
         </LinearLayout>
 
 
-<TextView
+<EditText
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textSize="25dp"
@@ -265,8 +265,8 @@
     android:layout_marginLeft="22dp"
    android:textColor="@color/black"
     android:layout_marginTop="15dp"
-    android:text="BRIEF"/>
-        <TextView
+    android:hint="BRIEF"/>
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25dp"
@@ -274,7 +274,7 @@
             android:layout_marginLeft="22dp"
             android:textColor="@color/black"
             android:layout_marginTop="8dp"
-            android:text="@string/brief"/>
+            android:hint="@string/brief"/>
 
 
         <LinearLayout
@@ -304,4 +304,4 @@
     </LinearLayout>
         </ScrollView>
     </LinearLayout>
-</RelativeLayout>
+</ScrollView>

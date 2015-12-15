@@ -1,6 +1,9 @@
 package com.hik.trendycraftshow;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -10,19 +13,31 @@ public class MyBusinessCard extends NavigationDrawer {
     boolean isTablet;
     IsTablet tablet;
 
-    TextView toatl_sale,date;
-    ListView business_list;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_business_card);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        title=(TextView)findViewById(R.id.titletoolbar);
+        title.setText("MY BUSSINESS CARD");
+        isTablet = tablet.isTablet(getApplicationContext());
+        if (isTablet) {
+            getLayoutInflater().inflate(R.layout.activity_my_business_card, container);
+        } else {
+            getLayoutInflater().inflate(R.layout.activity_my_business_card_mob, container);
+        }
 
-        toatl_sale=(TextView)findViewById(R.id.tatal_sale);
-        date=(TextView)findViewById(R.id.member_date);
-        business_list=(ListView)findViewById(R.id.business_list);
-
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode== KeyEvent.KEYCODE_BACK) {
+            Intent i=new Intent(getApplicationContext(),MainActivity.class);
+            finish();
+            startActivity(i);
+        }
+        return false;
 
     }
 }
+

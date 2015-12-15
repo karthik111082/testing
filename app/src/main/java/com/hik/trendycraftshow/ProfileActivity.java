@@ -11,12 +11,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hik.trendycraftshow.Utils.IsTablet;
@@ -36,16 +40,21 @@ public class ProfileActivity extends NavigationDrawer {
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     public static ImageView ivImage;
     RoundImage roundImage;
-
-    EditText fname,email,phone,street,city,zip,cellphone;
+    TextView email;
+    EditText fname,phone,street,city,zip,cellphone;
     String Fname,Email,Phone,Street,City,Zip,State,CellNo;
     Spinner state;
+    Button change_psw,save,cancel;
+    LinearLayout change_psw_layout,profile_layout;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        title=(TextView)findViewById(R.id.titletoolbar);
+        title.setText("MY PROFILE");
 
 
         isTablet = tablet.isTablet(getApplicationContext());
@@ -56,12 +65,15 @@ public class ProfileActivity extends NavigationDrawer {
         }
 
         fname=(EditText)findViewById(R.id.fname);
-        email = (EditText) findViewById(R.id.email);
+        email = (TextView) findViewById(R.id.email);
         cellphone=(EditText)findViewById(R.id.phoneno_cell);
         phone=(EditText)findViewById(R.id.phoneno);
         street=(EditText)findViewById(R.id.street_address);
         city=(EditText)findViewById(R.id.city);
         zip=(EditText)findViewById(R.id.zip);
+
+
+
         roundImage=new RoundImage();
 
         ivImage = (ImageView) findViewById(R.id.profile_image);
@@ -70,6 +82,36 @@ public class ProfileActivity extends NavigationDrawer {
             public void onClick(View v) {
 
                 selectImage();
+
+            }
+        });
+
+        change_psw=(Button)findViewById(R.id.change_psw);
+        save=(Button)findViewById(R.id.save);
+
+        change_psw_layout=(LinearLayout)findViewById(R.id.change_psw_layout);
+        profile_layout=(LinearLayout)findViewById(R.id.profile_layout);
+
+
+        change_psw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                profile_layout.setVisibility(View.GONE);
+                change_psw_layout.setVisibility(View.VISIBLE);
+                title.setText("CHANGE PASSWORD");
+
+
+            }
+        });
+        cancel=(Button)findViewById(R.id.cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                profile_layout.setVisibility(View.VISIBLE);
+                change_psw_layout.setVisibility(View.GONE);
+                title.setText("MY PROFILE");
 
             }
         });

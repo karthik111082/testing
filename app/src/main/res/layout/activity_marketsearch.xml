@@ -1,40 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/green"
-            android:orientation="horizontal">
-            <ImageButton
-                android:id="@+id/back"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:visibility="visible"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/back"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:text="@string/market_search"
-                android:textStyle="bold"
-                android:textSize="35dp"
-                android:layout_weight="1"
-                android:layout_marginRight="40dp"
-                android:textColor="#ffffff"
-                android:gravity="center_horizontal|center_vertical|center"
-                android:background="@color/green"
-                />
 
-        </LinearLayout>
 
 <LinearLayout
     android:layout_width="match_parent"
@@ -56,6 +30,71 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/titlestyle1"
+        android:id="@+id/keyword"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="20dp"
+        android:text="Select Category"/>
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/spt"
+        android:entries="@array/trendycat"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="20dp"
+        android:text="Street Address"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/sat"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/titlestyle1"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="20dp"
+        android:text="City"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/city_t"
+        android:background="@drawable/titlestyle1"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="20dp"
+        android:text="Zipcode"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/zipcode_t"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/titlestyle1"
         android:layout_marginTop="10dp"/>
     <TextView
         android:layout_width="match_parent"
@@ -74,24 +113,52 @@
         android:layout_marginTop="10dp"
         android:paddingBottom="30dp"
         android:layout_height="wrap_content">
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="28dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/black"
-
-            android:text="$0"/>
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="28dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                android:text="0 $"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="28dp"
+                android:layout_weight="1"
+                android:id="@+id/et1_t"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                android:text="0 $"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="28dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                android:text="1000 $"/>
+        </LinearLayout>
         <SeekBar
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:paddingLeft="10dp"
+            android:thumb="@drawable/seekbarround"
+            android:id="@+id/seek1_t"
+            android:max="1000"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
-            android:thumb="@drawable/seekbarround"
+
             android:layout_marginTop="5dp"/>
     </LinearLayout>
     <TextView
@@ -111,25 +178,51 @@
         android:layout_marginTop="10dp"
         android:paddingBottom="30dp"
         android:layout_height="wrap_content">
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="28dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/black"
-
-            android:text="$0"/>
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="28dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                android:text="0 $"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="28dp"
+                android:layout_weight="1"
+                android:id="@+id/et2_t"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                android:text="0 $"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="28dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                android:text="1000 $"/>
+        </LinearLayout>
         <SeekBar
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:paddingLeft="10dp"
+            android:id="@+id/seek2_t"
             android:paddingBottom="10dp"
+            android:max="1000"
             android:paddingTop="10dp"
             android:thumb="@drawable/seekbarround"
-
             android:layout_marginTop="5dp"/>
     </LinearLayout>
     <Button
@@ -140,6 +233,7 @@
         android:layout_marginTop="80dp"
         android:textColor="@color/white"
         android:textSize="20dp"
+        android:id="@+id/search_t"
         android:background="@color/green"
         android:text="SEARCH NOW"/>
 
@@ -148,4 +242,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</ScrollView>

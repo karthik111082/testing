@@ -24,7 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class PostAdvertismentTrendyMarket extends AppCompatActivity {
+public class PostAdvertismentTrendyMarket extends NavigationDrawer {
     ImageView img1,img2,img3,img4;
     int REQUEST_CAMERA1 = 11,REQUEST_CAMERA2 = 22,REQUEST_CAMERA3 = 33,REQUEST_CAMERA4 = 44, SELECT_FILE = 1, SELECT_FILE2 = 2;
     IsTablet tablet;
