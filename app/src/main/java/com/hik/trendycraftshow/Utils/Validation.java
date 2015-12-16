@@ -54,6 +54,8 @@ public class Validation {
         }
         return false;
     }
+
+
     // validating password with retype password
     public static boolean isValidConfirmPassword(String pass,String Cpass) {
         if (pass.equals(Cpass)) {

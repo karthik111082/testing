@@ -34,34 +34,43 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:id="@+id/aimg1"
-                android:background="@color/black"/>
+                android:background="@color/black"
+                android:layout_weight="1"
+                />
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginLeft="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="3dp"
                 android:id="@+id/aimg2"
-                android:background="@color/black"/>
+                android:background="@color/black"
+                android:layout_weight="1"
+                />
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginLeft="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="3dp"
                 android:id="@+id/aimg3"
-                android:background="@color/black"/>
+                android:background="@color/black"
+                android:layout_weight="1"
+                />
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginLeft="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="3dp"
                 android:id="@+id/aimg4"
-                android:background="@color/black"/>
+                android:background="@color/black"
+                android:layout_weight="1"
+                />
         </LinearLayout>
         <ScrollView
             android:layout_width="match_parent"
@@ -78,6 +87,7 @@
                     android:orientation="horizontal">
 
                     <Spinner
+                        android:id="@+id/category"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
@@ -96,13 +106,13 @@
                     android:orientation="horizontal">
 
                     <EditText
+                        android:id="@+id/addtitle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
                         android:textSize="18dp"
                         android:drawableLeft="@drawable/hmecpy"
                         android:layout_marginRight="18dp"
-
                         android:entries="@array/category"
                         android:gravity="center_vertical"
                         android:hint="Add Title"/>
@@ -116,6 +126,7 @@
                     android:orientation="horizontal">
 
                     <EditText
+                        android:id="@+id/street_address"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
@@ -133,6 +144,7 @@
                     android:orientation="horizontal">
 
                     <EditText
+                        android:id="@+id/city"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
@@ -150,6 +162,7 @@
                     android:orientation="horizontal">
 
                     <EditText
+                        android:id="@+id/sate"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginRight="18dp"
@@ -165,6 +178,7 @@
                     android:orientation="horizontal">
 
                     <EditText
+                        android:id="@+id/zip"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
@@ -231,7 +245,7 @@
                 </LinearLayout>
 
 
-                <EditText
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="20dp"
@@ -241,6 +255,7 @@
                     android:layout_marginTop="15dp"
                     android:hint="BRIEF"/>
                 <EditText
+                    android:id="@+id/brief_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="20dp"
@@ -248,7 +263,9 @@
                     android:layout_marginLeft="22dp"
                     android:textColor="@color/black"
                     android:layout_marginTop="8dp"
-                    android:hint="@string/brief"/>
+                    android:inputType="textMultiLine"
+
+                    />
 
 
         <LinearLayout
@@ -259,6 +276,7 @@
             android:layout_height="wrap_content">
 
             <Button
+                android:id="@+id/cancel_advertisement"
                 android:layout_width="130dp"
                 android:layout_height="60dp"
                 android:text="Cancel"
@@ -267,6 +285,7 @@
                 android:textSize="25dp"
                 android:background="@drawable/roundrectaglebutton"/>
             <Button
+                android:id="@+id/submit_advertisement"
                 android:layout_width="130dp"
                 android:layout_height="60dp"
                 android:layout_marginLeft="20dp"

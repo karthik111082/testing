@@ -2,21 +2,27 @@ package com.hik.trendycraftshow;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.hik.trendycraftshow.Utils.InternetStatus;
 import com.hik.trendycraftshow.Utils.IsTablet;
 import com.hik.trendycraftshow.Utils.RoundImage;
+import com.hik.trendycraftshow.Utils.Validation;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -33,6 +39,14 @@ public class PostAdvertismentTrendyMarket extends NavigationDrawer {
     Bitmap bitmap;
     byte[] image1,image2,image3,image4;
 
+    Spinner category;
+    EditText addtitle,price,street,city,state,zip,brief;
+    String  Category,Addtitle,Price,Street,City,State,Zip,Brief;
+    Button cancel_advertisement,submit_advertisement;
+
+    InternetStatus internetStatus;
+    ProgressDialog pDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +57,36 @@ public class PostAdvertismentTrendyMarket extends NavigationDrawer {
             setContentView(R.layout.activity_post_advertisment_trendymarket_mob);
 
         }
+
+
+        category=(Spinner)findViewById(R.id.category);
+        addtitle=(EditText)findViewById(R.id.addtitle);
+        street=(EditText)findViewById(R.id.street_address);
+        price=(EditText)findViewById(R.id.trendy_post_price);
+        city=(EditText)findViewById(R.id.city);
+        zip=(EditText)findViewById(R.id.zip);
+        brief=(EditText)findViewById(R.id.brief_edit);
+
+
+        cancel_advertisement=(Button)findViewById(R.id.cancel_advertisement);
+        cancel_advertisement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+
+
+            }
+        });
+
+        submit_advertisement=(Button)findViewById(R.id.submit_advertisement);
+        submit_advertisement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Validation();
+            }
+        });
+
 
         //setContentView(R.layout.activity_post_advertisment_trendymarket);
 
@@ -258,5 +302,126 @@ public class PostAdvertismentTrendyMarket extends NavigationDrawer {
 
 
         }
+    }
+
+
+
+
+    // ShowDialog
+    public void showDialog()
+    {
+        pDialog = new ProgressDialog(PostAdvertismentTrendyMarket.this);
+        pDialog.setMessage("Please wait ...");
+        pDialog.setIndeterminate(false);
+        pDialog.setCancelable(false);
+        pDialog.show();
+    }
+
+    //HideDialog
+    public void hideDialog() {
+        if (pDialog.isShowing()) {
+            pDialog.dismiss();
+        }
+    }
+
+    // Set Validation
+
+    public void Validation() {
+        boolean VCategory = false,VAddtitle = false,VPrice = false,VStreet = false,VState = false,  VCity = false,  VZip = false, VBrief=false;
+        Category = category.getSelectedItem().toString();
+        Addtitle = addtitle.getText().toString();
+        Price=price.getText().toString();
+        Street = street.getText().toString();
+        City = city.getText().toString();
+        // State=state.getSelectedItem().toString();
+        State = state.getText().toString();
+        Zip = zip.getText().toString();
+        Brief = brief.getText().toString();
+
+        // category validation
+        if (category.getSelectedItemPosition() > 0) {
+            VCategory = true;
+        }
+        else
+        {
+            VCategory = false;
+            Toast.makeText(getApplicationContext(), "Please choose a valid category!!!", Toast.LENGTH_SHORT).show();
+        }
+
+        // Add title validation
+
+        if (Validation.isEmpty(Addtitle)) {
+            VAddtitle = false;
+            addtitle.setError("Please enter valid street address!!!");
+        } else {
+            VAddtitle = true;
+        }
+        // Price validation
+
+        if (Validation.isEmpty(Price) || Integer.parseInt(Price)<=0 ) {
+             VPrice= false;
+            price.setError("Please enter valid street address!!!");
+        } else {
+            VPrice = true;
+        }
+
+
+        // Street address validation
+        if (Validation.isEmpty(Street)) {
+            VStreet = false;
+            street.setError("Please enter valid street address!!!");
+        } else {
+            VStreet = true;
+        }
+
+
+        // City validation
+        if (Validation.isEmpty(City)) {
+            VCity = false;
+            city.setError("Please enter valid city!!!");
+        } else {
+            VCity = true;
+        }
+
+        // State validation
+        if (Validation.isEmpty(State)) {
+            VState = false;
+            state.setError("Please enter valid city!!!");
+        } else {
+            VState = true;
+        }
+
+
+
+        // Zip validation
+
+        if (Validation.isZip(Zip)) {
+            VZip = true;
+        } else {
+            VZip = false;
+            zip.setError("Please enter valid zip code!!!");
+        }
+
+
+
+
+        if (VCategory && VAddtitle && VPrice && VStreet && VCity && VState && VZip)
+        {
+            {  if(internetStatus.InternetStatus(getApplicationContext())) {
+
+                Toast.makeText(getApplicationContext(),"Success!!!",Toast.LENGTH_SHORT).show();
+
+            }
+            else{
+                Toast.makeText(getApplicationContext(),"Trendy Craft Show requires internet. Please check!!!",Toast.LENGTH_SHORT).show();
+            }
+
+            }
+
+
+
+        }
+
+
     }
 }

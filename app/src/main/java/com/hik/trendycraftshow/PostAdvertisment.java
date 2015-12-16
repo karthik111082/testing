@@ -4,26 +4,32 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.hik.trendycraftshow.Utils.InternetStatus;
 import com.hik.trendycraftshow.Utils.IsTablet;
 import com.hik.trendycraftshow.Utils.RoundImage;
+import com.hik.trendycraftshow.Utils.Validation;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -44,6 +50,15 @@ public class PostAdvertisment extends NavigationDrawer {
     TextView et1,et2;
     Calendar calendar;
     int year,day,month;
+
+    Spinner category;
+    EditText addtitle,street,city,state,zip,brief;
+    String  Category,Addtitle,Street,City,State,Zip,Brief;
+    Button cancel_advertisement,submit_advertisement;
+
+    InternetStatus internetStatus;
+    ProgressDialog pDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +83,40 @@ public class PostAdvertisment extends NavigationDrawer {
         et1=(TextView)findViewById(R.id.pd1);
         et2=(TextView)findViewById(R.id.pd2);
 
+        category=(Spinner)findViewById(R.id.category);
+        addtitle=(EditText)findViewById(R.id.addtitle);
+        street=(EditText)findViewById(R.id.street_address);
+        city=(EditText)findViewById(R.id.city);
+        state=(EditText)findViewById(R.id.state);
+        zip=(EditText)findViewById(R.id.zip);
+        brief=(EditText)findViewById(R.id.brief_edit);
+
+
+        cancel_advertisement=(Button)findViewById(R.id.cancel_advertisement);
+        cancel_advertisement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+
+
+            }
+        });
+
+        submit_advertisement=(Button)findViewById(R.id.submit_advertisement);
+        submit_advertisement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+            Validation();
+            }
+        });
+
+
+
         aimg1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
 
                 selectImage(1);
             }
@@ -78,36 +124,51 @@ public class PostAdvertisment extends NavigationDrawer {
 
         aimg2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 selectImage(2);
             }
         });
         aimg3.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
 
                 selectImage(3);
             }
         });
         aimg4.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
 
                 selectImage(4);
             }
         });
-et1.setOnTouchListener(new View.OnTouchListener() {
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        showDialog(999);
-        return false;
-    }
-});
+        et1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event)
+            {
+                showDialog(999);
+                return false;
+            }
+        });
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
     }
+
+
+
+
+
+
+
+
+
+
+
     @SuppressWarnings("deprecation")
     public void setDate(View view) {
         showDialog(999);
@@ -327,6 +388,124 @@ et1.setOnTouchListener(new View.OnTouchListener() {
             startActivity(i);
         }
         return false;
+
+    }
+
+// ShowDialog
+    public void showDialog()
+    {
+        pDialog = new ProgressDialog(PostAdvertisment.this);
+        pDialog.setMessage("Please wait ...");
+        pDialog.setIndeterminate(false);
+        pDialog.setCancelable(false);
+        pDialog.show();
+    }
+
+    //HideDialog
+    public void hideDialog() {
+        if (pDialog.isShowing()) {
+            pDialog.dismiss();
+        }
+    }
+
+    // Set Validation
+
+    public void Validation() {
+        boolean VCategory = false,VAddtitle = false,VStreet = false,VState = false,  VCity = false,  VZip = false, VBrief=false;
+        Category = category.getSelectedItem().toString();
+        Addtitle = addtitle.getText().toString();
+        Street = street.getText().toString();
+        City = city.getText().toString();
+        // State=state.getSelectedItem().toString();
+        State = state.getText().toString();
+        Zip = zip.getText().toString();
+        Brief = brief.getText().toString();
+
+        // category validation
+        if (category.getSelectedItemPosition() > 0) {
+                VCategory = true;
+        }
+        else
+        {
+            VCategory = false;
+            Toast.makeText(getApplicationContext(), "Please choose a valid category!!!", Toast.LENGTH_SHORT).show();
+        }
+
+        // Add title validation
+
+        if (Validation.isEmpty(Addtitle)) {
+            VAddtitle = false;
+            addtitle.setError("Please enter valid street address!!!");
+        } else {
+            VAddtitle = true;
+        }
+
+
+        // Street address validation
+        if (Validation.isEmpty(Street)) {
+            VStreet = false;
+            street.setError("Please enter valid street address!!!");
+        } else {
+            VStreet = true;
+        }
+
+
+        // City validation
+        if (Validation.isEmpty(City)) {
+            VCity = false;
+            city.setError("Please enter valid city!!!");
+        } else {
+            VCity = true;
+        }
+
+//        // State validation
+        if (Validation.isEmpty(State)) {
+            VState = false;
+            state.setError("Please enter valid city!!!");
+        } else {
+            VState = true;
+        }
+
+        // State validation
+
+//        if (state.getSelectedItemPosition() > 0) {
+//                VState = true;
+//        }
+//        else {
+//                VState = false;
+//                Toast.makeText(getApplicationContext(), "Please choose a valid state!!!", Toast.LENGTH_SHORT).show();
+//        }
+
+
+        // Zip validation
+
+        if (Validation.isZip(Zip)) {
+            VZip = true;
+        } else {
+            VZip = false;
+            zip.setError("Please enter valid zip code!!!");
+        }
+
+
+
+
+        if (VCategory && VAddtitle && VStreet && VCity && VState && VZip)
+        {
+            {  if(internetStatus.InternetStatus(getApplicationContext())) {
+
+                Toast.makeText(getApplicationContext(),"Success!!!",Toast.LENGTH_SHORT).show();
+
+            }
+            else{
+                Toast.makeText(getApplicationContext(),"Trendy Craft Show requires internet. Please check!!!",Toast.LENGTH_SHORT).show();
+            }
+
+            }
+
+
+
+        }
+
 
     }
 }
