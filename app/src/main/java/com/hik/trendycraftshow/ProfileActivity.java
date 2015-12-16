@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -23,35 +24,50 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hik.trendycraftshow.JSON.Api;
+import com.hik.trendycraftshow.JSON.WebServiceRequest;
+import com.hik.trendycraftshow.Utils.Consts;
+import com.hik.trendycraftshow.Utils.Utils;
 import com.hik.trendycraftshow.Utils.InternetStatus;
 import com.hik.trendycraftshow.Utils.IsTablet;
 import com.hik.trendycraftshow.Utils.RoundImage;
 import com.hik.trendycraftshow.Utils.Validation;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class ProfileActivity extends NavigationDrawer {
     boolean isTablet;
     IsTablet tablet;
-
+Consts consts;
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     public static ImageView ivImage;
     RoundImage roundImage;
 
-    TextView email;
+    TextView email,name;
     EditText company_name, homephone, cellphone, street, city, zip,current_password,new_password,conf_edit_password;
     Spinner state;
-    String Email,Campany_Name, HomePhone, CellNo, Street, City, State, Zip,Current_password,New_password,Confirm_edit_password;
+    String Name,Email,Company_Name, HomePhone, CellNo, Street, City, State, Zip,Current_password,New_password,Confirm_password;
     Button change_psw_main,confirm_psw_sub, save_profile, cancel_profile;
 
     LinearLayout change_psw_layout, profile_layout;
-
+    private WebServiceRequest.HttpURLCONNECTION sendprofile;
+    private WebServiceRequest.HttpURLCONNECTION changepwd;
+Api api;
     InternetStatus internetStatus;
     ProgressDialog pDialog;
+    Bitmap thumbnail=null;
+
 
 
     @Override
@@ -75,16 +91,19 @@ public class ProfileActivity extends NavigationDrawer {
         street = (EditText) findViewById(R.id.street_address);
         city = (EditText) findViewById(R.id.city);
         zip = (EditText) findViewById(R.id.zip);
-
+        state=(Spinner)findViewById(R.id.state);
+        name=(TextView)findViewById(R.id.name);
         current_password = (EditText) findViewById(R.id.current_password);
         new_password = (EditText) findViewById(R.id.new_password);
         conf_edit_password =(EditText)findViewById(R.id.conf_password);
-
-
-
+        consts=new Consts(ProfileActivity.this);
         roundImage = new RoundImage();
-
         ivImage = (ImageView) findViewById(R.id.profile_image);
+        change_psw_layout = (LinearLayout) findViewById(R.id.change_psw_layout);
+        profile_layout = (LinearLayout) findViewById(R.id.profile_layout);
+        change_psw_main = (Button) findViewById(R.id.change_psw_main);
+        save_profile = (Button) findViewById(R.id.save_profile);
+        confirm_psw_sub=(Button)findViewById(R.id.confirm_password_sub);
         ivImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,11 +117,6 @@ public class ProfileActivity extends NavigationDrawer {
             }
         });
 
-
-        change_psw_layout = (LinearLayout) findViewById(R.id.change_psw_layout);
-        profile_layout = (LinearLayout) findViewById(R.id.profile_layout);
-
-        change_psw_main = (Button) findViewById(R.id.change_psw_main);
         change_psw_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,46 +128,34 @@ public class ProfileActivity extends NavigationDrawer {
             }
         });
 
-        save_profile = (Button) findViewById(R.id.save_profile);
+
         save_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (internetStatus.InternetStatus(getApplicationContext())) {
                     Validation();
-                    Toast.makeText(getApplicationContext(), " successfully saved your profile details!!!", Toast.LENGTH_SHORT).show();
+
                 } else {
                     Toast.makeText(getApplicationContext(), "Trendy Craft Show requires internet. Please check!!!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        cancel_profile = (Button) findViewById(R.id.cancel_profile);
-        cancel_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                profile_layout.setVisibility(View.VISIBLE);
-                change_psw_layout.setVisibility(View.GONE);
-                title.setText("MY PROFILE");
 
 
-            }
-        });
-
-        confirm_psw_sub=(Button)findViewById(R.id.confirm_password_sub);
         confirm_psw_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (internetStatus.InternetStatus(getApplicationContext())) {
                     Validation2();
-                    Toast.makeText(getApplicationContext(), " successfully saved your profile details!!!", Toast.LENGTH_SHORT).show();
+
                 } else {
                     Toast.makeText(getApplicationContext(), "Trendy Craft Show requires internet. Please check!!!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
+SetData();
 
 
 
@@ -210,13 +212,12 @@ public class ProfileActivity extends NavigationDrawer {
     }
 
     private void onCaptureImageResult(Intent data) {
-        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+         thumbnail = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
 
         File destination = new File(Environment.getExternalStorageDirectory(),
                 System.currentTimeMillis() + ".png");
-
         FileOutputStream fo;
         try {
             destination.createNewFile();
@@ -228,9 +229,9 @@ public class ProfileActivity extends NavigationDrawer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        thumbnail = roundImage.getCircularBorder(thumbnail, 10);
+       Bitmap img = roundImage.getCircularBorder(thumbnail, 5);
 
-        ivImage.setImageBitmap(thumbnail);
+        ivImage.setImageBitmap(img);
     }
 
     @SuppressWarnings("deprecation")
@@ -241,9 +242,7 @@ public class ProfileActivity extends NavigationDrawer {
                 null);
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
         cursor.moveToFirst();
-
         String selectedImagePath = cursor.getString(column_index);
-
         Bitmap bm;
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
@@ -255,42 +254,30 @@ public class ProfileActivity extends NavigationDrawer {
             scale *= 2;
         options.inSampleSize = scale;
         options.inJustDecodeBounds = false;
-        bm = BitmapFactory.decodeFile(selectedImagePath, options);
-
-        bm = roundImage.getCircularBorder(bm, 10);
+        thumbnail = BitmapFactory.decodeFile(selectedImagePath, options);
+        bm = roundImage.getCircularBorder(thumbnail, 5);
 
 
         ivImage.setImageBitmap(bm);
     }
 
-    public void showDialog() {
-        pDialog = new ProgressDialog(ProfileActivity.this);
-        pDialog.setMessage("Please wait ...");
-        pDialog.setIndeterminate(false);
-        pDialog.setCancelable(false);
-        pDialog.show();
-    }
 
-    public void hideDialog() {
-        if (pDialog.isShowing()) {
-            pDialog.dismiss();
-        }
-    }
 
 
     public void Validation() {
-        boolean VCName = false, VEmail = false, VHPhone = false, VCPhone = false, VCity = false, VStreet = false, VZip = false, VState = false,Vphoto=false;
+        boolean VCName = false,  VHPhone = false, VCPhone = false, VCity = false, VStreet = false, VZip = false, VState = false,Vphoto=false;
         Email = email.getText().toString();
-        Campany_Name = company_name.getText().toString();
+        Name=name.getText().toString();
+        Company_Name = company_name.getText().toString();
         HomePhone = homephone.getText().toString();
         CellNo = cellphone.getText().toString();
         Street = street.getText().toString();
         City = city.getText().toString();
-//        State=state.getSelectedItem().toString();
+        State=state.getSelectedItem().toString();
         Zip = zip.getText().toString();
 
 
-        if (Validation.isEmpty(Campany_Name)) {
+        if (Validation.isEmpty(Company_Name)) {
             VCName = false;
             company_name.setError("Please enter valid name!!!");
         } else {
@@ -302,14 +289,14 @@ public class ProfileActivity extends NavigationDrawer {
         if (Validation.isValidPhone(HomePhone)) {
             VHPhone = true;
         } else {
-            VHPhone = true;
+            VHPhone = false;
             homephone.setError("Invalid phone number");
         }
 
         if (Validation.isValidPhone(CellNo)) {
             VCPhone = true;
         } else {
-            VCPhone = true;
+            VCPhone = false;
             cellphone.setError("Invalid phone number");
         }
 
@@ -332,19 +319,25 @@ public class ProfileActivity extends NavigationDrawer {
             VCity = true;
         }
 
-//
-//        if (state.getSelectedItemPosition() > 0) {
-//                VState = true;
-//        }
-//        else {
-//                VState = false;
-//                Toast.makeText(getApplicationContext(), "Please choose a valid state!!!", Toast.LENGTH_SHORT).show();
-//        }
+       if (state.getSelectedItemPosition() > 0) {
+               VState = true;
+       }
+       else {
+               VState = false;
+               Toast.makeText(getApplicationContext(), "Please choose a state!!!", Toast.LENGTH_SHORT).show();
+       }
+if(thumbnail==null||thumbnail.equals(null))
+{
+    Vphoto=false;
+    Toast.makeText(getApplicationContext(), "Please upload photo!!!", Toast.LENGTH_SHORT).show();
+}else{
+    Vphoto=true;
+}
 
-
-        if (VCName && VHPhone && VCPhone && VStreet && VCity && VState && VZip) {
+        if (VCName && VHPhone && VCPhone && VStreet && VCity && VState && VZip&&VState&&Vphoto) {
             if (internetStatus.InternetStatus(getApplicationContext())) {
-                showDialog();
+                consts.showDialog(ProfileActivity.this);
+                SendProfile();
 
             } else {
                 Toast.makeText(getApplicationContext(), "Trendy Craft Show requires internet. Please check!!!", Toast.LENGTH_SHORT).show();
@@ -356,19 +349,128 @@ public class ProfileActivity extends NavigationDrawer {
 
     }
 
+    public void SendProfile()
+    {
+        Map<String, String> params=SendProfileParams();
+        StringBuffer requestParams = new StringBuffer();
+try {
+    if (params != null && params.size() > 0) {
+        // creates the params string, encode them using URLEncoder
+        Iterator<String> paramIterator = params.keySet().iterator();
+        while (paramIterator.hasNext()) {
+            String key = paramIterator.next();
+            String value = params.get(key);
+            requestParams.append(URLEncoder.encode(key, "UTF-8"));
+            requestParams.append("=").append(
+                    URLEncoder.encode(value, "UTF-8"));
+            requestParams.append("&");
+        }
+
+
+    }
+}catch (Exception e){consts.hideDialog();}
+        sendprofile = api.SEND_PROFILE(requestParams.toString(), new WebServiceRequest.Callback() {
+            @Override
+            public void onResult(int responseCode, String responseMessage, Exception exception) {
+                if (responseCode == 200) {
+                    try {
+                        Log.d("response", responseMessage);
+                        JSONObject obj = new JSONObject(responseMessage);
+                        String status=obj.getString("msg");
+                        if(status.equals("success"))
+                        {
+                            Toast.makeText(getApplicationContext(), "Profile successfully update!!!", Toast.LENGTH_SHORT).show();
+                            Consts.FirstName=Name;
+                            Consts.UserName=Email;
+                            Consts.Phone=HomePhone;
+                            Consts.Cellphone=CellNo;
+                            Consts.City=City;
+                            Consts.Street=Street;
+                            Consts.Company_Name=Company_Name;
+                            Consts.Zip=Zip;
+                            Consts.State=State;
+                            Consts.Photo=Utils.BitMapToString(thumbnail);
+                            consts.hideDialog();
+                        }else
+                        {
+                            Toast.makeText(getApplicationContext(), "Something Wrong!!!", Toast.LENGTH_SHORT).show();
+                            consts.hideDialog();
+                        }
+
+
+                    }
+                    catch (JSONException e){consts.hideDialog();}
+                }else
+                {
+                    consts.hideDialog();
+                }
+            }
+        });
+        sendprofile.execute();
+    }
+    public void SetData()
+    {
+        name.setText(Consts.FirstName);
+        email.setText(Consts.UserName);
+        homephone.setText(Consts.Phone);
+        cellphone.setText(Consts.Cellphone);
+        street.setText(Consts.Street);
+        city.setText(Consts.City);
+        zip.setText(Consts.Zip);
+        company_name.setText(Consts.Company_Name);
+        state.setSelection(0);
+        if(Consts.Photo.equals(null)||Consts.Photo.equals("")||Consts.Photo==null)
+        {
+            Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.avator);
+            String avator=Utils.BitMapToString(largeIcon);
+            thumbnail=roundImage.getCircularBorder(Utils.StringToBitMap(avator), 5);;
+
+            ivImage.setImageBitmap(thumbnail);
+
+        }else {
+            thumbnail=roundImage.getCircularBorder(Utils.StringToBitMap(Consts.Photo),5);
+            ivImage.setImageBitmap(thumbnail);
+
+        }
+
+
+    }
+    private Map<String, String> SendProfileParams() {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("username", Email);
+        params.put("firstname", Name);
+        params.put("phone", HomePhone);
+        params.put("street", Street);
+        params.put("city", City);
+        params.put("state", State);
+        params.put("zipcode", Zip);
+        params.put("cellphone", CellNo);
+        params.put("companyname", Company_Name);
+        params.put("photo", Utils.BitMapToString(thumbnail));
+        return params;
+    }
+    private Map<String, String> ChangePasswordParams() {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("username", Email);
+        params.put("password", Confirm_password);
+
+        return params;
+    }
+
     public void Validation2() {
         boolean  VcuPass = false, VnPass = false, VcnPass = false;
+        Email=email.getText().toString();
         Current_password=current_password.getText().toString();
         New_password=new_password.getText().toString();
-        Confirm_edit_password=conf_edit_password.getText().toString();
+        Confirm_password=conf_edit_password.getText().toString();
         //current password
-        if(Validation.isValidPassword(Current_password))
+        if(Current_password.equals(Consts.Password))
         {
             VcuPass=true;
         }
         else {
             VcuPass=false;
-            current_password.setError("Password should be more then 5 digits!!!");
+            current_password.setError("Incorrect current password!!!");
         }
         //new password
         if(Validation.isValidPassword(New_password))
@@ -380,7 +482,7 @@ public class ProfileActivity extends NavigationDrawer {
             new_password.setError("Password should be more then 5 digits!!!");
         }
         //confirm password
-        if(Validation.isValidConfirmPassword(New_password, Confirm_edit_password ))
+        if(Validation.isValidConfirmPassword(New_password, Confirm_password ))
         {
             VcnPass=true;
         }
@@ -390,7 +492,8 @@ public class ProfileActivity extends NavigationDrawer {
         }
         if (VcuPass && VnPass && VcnPass ) {
             if (internetStatus.InternetStatus(getApplicationContext())) {
-                showDialog();
+                consts.showDialog(ProfileActivity.this);
+                SendChangePassword();
 
             } else
             {
@@ -399,6 +502,56 @@ public class ProfileActivity extends NavigationDrawer {
 
 
         }
+    }
+
+    public void SendChangePassword()
+    {
+        Map<String, String> params=ChangePasswordParams();
+        StringBuffer requestParams = new StringBuffer();
+        try {
+            if (params != null && params.size() > 0) {
+                // creates the params string, encode them using URLEncoder
+                Iterator<String> paramIterator = params.keySet().iterator();
+                while (paramIterator.hasNext()) {
+                    String key = paramIterator.next();
+                    String value = params.get(key);
+                    requestParams.append(URLEncoder.encode(key, "UTF-8"));
+                    requestParams.append("=").append(
+                            URLEncoder.encode(value, "UTF-8"));
+                    requestParams.append("&");
+                }
+
+
+            }
+        }catch (Exception e){consts.hideDialog();}
+        changepwd = api.CHANGE_PASSWORD(requestParams.toString(), new WebServiceRequest.Callback() {
+            @Override
+            public void onResult(int responseCode, String responseMessage, Exception exception) {
+                if (responseCode == 200) {
+                    try {
+                        Log.d("response", responseMessage);
+                        JSONObject obj = new JSONObject(responseMessage);
+                        String status=obj.getString("msg");
+                        if(status.equals("success"))
+                        {
+                            Toast.makeText(getApplicationContext(), "Password changed successfully!!!", Toast.LENGTH_SHORT).show();
+                            Consts.Password=Confirm_password;
+                            consts.hideDialog();
+                        }else
+                        {
+                            Toast.makeText(getApplicationContext(), "Something Wrong!!!", Toast.LENGTH_SHORT).show();
+                            consts.hideDialog();
+                        }
+
+
+                    }
+                    catch (JSONException e){consts.hideDialog();}
+                } else {
+                    consts.hideDialog();
+                }
+            }
+        });
+        changepwd.execute();
     }
 
     }

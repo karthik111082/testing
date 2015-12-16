@@ -114,7 +114,7 @@ public class ForgotPassword extends Activity {
                             Consts.City = obj.getString("City");
                             Consts.State = obj.getString("State");
                             Consts.Zip = obj.getString("Zipcode");
-                            Consts.Photo = obj.getString("photo").getBytes();
+                            Consts.Photo = obj.getString("photo");
                             consts.hideDialog();
                             Intent i = new Intent(getApplicationContext(), MainActivity.class);
                             finish();
