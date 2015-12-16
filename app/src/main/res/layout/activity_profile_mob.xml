@@ -74,7 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:padding="5dp"
-                    android:hint="kay@hikacademy.com"
+                    android:hint="Email"
                     android:gravity="center_vertical"
                     android:textStyle="bold"
                     />
@@ -85,11 +85,11 @@
                     android:layout_height="50dp"
                     android:padding="5dp"
                     android:hint="@string/companyname"
-                    android:gravity="center_vertical"                    />
-
+                    android:gravity="center_vertical"
+                    />
 
                 <EditText
-                    android:id="@+id/phoneno"
+                    android:id="@+id/home_phoneno"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:padding="5dp"
@@ -99,7 +99,7 @@
                     android:gravity="center_vertical"
                     />
                 <EditText
-                    android:id="@+id/phoneno_cell"
+                    android:id="@+id/cell_phoneno"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:padding="5dp"
@@ -156,7 +156,7 @@
                     android:maxLength="6"
                     />
                 <Button
-                    android:id="@+id/change_psw"
+                    android:id="@+id/change_psw_main"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:hint="@string/change_password"
@@ -172,6 +172,7 @@
                     android:gravity="center_horizontal"
                     android:paddingTop="5dp">
                     <Button
+                        android:id="@+id/save_profile"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:gravity="center"
@@ -183,6 +184,7 @@
                         android:padding="5dp"
                         android:layout_marginTop="10dp"/>
                     <Button
+                        android:id="@+id/cancel_profile"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:gravity="center"
@@ -253,25 +255,15 @@
                 android:gravity="center_horizontal"
                 android:layout_marginBottom="10dp">
                 <Button
-                    android:id="@+id/save"
-
-                    android:layout_width="160dp"
+                    android:id="@+id/confirm_password_sub"
+                    android:layout_width="170dp"
                     android:layout_height="35dp"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:text="@string/confirm_password"
                     android:textColor="@color/white"
                     android:background="@color/green"/>
-                <Button
-                    android:id="@+id/cancel"
-                    android:layout_width="160dp"
-                    android:layout_height="35dp"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:text="@string/cancel"
-                    android:textColor="@color/white"
-                    android:background="@color/green"
-                    android:layout_marginLeft="15dp"/>
+
             </LinearLayout>
 
         </LinearLayout>

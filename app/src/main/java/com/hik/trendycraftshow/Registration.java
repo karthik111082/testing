@@ -145,58 +145,60 @@ public class Registration extends Activity {
                 if(otp.getText().toString().length()>0)
                 {
                     if(otp.getText().toString().equals(OTPValue))
-                    {if(internetStatus.InternetStatus(getApplicationContext())) {
+                    {
+                        if(internetStatus.InternetStatus(getApplicationContext()))
+                        {
 
-                        String params = "username=" + Email;
-                        Log.d("parameters", params);
-                        params=params.replaceAll(" ", "%20");
-                        activate = api.ACTIVATE_ACCOUNT(params, new WebServiceRequest.Callback() {
-                            @Override
-                            public void onResult(int responseCode, String responseMessage, Exception exception) {
+                            String params = "username=" + Email;
+                            Log.d("parameters", params);
+                            params=params.replaceAll(" ", "%20");
+                            activate = api.ACTIVATE_ACCOUNT(params, new WebServiceRequest.Callback() {
+                                @Override
+                                public void onResult(int responseCode, String responseMessage, Exception exception) {
 
-                                if (responseCode == 200) {
-                                    try {
-                                        Log.d("response", responseMessage.toString());
+                                    if (responseCode == 200) {
+                                        try {
+                                            Log.d("response", responseMessage.toString());
 
-                                        JSONObject obj = new JSONObject(responseMessage);
-                                        String status=obj.getString("msg");
-                                        hideDialog();
-                                        if(status.equalsIgnoreCase("Activation Failed"))
-                                        {
-                                            Toast.makeText(getApplicationContext(),"We encountered an error while connecting to the server, please try after sometime!!!",Toast.LENGTH_SHORT).show();
-                                        }else
-                                        {
+                                            JSONObject obj = new JSONObject(responseMessage);
+                                            String status=obj.getString("msg");
+                                            hideDialog();
+                                            if(status.equalsIgnoreCase("Activation Failed"))
+                                            {
+                                                Toast.makeText(getApplicationContext(),"We encountered an error while connecting to the server, please try after sometime!!!",Toast.LENGTH_SHORT).show();
+                                            }else
+                                            {
 
-                                            Intent i=new Intent(getApplicationContext(),NavigationDrawer.class);
-                                            finish();
-                                            //Erase Data
-                                            Consts.FirstName="";
-                                            Consts.UserName="";
-                                            Consts.Password="";
-                                            Consts.Phone="";
-                                            Consts.Cellphone="";
-                                            Consts.City="";
-                                            Consts.Zip="";
-                                            Consts.Street="";
-                                            Consts.SpinnerItem=0;
+                                                Intent i=new Intent(getApplicationContext(),NavigationDrawer.class);
+                                                finish();
+                                                //Erase Data
+                                                Consts.FirstName="";
+                                                Consts.UserName="";
+                                                Consts.Password="";
+                                                Consts.Phone="";
+                                                Consts.Cellphone="";
+                                                Consts.City="";
+                                                Consts.Zip="";
+                                                Consts.Street="";
+                                                Consts.SpinnerItem=0;
 
-                                            startActivity(i);
+                                                startActivity(i);
 
+                                            }
+
+
+
+                                        } catch (JSONException e) {
+                                            hideDialog();
                                         }
-
-
-
-                                    } catch (JSONException e) {
-                                        hideDialog();
                                     }
                                 }
-                            }
-                        });
-                        activate.execute();
-                    }
-                    else{
-                        Toast.makeText(getApplicationContext(),"Trendy Craft Show requires internet. Please check!!!",Toast.LENGTH_SHORT).show();
-                    }
+                            });
+                            activate.execute();
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(),"Trendy Craft Show requires internet. Please check!!!",Toast.LENGTH_SHORT).show();
+                        }
 
 
                     }else{
@@ -288,6 +290,7 @@ public class Registration extends Activity {
         state.setSelection(Consts.SpinnerItem);
 
     }
+
     public void Validation()
     {
        boolean VName=false,VEmail=false,VPass=false,VcPass=false,VPhone=false,VCity=false,VStreet=false,VZip=false,VState=false;
@@ -368,7 +371,7 @@ public class Registration extends Activity {
         else {
             VCity=true;
         }
-        if(state.getSelectedItemPosition()>0)
+       if(state.getSelectedItemPosition()>0)
         {
             VState=true;
         }
@@ -376,7 +379,7 @@ public class Registration extends Activity {
         {
             VState=false;
            Toast.makeText(getApplicationContext(),"Please choose a valid state!!!",Toast.LENGTH_SHORT).show();
-        }
+  }
 
 
 

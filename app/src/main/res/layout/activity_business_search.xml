@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
@@ -39,7 +39,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp">
 
 
             <TextView
@@ -54,6 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
+                android:id="@+id/keyword_c"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/titlestyle1"
                 android:layout_marginTop="10dp"/>
@@ -64,12 +66,29 @@
                 android:layout_marginTop="20dp"
                 android:textColor="@color/black"
                 android:layout_marginLeft="20dp"
-                android:text="Location"/>
+                android:text="Street Address"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/sac"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/titlestyle1"
+                android:layout_marginTop="10dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="20dp"
+                android:text="City"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:id="@+id/city_c"
                 android:background="@drawable/titlestyle1"
                 android:layout_marginTop="10dp"/>
             <TextView
@@ -85,6 +104,7 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:id="@+id/zipcode_c"
                 android:background="@drawable/titlestyle1"
                 android:layout_marginTop="10dp"/>
             <TextView
@@ -94,7 +114,7 @@
                 android:layout_marginTop="20dp"
                 android:textColor="@color/black"
                 android:layout_marginLeft="20dp"
-                android:text="Distance"/>
+                android:text="Within distance"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="vertical"
@@ -104,21 +124,47 @@
                 android:layout_marginTop="10dp"
                 android:paddingBottom="30dp"
                 android:layout_height="wrap_content">
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="28dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="20dp"
-                    android:textColor="@color/black"
-
-                    android:text="0 miles"/>
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="28dp"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="20dp"
+                        android:textColor="@color/black"
+                        android:text="0 miles"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="28dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/tx1_c"
+                        android:layout_marginTop="20dp"
+                        android:textColor="@color/black"
+                        android:text="0 miles"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="28dp"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="20dp"
+                        android:textColor="@color/black"
+                        android:text="100 miles"/>
+                </LinearLayout>
                 <SeekBar
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:paddingLeft="10dp"
+                    android:id="@+id/seek_c"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
                     android:thumb="@drawable/seekbarround"
@@ -129,9 +175,8 @@
                 android:layout_height="wrap_content"
                 android:textSize="30dp"
                 android:layout_marginTop="20dp"
-                android:textColor="@color/black"
                 android:layout_marginLeft="20dp"
-                android:text="Category"/>
+                android:text="Select category"/>
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -145,8 +190,9 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="30dp"
                 android:textColor="@color/white"
+                android:id="@+id/search_c"
                 android:textSize="20dp"
-                android:background="@drawable/serachstyle"
+                android:background="@color/green"
                 android:text="SEARCH NOW"/>
 
 
@@ -154,4 +200,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</ScrollView>
