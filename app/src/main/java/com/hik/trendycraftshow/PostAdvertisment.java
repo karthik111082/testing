@@ -73,6 +73,7 @@ public class PostAdvertisment extends NavigationDrawer {
         } else {
             getLayoutInflater().inflate(R.layout.activity_post_advertisment_mob, container);
         }
+        int category=getIntent().getExtras().getInt("category");
 
         //setContentView(R.layout.activity_post_advertisment_trendymarket);
 

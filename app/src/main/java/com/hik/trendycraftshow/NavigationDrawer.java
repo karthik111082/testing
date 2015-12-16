@@ -81,23 +81,6 @@ public class NavigationDrawer extends AppCompatActivity
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-/*
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-*/
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -154,7 +137,7 @@ public class NavigationDrawer extends AppCompatActivity
             startActivity(i);
 
         }else if (id == R.id.nav_advertisment) {
-            Intent i=new Intent(getApplicationContext(),PostAdvertisment.class);
+            Intent i=new Intent(getApplicationContext(),PostAddChooser.class);
             finish();
             startActivity(i);
 

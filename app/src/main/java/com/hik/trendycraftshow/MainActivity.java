@@ -208,7 +208,13 @@ public class MainActivity extends Activity {
                                 Consts.City=obj.getString("City");
                                 Consts.State=obj.getString("State");
                                 Consts.Zip=obj.getString("Zipcode");
-                                Consts.Photo=obj.getString("photo").getBytes();
+                                Consts.Photo=obj.getString("photo");
+                                Consts.UserId=obj.getString("userId");
+                                Consts.Company_Name=obj.getString("companyName");
+                                Consts.Cellphone=obj.getString("cellPhone");
+                                Consts.QuickBloxId=obj.getString("quickId");
+                                Consts.SpinnerItem=Integer.parseInt(obj.getString("stateCode"));
+
                                 hideDialog();
                                 if(remember.isChecked())
                                 {

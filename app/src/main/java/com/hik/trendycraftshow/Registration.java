@@ -171,16 +171,21 @@ public class Registration extends Activity {
 
                                                 Intent i=new Intent(getApplicationContext(),NavigationDrawer.class);
                                                 finish();
-                                                //Erase Data
-                                                Consts.FirstName="";
-                                                Consts.UserName="";
-                                                Consts.Password="";
-                                                Consts.Phone="";
-                                                Consts.Cellphone="";
-                                                Consts.City="";
-                                                Consts.Zip="";
-                                                Consts.Street="";
-                                                Consts.SpinnerItem=0;
+                                                Consts.UserName=obj.getString("UserName");
+                                                Consts.Password=obj.getString("Password");
+                                                Consts.FirstName=obj.getString("Firstname");
+                                                Consts.Phone=obj.getString("Phone");
+                                                Consts.Street=obj.getString("Street");
+                                                Consts.City=obj.getString("City");
+                                                Consts.State=obj.getString("State");
+                                                Consts.Zip=obj.getString("Zipcode");
+                                                Consts.Photo=obj.getString("photo");
+                                                Consts.UserId=obj.getString("userId");
+                                                Consts.Company_Name=obj.getString("companyName");
+                                                Consts.Cellphone=obj.getString("cellPhone");
+                                                Consts.QuickBloxId=obj.getString("quickId");
+                                                Consts.SpinnerItem=Integer.parseInt(obj.getString("stateCode"));
+
 
                                                 startActivity(i);
 
@@ -215,7 +220,7 @@ public class Registration extends Activity {
 
     public void SignUp()
     {
-        String params = "username=" + Email + "&password="+cPwd+ "&firstname="+Fname+ "&phone="+Phone+ "&street="+Street+ "&city="+City+ "&state="+State+ "&zipcode="+Zip+ "&photo="+"0"+ "&cellphone="+CellNo;
+        String params = "username=" + Email + "&password="+cPwd+ "&firstname="+Fname+ "&phone="+Phone+ "&street="+Street+ "&city="+City+ "&state="+State+ "&zipcode="+Zip+ "&photo="+"0"+ "&cellphone="+CellNo+ "&statecode="+state.getSelectedItemPosition();
         params=params.replaceAll(" ","%20");
         Log.d("parameters", params);
         signup = api.REGISTRATION(params, new WebServiceRequest.Callback() {
@@ -241,7 +246,12 @@ public class Registration extends Activity {
                             Consts.City=obj.getString("City");
                             Consts.State=obj.getString("State");
                             Consts.Zip=obj.getString("Zipcode");
-                            Consts.Photo=obj.getString("photo").getBytes();
+                            Consts.Photo=obj.getString("photo");
+                            Consts.UserId=obj.getString("userId");
+                            Consts.Company_Name=obj.getString("companyName");
+                            Consts.Cellphone=obj.getString("cellPhone");
+                            Consts.QuickBloxId=obj.getString("quickId");
+                            Consts.SpinnerItem=Integer.parseInt(obj.getString("stateCode"));
                             Consts.AccessCode = obj.getString("code");
                             Log.d("ConsValue",Consts.AccessCode);
                             OTPValue = obj.getString("code");
