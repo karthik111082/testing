@@ -3,10 +3,15 @@ package com.hik.trendycraftshow;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -23,10 +28,17 @@ import com.hik.trendycraftshow.Utils.Consts;
 import com.hik.trendycraftshow.Utils.Dbhelper;
 import com.hik.trendycraftshow.Utils.InternetStatus;
 import com.hik.trendycraftshow.Utils.IsTablet;
+import com.hik.trendycraftshow.Utils.Utils;
 import com.hik.trendycraftshow.Utils.Validation;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 public class MainActivity extends Activity {
     boolean isTablet;
@@ -39,9 +51,11 @@ public class MainActivity extends Activity {
     TextView Forgot;
     InternetStatus internetStatus;
     boolean internet;
+    public static Bitmap bitmap;
     ImageButton signin,signup,guest;
     Dbhelper mHelper;
     SQLiteDatabase database;
+    public static Consts consts;
     CheckBox remember;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +67,7 @@ public class MainActivity extends Activity {
         else{
             setContentView(R.layout.activity_main_mob);
         }
+        consts=new Consts(getApplicationContext());
         mHelper=new Dbhelper(getApplicationContext());
         database=mHelper.getWritableDatabase();
         internetStatus=new InternetStatus();
@@ -72,6 +87,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
 
                 Intent i = new Intent(getApplicationContext(), NavigationDrawer.class);
+                Consts.isGuest=true;
                 finish();
                 startActivity(i);
             }
@@ -207,14 +223,21 @@ public class MainActivity extends Activity {
                                 Consts.Street=obj.getString("Street");
                                 Consts.City=obj.getString("City");
                                 Consts.State=obj.getString("State");
-                                Consts.Zip=obj.getString("Zipcode");
-                                Consts.Photo=obj.getString("photo");
+                                Consts.Zip=obj.getString("Zipcode");                               
                                 Consts.UserId=obj.getString("userId");
                                 Consts.Company_Name=obj.getString("companyName");
                                 Consts.Cellphone=obj.getString("cellPhone");
                                 Consts.QuickBloxId=obj.getString("quickId");
                                 Consts.SpinnerItem=Integer.parseInt(obj.getString("stateCode"));
+                                Consts.Photo=(Utils.StringToBitMap(obj.getString("photo")));
+                                Consts.UserSince=obj.getString("createdDate");
+                                writeToFile(obj.getString("photo"));
 
+
+
+                                Log.d("jsonimage",obj.getString("photo"));
+
+                                Log.d("jsonlength", String.valueOf(obj.getString("photo").length()));
                                 hideDialog();
                                 if(remember.isChecked())
                                 {
@@ -230,6 +253,7 @@ public class MainActivity extends Activity {
                                     database.execSQL(sql);
                                 }
                                 Intent i = new Intent(getApplicationContext(), NavigationDrawer.class);
+                                Consts.isGuest=false;
                                 finish();
                                 startActivity(i);
 
@@ -251,6 +275,21 @@ public class MainActivity extends Activity {
             });
             loginRequest.execute();
         }
+
+    private void writeToFile(String data) {
+        try{
+
+            byte[] encodeByte= Base64.decode(data, Base64.NO_WRAP);
+            bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+
+        }catch(Exception e){
+            e.getMessage();
+
+        }
+    }
+
+
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode== KeyEvent.KEYCODE_BACK) {

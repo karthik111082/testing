@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,6 +24,7 @@
                 android:orientation="vertical"
                 android:layout_marginTop="25dp">
                 <TextView
+                    android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Karthik Dhanasekaran"
@@ -34,14 +35,15 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     />
-                <ImageView
-                    android:id="@+id/profile_image"
+                <com.mikhaellopez.circularimageview.CircularImageView
                     android:layout_width="220dp"
                     android:layout_height="220dp"
-                    android:background="@drawable/avator"
-                    android:gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="40dp"/>
+                    android:id="@+id/profile_image_mysales"
+                    app:border_color="#EEEEEE"
+                    app:border_width="4dp"
+                    app:shadow="true"
+                    app:shadow_radius="10"
+                    app:shadow_color="#8BC34A"/>
 
             </LinearLayout>
             <LinearLayout
@@ -56,6 +58,7 @@
                     android:background="@color/gainsboro"
                     >
                     <TextView
+                        android:id="@+id/tatal_sale"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="$2548.50"
@@ -68,6 +71,7 @@
 
                         />
                     <TextView
+                        android:id="@+id/member_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="30 NOV 2015"

@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -27,7 +28,7 @@
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
                 <ImageButton
-                    android:id="@+id/craft"
+                    android:id="@+id/home_craft"
                     android:layout_width="80dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
@@ -35,7 +36,7 @@
                     android:background="@drawable/craftshow"
                     />
                 <ImageButton
-                    android:id="@+id/art"
+                    android:id="@+id/home_art"
                     android:layout_width="80dp"
                     android:layout_height="100dp"
                     android:layout_marginLeft="40dp"
@@ -82,7 +83,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_height="wrap_content">
                 <ImageButton
-                    android:id="@+id/expo"
+                    android:id="@+id/home_expo"
                     android:layout_width="80dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
@@ -90,7 +91,7 @@
                     android:background="@drawable/expo"
                     />
                 <ImageButton
-                    android:id="@+id/fairs"
+                    android:id="@+id/home_fairs"
                     android:layout_width="80dp"
                     android:layout_height="100dp"
                     android:layout_marginLeft="40dp"
@@ -143,7 +144,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_height="wrap_content">
                 <ImageButton
-                    android:id="@+id/business_card"
+                    android:id="@+id/home_business_card"
                     android:layout_width="80dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
@@ -152,7 +153,7 @@
                     android:background="@drawable/business_card"
                     />
                 <ImageButton
-                    android:id="@+id/trendy"
+                    android:id="@+id/home_trendy"
                     android:layout_width="80dp"
                     android:layout_height="100dp"
                     android:layout_marginLeft="40dp"

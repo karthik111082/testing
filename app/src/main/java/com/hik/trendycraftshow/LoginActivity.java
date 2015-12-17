@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hik.trendycraftshow.Utils.Consts;
 import com.hik.trendycraftshow.Utils.InternetStatus;
 import com.hik.trendycraftshow.Utils.IsTablet;
 
@@ -23,6 +24,7 @@ public class LoginActivity extends Activity {
     TextView intro;
     ImageButton guest;
     InternetStatus internetStatus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -66,6 +68,7 @@ public class LoginActivity extends Activity {
             public void onClick(View v) {
 
                 Intent i = new Intent(getApplicationContext(), NavigationDrawer.class);
+                Consts.isGuest=true;
                 finish();
                 startActivity(i);
             }

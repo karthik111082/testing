@@ -15,6 +15,7 @@ public class HomeActivity extends NavigationDrawer {
 
     boolean isTablet;
     IsTablet tablet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

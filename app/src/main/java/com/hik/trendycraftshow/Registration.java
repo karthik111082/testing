@@ -20,6 +20,7 @@ import com.hik.trendycraftshow.JSON.WebServiceRequest;
 import com.hik.trendycraftshow.Utils.Consts;
 import com.hik.trendycraftshow.Utils.InternetStatus;
 import com.hik.trendycraftshow.Utils.IsTablet;
+import com.hik.trendycraftshow.Utils.Utils;
 import com.hik.trendycraftshow.Utils.Validation;
 
 import org.json.JSONException;
@@ -179,7 +180,7 @@ public class Registration extends Activity {
                                                 Consts.City=obj.getString("City");
                                                 Consts.State=obj.getString("State");
                                                 Consts.Zip=obj.getString("Zipcode");
-                                                Consts.Photo=obj.getString("photo");
+                                                MainActivity.consts.setPhoto(Utils.StringToBitMap(obj.getString("photo")));
                                                 Consts.UserId=obj.getString("userId");
                                                 Consts.Company_Name=obj.getString("companyName");
                                                 Consts.Cellphone=obj.getString("cellPhone");
@@ -246,7 +247,7 @@ public class Registration extends Activity {
                             Consts.City=obj.getString("City");
                             Consts.State=obj.getString("State");
                             Consts.Zip=obj.getString("Zipcode");
-                            Consts.Photo=obj.getString("photo");
+                            Consts.Photo=(Utils.StringToBitMap(obj.getString("photo")));
                             Consts.UserId=obj.getString("userId");
                             Consts.Company_Name=obj.getString("companyName");
                             Consts.Cellphone=obj.getString("cellPhone");

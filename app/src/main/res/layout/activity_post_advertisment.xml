@@ -33,33 +33,38 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="130dp"
             android:layout_marginLeft="22dp"
+            android:layout_marginRight="22dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="130dp"
-                android:layout_height="130dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:id="@+id/aimg1"
+                android:layout_weight="1"
                 android:background="@color/black"/>
             <ImageView
-                android:layout_width="130dp"
-                android:layout_height="130dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
+                android:layout_weight="1"
                 android:id="@+id/aimg2"
                 android:background="@color/black"/>
             <ImageView
-                android:layout_width="130dp"
-                android:layout_height="130dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
+                android:layout_weight="1"
                 android:id="@+id/aimg3"
                 android:background="@color/black"/>
             <ImageView
-                android:layout_width="130dp"
-                android:layout_height="130dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:id="@+id/aimg4"
+                android:layout_weight="1"
                 android:background="@color/black"/>
         </LinearLayout>
         <ScrollView
@@ -153,16 +158,13 @@
                     android:layout_marginTop="30dp"
                     android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/sate"
+                    <Spinner
+                        android:id="@+id/state"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="18dp"
-                        android:layout_marginLeft="8dp"
-                        android:textSize="25dp"
+                        android:layout_height="50dp"
                         android:entries="@array/spinner"
-                        android:gravity="center_vertical"
-                        android:hint="State"/>
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center_vertical" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -177,6 +179,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
                         android:textSize="25dp"
+
                         android:layout_marginRight="18dp"
                         android:layout_marginLeft="8dp"
                         android:entries="@array/category"
@@ -208,34 +211,43 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     android:layout_marginTop="30dp"
                     android:layout_gravity="center"
                     android:orientation="horizontal">
                     <TextView
-                        android:layout_width="250dp"
-                        android:layout_height="50dp"
-                        android:textSize="25dp"
-                        android:background="@color/green"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:id="@+id/pd1"
+                        android:textColor="@color/black"
+                        android:textSize="20dp"
+                        android:hint="Select Date"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:background="@color/green"
                         android:startYear="2015"
                         android:endYear="2030"
+
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="5dp"
                         android:text="to"/>
                     <TextView
-                        android:layout_width="250dp"
+                        android:layout_width="match_parent"
                         android:layout_height="50dp"
+                        android:textColor="@color/black"
+                        android:textSize="20dp"
                         android:id="@+id/pd2"
-                        android:textSize="25dp"
+                        android:layout_weight="1"
                         android:background="@color/green"
-                        android:layout_marginLeft="20dp"
+                        android:hint="Select Date"
+                        android:layout_marginLeft="5dp"
                         android:startYear="2015"
                         android:endYear="2030"
-                        android:gravity="end"
+                        android:gravity="center_vertical|center_horizontal"
                         />
                 </LinearLayout>
 
@@ -266,9 +278,11 @@
             android:layout_width="match_parent"
             android:gravity="center"
             android:layout_marginTop="23dp"
+            android:paddingBottom="30dp"
             android:layout_height="wrap_content">
 
             <Button
+                android:id="@+id/cancel_advertisement"
                 android:layout_width="200dp"
                 android:layout_height="80dp"
                 android:text="Cancel"
@@ -277,6 +291,7 @@
                 android:textSize="25dp"
                 android:background="@drawable/roundrectaglebutton"/>
             <Button
+                android:id="@+id/submit_advertisement"
                 android:layout_width="200dp"
                 android:layout_height="80dp"
                 android:layout_marginLeft="20dp"

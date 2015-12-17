@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,17 +27,32 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hik.trendycraftshow.JSON.Api;
+import com.hik.trendycraftshow.JSON.WebServiceRequest;
+import com.hik.trendycraftshow.Utils.Consts;
+import com.hik.trendycraftshow.Utils.GPSTracker;
 import com.hik.trendycraftshow.Utils.InternetStatus;
 import com.hik.trendycraftshow.Utils.IsTablet;
 import com.hik.trendycraftshow.Utils.RoundImage;
+import com.hik.trendycraftshow.Utils.Utils;
 import com.hik.trendycraftshow.Utils.Validation;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class PostAdvertisment extends NavigationDrawer {
 
@@ -46,64 +62,75 @@ public class PostAdvertisment extends NavigationDrawer {
     boolean isTablet;
     RoundImage roundImage;
     Bitmap bitmap;
-    byte[] image1,image2,image3,image4;
+    String image1="",image2="",image3="",image4="";
     TextView et1,et2;
     Calendar calendar;
     int year,day,month;
+    Consts consts;
+    GPSTracker gps;
 
     Spinner category;
-    EditText addtitle,street,city,state,zip,brief;
-    String  Category,Addtitle,Street,City,State,Zip,Brief;
+    EditText addtitle,street,city,zip,brief;
+    Spinner state;
+    String  Category,Addtitle,Street,City,State,Zip,Brief,Startdate="",Enddate="";
+
     Button cancel_advertisement,submit_advertisement;
+    boolean date1,date2;
+    double latitude;
+    double longitude;
 
     InternetStatus internetStatus;
     ProgressDialog pDialog;
+    private WebServiceRequest.HttpURLCONNECTION postAdd;
+    Api api;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        title=(TextView)findViewById(R.id.titletoolbar);
-        title.setText("POST ADVERTISMENT");
-        isTablet=tablet.isTablet(getApplicationContext());
         isTablet = tablet.isTablet(getApplicationContext());
         if (isTablet) {
             getLayoutInflater().inflate(R.layout.activity_post_advertisment, container);
         } else {
             getLayoutInflater().inflate(R.layout.activity_post_advertisment_mob, container);
         }
-        int category=getIntent().getExtras().getInt("category");
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        title=(TextView)findViewById(R.id.titletoolbar);
+        title.setText("POST ADVERTISMENT");
+        int categoryid=getIntent().getExtras().getInt("category");
 
         //setContentView(R.layout.activity_post_advertisment_trendymarket);
-
+        consts=new Consts(getApplicationContext());
         aimg1=(ImageView)findViewById(R.id.aimg1);
         aimg2=(ImageView)findViewById(R.id.aimg2);
         aimg3=(ImageView)findViewById(R.id.aimg3);
         aimg4=(ImageView)findViewById(R.id.aimg4);
         et1=(TextView)findViewById(R.id.pd1);
         et2=(TextView)findViewById(R.id.pd2);
-
         category=(Spinner)findViewById(R.id.category);
+        state=(Spinner)findViewById(R.id.state);
         addtitle=(EditText)findViewById(R.id.addtitle);
         street=(EditText)findViewById(R.id.street_address);
         city=(EditText)findViewById(R.id.city);
-        state=(EditText)findViewById(R.id.state);
         zip=(EditText)findViewById(R.id.zip);
         brief=(EditText)findViewById(R.id.brief_edit);
-
-
+        submit_advertisement=(Button)findViewById(R.id.submit_advertisement);
         cancel_advertisement=(Button)findViewById(R.id.cancel_advertisement);
+        category.setSelection(categoryid);
+        setData();
+
+
+
+
         cancel_advertisement.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
 
 
             }
         });
 
-        submit_advertisement=(Button)findViewById(R.id.submit_advertisement);
+
         submit_advertisement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -118,7 +145,6 @@ public class PostAdvertisment extends NavigationDrawer {
             @Override
             public void onClick(View v)
             {
-
                 selectImage(1);
             }
         });
@@ -148,9 +174,26 @@ public class PostAdvertisment extends NavigationDrawer {
         });
         et1.setOnTouchListener(new View.OnTouchListener() {
             @Override
+            public boolean onTouch(View v, MotionEvent event) {
+               date1=true;
+                date2=false;
+                showDialog(999);
+                return false;
+            }
+        });
+        et2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
             public boolean onTouch(View v, MotionEvent event)
             {
-                showDialog(999);
+                if(Startdate.equals(null)||Startdate==null||Startdate.equals(""))
+                {
+                    Toast.makeText(getApplicationContext(),"Please select start date first!!!",Toast.LENGTH_SHORT).show();
+                }else{
+                    date1=false;
+                    date2=true;
+                    showDialog(999);
+                }
+
                 return false;
             }
         });
@@ -180,12 +223,41 @@ public class PostAdvertisment extends NavigationDrawer {
         // TODO Auto-generated method stub
         if (id == 999) {
             //return new DatePickerDialog(this, myDateListener, year, month, day);
+            if (date2) {
+                //return new DatePickerDialog(this, myDateListener, year, month, day);
+                String expectedPattern = "MM/dd/yyyy";
+                Date date=null;
+                Calendar c=null;
+                SimpleDateFormat formatter = new SimpleDateFormat(expectedPattern);
+                try
+                {
+                    date = formatter.parse(Startdate);
+                    System.out.println(date);
+                     c = Calendar.getInstance();
+                    c.setTime(formatter.parse(Startdate));
+                    c.add(Calendar.DATE, 30);
+                }
+                catch (ParseException e)
+                {
 
-            DatePickerDialog dialog = new DatePickerDialog(this, myDateListener, year, month, day);
-            dialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                    e.printStackTrace();
+                }
+                DatePickerDialog dialog = new DatePickerDialog(this, myDateListener, year, month, day);
+                dialog.getDatePicker().setMinDate(date.getTime());
+                dialog.getDatePicker().setMaxDate(Long.parseLong(formatter.format(c.getTime())));
 
-            return dialog;
+                Log.d("date","test:"+date.getTime());
+
+                return dialog;
+            }else {
+
+                DatePickerDialog dialog = new DatePickerDialog(this, myDateListener, year, month, day);
+                dialog.getDatePicker().setMinDate(System.currentTimeMillis()-1000);
+
+                return dialog;
+            }
         }
+
         return null;
     }
 
@@ -201,8 +273,26 @@ public class PostAdvertisment extends NavigationDrawer {
     };
 
     private void showDate(int year, int month, int day) {
-        et1.setText(new StringBuilder().append(month).append("/")
-                .append(day).append("/").append(year));
+        if(date1) {
+
+            et1.setText(new StringBuilder().append(month).append("/").append(day).append("/").append(year));
+            Startdate=et1.getText().toString();
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+                Calendar c = Calendar.getInstance();
+                c.setTime(sdf.parse(Startdate));
+                c.add(Calendar.DATE, 30);
+                 // number of days to add
+                et2.setText(sdf.format(c.getTime()));
+                Enddate=et2.getText().toString();
+            }catch (ParseException e){}
+        }
+        if(date2)
+        {
+
+            et2.setText(new StringBuilder().append(month).append("/").append(day).append("/").append(year));
+            Enddate=et2.getText().toString();
+        }
     }
 
     private void selectImage(final int requestcode) {
@@ -253,23 +343,22 @@ public class PostAdvertisment extends NavigationDrawer {
         builder.show();
 
     }
-    public void BitmapToByte(Bitmap bitmap,int image)
+    public void BitmapToString(Bitmap bitmap,int image)
     {
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+
         switch (image)
         {
             case 1:
-                image1= stream.toByteArray();
+                image1= Utils.BitMapToString(bitmap);
                 break;
             case 2:
-                image2= stream.toByteArray();
+                image2= Utils.BitMapToString(bitmap);
                 break;
             case 3:
-                image3= stream.toByteArray();
+                image3= Utils.BitMapToString(bitmap);
                 break;
             case 4:
-                image4= stream.toByteArray();
+                image4= Utils.BitMapToString(bitmap);
                 break;
 
         }
@@ -328,19 +417,19 @@ public class PostAdvertisment extends NavigationDrawer {
             switch (image) {
                 case 1:
                     aimg1.setImageBitmap(thumbnail);
-                    BitmapToByte(thumbnail,1);
+                    BitmapToString(thumbnail, 1);
                     break;
                 case 2:
                     aimg2.setImageBitmap(thumbnail);
-                    BitmapToByte(thumbnail, 2);
+                    BitmapToString(thumbnail, 2);
                     break;
                 case 3:
                     aimg3.setImageBitmap(thumbnail);
-                    BitmapToByte(thumbnail, 3);
+                    BitmapToString(thumbnail, 3);
                     break;
                 case 4:
                     aimg4.setImageBitmap(thumbnail);
-                    BitmapToByte(thumbnail,4);
+                    BitmapToString(thumbnail, 4);
 
 
             }
@@ -364,19 +453,19 @@ public class PostAdvertisment extends NavigationDrawer {
         switch (image) {
             case 1:
                 aimg1.setImageBitmap(bitmap);
-                BitmapToByte(bitmap, 1);
+                BitmapToString(bitmap, 1);
                 break;
             case 2:
                 aimg2.setImageBitmap(bitmap);
-                BitmapToByte(bitmap, 2);
+                BitmapToString(bitmap, 2);
                 break;
             case 3:
                 aimg3.setImageBitmap(bitmap);
-                BitmapToByte(bitmap, 3);
+                BitmapToString(bitmap, 3);
                 break;
             case 4:
                 aimg4.setImageBitmap(bitmap);
-                BitmapToByte(bitmap, 4);
+                BitmapToString(bitmap, 4);
 
 
         }
@@ -417,8 +506,7 @@ public class PostAdvertisment extends NavigationDrawer {
         Addtitle = addtitle.getText().toString();
         Street = street.getText().toString();
         City = city.getText().toString();
-        // State=state.getSelectedItem().toString();
-        State = state.getText().toString();
+        State = state.getSelectedItem().toString();
         Zip = zip.getText().toString();
         Brief = brief.getText().toString();
 
@@ -429,14 +517,14 @@ public class PostAdvertisment extends NavigationDrawer {
         else
         {
             VCategory = false;
-            Toast.makeText(getApplicationContext(), "Please choose a valid category!!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Please choose category!!!", Toast.LENGTH_SHORT).show();
         }
 
         // Add title validation
 
         if (Validation.isEmpty(Addtitle)) {
             VAddtitle = false;
-            addtitle.setError("Please enter valid street address!!!");
+            addtitle.setError("Please enter advertisement title!!!");
         } else {
             VAddtitle = true;
         }
@@ -445,7 +533,7 @@ public class PostAdvertisment extends NavigationDrawer {
         // Street address validation
         if (Validation.isEmpty(Street)) {
             VStreet = false;
-            street.setError("Please enter valid street address!!!");
+            street.setError("Please enter street address!!!");
         } else {
             VStreet = true;
         }
@@ -454,31 +542,18 @@ public class PostAdvertisment extends NavigationDrawer {
         // City validation
         if (Validation.isEmpty(City)) {
             VCity = false;
-            city.setError("Please enter valid city!!!");
+            city.setError("Please enter city!!!");
         } else {
             VCity = true;
         }
 
 //        // State validation
-        if (Validation.isEmpty(State)) {
+        if (state.getSelectedItemPosition()==0) {
             VState = false;
-            state.setError("Please enter valid city!!!");
+           Toast.makeText(getApplicationContext(),"Please select state!!!",Toast.LENGTH_SHORT).show();
         } else {
             VState = true;
         }
-
-        // State validation
-
-//        if (state.getSelectedItemPosition() > 0) {
-//                VState = true;
-//        }
-//        else {
-//                VState = false;
-//                Toast.makeText(getApplicationContext(), "Please choose a valid state!!!", Toast.LENGTH_SHORT).show();
-//        }
-
-
-        // Zip validation
 
         if (Validation.isZip(Zip)) {
             VZip = true;
@@ -492,21 +567,117 @@ public class PostAdvertisment extends NavigationDrawer {
 
         if (VCategory && VAddtitle && VStreet && VCity && VState && VZip)
         {
-            {  if(internetStatus.InternetStatus(getApplicationContext())) {
+            {  if(internetStatus.InternetStatus(getApplicationContext()))
+            {
+                consts.showDialog(PostAdvertisment.this);
 
-                Toast.makeText(getApplicationContext(),"Success!!!",Toast.LENGTH_SHORT).show();
+                    PostAdd();
 
             }
-            else{
+            else
+            {
                 Toast.makeText(getApplicationContext(),"Trendy Craft Show requires internet. Please check!!!",Toast.LENGTH_SHORT).show();
             }
 
+            }    }
+    }
+    public void PostAdd()
+    {
+        Map<String, String> params=PostAddParams();
+        StringBuffer requestParams = new StringBuffer();
+        try {
+            if (params != null && params.size() > 0) {
+                // creates the params string, encode them using URLEncoder
+                Iterator<String> paramIterator = params.keySet().iterator();
+                while (paramIterator.hasNext()) {
+                    String key = paramIterator.next();
+                    String value = params.get(key);
+                    requestParams.append(URLEncoder.encode(key, "UTF-8"));
+                    requestParams.append("=").append(
+                            URLEncoder.encode(value, "UTF-8"));
+                    requestParams.append("&");
+                }
+
+
             }
+        }catch (Exception e){consts.hideDialog();}
+        postAdd = api.POST_ADD(requestParams.toString(), new WebServiceRequest.Callback() {
+            @Override
+            public void onResult(int responseCode, String responseMessage, Exception exception) {
+                if (responseCode == 200) {
+                    try {
+                        Log.d("response", responseMessage);
+                        JSONObject obj = new JSONObject(responseMessage);
+                        String status = obj.getString("msg");
+                        if (status.equals("success")) {
+                            Toast.makeText(getApplicationContext(), "Add posted successfully!!!", Toast.LENGTH_SHORT).show();
+
+                            consts.hideDialog();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Something Wrong! please try after sometime!!!", Toast.LENGTH_SHORT).show();
+                            consts.hideDialog();
+                        }
 
 
+                    } catch (JSONException e) {
+                        consts.hideDialog();
+                    }
+                } else {
+                    consts.hideDialog();
+                }
+            }
+        });
+        postAdd.execute();
 
+    }
+    private Map<String, String> PostAddParams() {
+        GpsLocation();
+        Map<String, String> params = new HashMap<String, String>();
+
+        params.put("userid", Consts.UserId);
+        params.put("catid",String.valueOf(category.getSelectedItemPosition()));
+        params.put("addtitle",Addtitle);
+        params.put("street", Street);
+        params.put("city", City);
+        params.put("state", State);
+        params.put("zip", Zip);
+        params.put("startdate", Startdate);
+        params.put("enddate", Enddate);
+        params.put("latitude", String.valueOf(latitude));
+        params.put("langitude", String.valueOf(longitude));
+        params.put("description", Brief);
+        params.put("price", "0");
+        params.put("photo1", image1);
+        params.put("photo2",image2);
+        params.put("photo3",image3);
+        params.put("photo4",image4);
+        return params;
+    }
+    public void setData()
+    {
+        street.setText(Consts.Street);
+        state.setSelection(Consts.SpinnerItem);
+        city.setText(Consts.City);
+        zip.setText(Consts.Zip);
+
+    }
+    public void GpsLocation()
+    {
+        gps = new GPSTracker(PostAdvertisment.this);
+
+        // check if GPS enabled
+        if(gps.canGetLocation()) {
+
+            latitude = gps.getLatitude();
+            longitude = gps.getLongitude();
+
+            // \n is for new line
+
+        }else{
+            // can't get location
+            // GPS or Network is not enabled
+            // Ask user to enable GPS/network in settings
+            gps.showSettingsAlert();
         }
-
-
     }
 }

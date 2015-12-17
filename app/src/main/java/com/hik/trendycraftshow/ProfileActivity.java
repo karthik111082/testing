@@ -3,6 +3,7 @@ package com.hik.trendycraftshow;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -27,11 +28,13 @@ import android.widget.Toast;
 import com.hik.trendycraftshow.JSON.Api;
 import com.hik.trendycraftshow.JSON.WebServiceRequest;
 import com.hik.trendycraftshow.Utils.Consts;
+import com.hik.trendycraftshow.Utils.CustomImageView;
 import com.hik.trendycraftshow.Utils.Utils;
 import com.hik.trendycraftshow.Utils.InternetStatus;
 import com.hik.trendycraftshow.Utils.IsTablet;
 import com.hik.trendycraftshow.Utils.RoundImage;
 import com.hik.trendycraftshow.Utils.Validation;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,8 +54,9 @@ public class ProfileActivity extends NavigationDrawer {
     IsTablet tablet;
 Consts consts;
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;
-    public static ImageView ivImage;
+    CircularImageView ivImage;
     RoundImage roundImage;
+    private static final int PICK_FROM_GALLERY = 4;
 
     TextView email,name;
     EditText company_name, homephone, cellphone, street, city, zip,current_password,new_password,conf_edit_password;
@@ -98,7 +102,7 @@ Api api;
         conf_edit_password =(EditText)findViewById(R.id.conf_password);
         consts=new Consts(ProfileActivity.this);
         roundImage = new RoundImage();
-        ivImage = (ImageView) findViewById(R.id.profile_image);
+        ivImage = (CircularImageView) findViewById(R.id.profile_image);
         change_psw_layout = (LinearLayout) findViewById(R.id.change_psw_layout);
         profile_layout = (LinearLayout) findViewById(R.id.profile_layout);
         change_psw_main = (Button) findViewById(R.id.change_psw_main);
@@ -181,16 +185,33 @@ SetData();
             @Override
             public void onClick(DialogInterface dialog, int item) {
                 if (items[item].equals("Take Photo")) {
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(intent, REQUEST_CAMERA);
+                    Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+                    File file = new File(Environment.getExternalStorageDirectory()+File.separator + "img.jpg");
+    /*put uri as extra in intent object*/
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+    /*start activity for result pass intent as argument and request code */
+                    startActivityForResult(intent, 1);
                 } else if (items[item].equals("Choose from Library")) {
-                    Intent intent = new Intent(
-                            Intent.ACTION_PICK,
-                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    Intent intent = new Intent();
+// call android default gallery
                     intent.setType("image/*");
-                    startActivityForResult(
-                            Intent.createChooser(intent, "Select File"),
-                            SELECT_FILE);
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+// ******** code for crop image
+                    intent.putExtra("crop", "true");
+                    intent.putExtra("aspectX", 100);
+                    intent.putExtra("aspectY", 100);
+                    intent.putExtra("outputX", 200);
+                    intent.putExtra("outputY", 150);
+
+                    try {
+
+                        intent.putExtra("return-data", true);
+                        startActivityForResult(Intent.createChooser(intent,
+                                "Complete action using"), PICK_FROM_GALLERY);
+
+                    } catch (ActivityNotFoundException e) {
+// Do nothing for now
+                    }
                 } else if (items[item].equals("Cancel")) {
                     dialog.dismiss();
                 }
@@ -199,22 +220,68 @@ SetData();
         builder.show();
     }
 
+    private void cropCapturedImage(Uri picUri) {
+
+        Intent cropIntent = new Intent("com.android.camera.action.CROP");
+        //indicate image type and Uri of image
+        cropIntent.setDataAndType(picUri, "image/*");
+        //set crop properties
+        cropIntent.putExtra("crop", "true");
+        //indicate aspect of desired crop
+        cropIntent.putExtra("aspectX", 1);
+        cropIntent.putExtra("aspectY", 1);
+        //indicate output X and Y
+        cropIntent.putExtra("outputX", 256);
+        cropIntent.putExtra("outputY", 256);
+        //retrieve data on return
+        cropIntent.putExtra("return-data", true);
+        //start the activity - we handle returning in onActivityResult
+        startActivityForResult(cropIntent, 2);
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == SELECT_FILE)
-                onSelectFromGalleryResult(data);
-            else if (requestCode == REQUEST_CAMERA)
+
+        if(requestCode==1){
+            //create instance of File with same name we created before to get image from storage
+            File file = new File(Environment.getExternalStorageDirectory()+File.separator + "img.jpg");
+            //Crop the captured image using an other intent
+            try {
+    /*the user's device may not support cropping*/
+                cropCapturedImage(Uri.fromFile(file));
+            }
+            catch(ActivityNotFoundException aNFE){
+                //display an error message if user device doesn't support
+                String errorMessage = "Sorry - your device doesn't support the crop action!";
+                Toast toast = Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        }
+        if(requestCode==2) {
+            //Create an instance of bundle and get the returned data
+            Bundle extras = data.getExtras();
+            //get the cropped bitmap from extras
+            Bitmap thePic = extras.getParcelable("data");
+            //set image bitmap to image view
+            onCaptureImageResult(data);
+            //ivImage.setImageBitmap(thePic);
+        }
+        if (requestCode == PICK_FROM_GALLERY) {
+            Bundle extras2 = data.getExtras();
+            if (extras2 != null) {
+                Bitmap photo = extras2.getParcelable("data");
                 onCaptureImageResult(data);
+                //ivImage.setImageBitmap(photo);
+
+            }
         }
     }
 
     private void onCaptureImageResult(Intent data) {
          thumbnail = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        thumbnail.compress(Bitmap.CompressFormat.PNG, 90, bytes);
 
         File destination = new File(Environment.getExternalStorageDirectory(),
                 System.currentTimeMillis() + ".png");
@@ -229,9 +296,7 @@ SetData();
         } catch (IOException e) {
             e.printStackTrace();
         }
-       Bitmap img = roundImage.getCircularBorder(thumbnail, 5);
-
-        ivImage.setImageBitmap(img);
+        ivImage.setImageBitmap(thumbnail);
     }
 
     @SuppressWarnings("deprecation")
@@ -255,10 +320,7 @@ SetData();
         options.inSampleSize = scale;
         options.inJustDecodeBounds = false;
         thumbnail = BitmapFactory.decodeFile(selectedImagePath, options);
-        bm = roundImage.getCircularBorder(thumbnail, 5);
-
-
-        ivImage.setImageBitmap(bm);
+        ivImage.setImageBitmap(thumbnail);
     }
 
 
@@ -389,7 +451,7 @@ try {
                             Consts.Company_Name=Company_Name;
                             Consts.Zip=Zip;
                             Consts.State=State;
-                            Consts.Photo=Utils.BitMapToString(thumbnail);
+                            MainActivity.consts.setPhoto(thumbnail);
                             consts.hideDialog();
                         }else
                         {
@@ -408,8 +470,7 @@ try {
         });
         sendprofile.execute();
     }
-    public void SetData()
-    {
+    public void SetData() {
         name.setText(Consts.FirstName);
         email.setText(Consts.UserName);
         homephone.setText(Consts.Phone);
@@ -418,22 +479,16 @@ try {
         city.setText(Consts.City);
         zip.setText(Consts.Zip);
         company_name.setText(Consts.Company_Name);
-        state.setSelection(0);
-        if(Consts.Photo.equals(null)||Consts.Photo.equals("")||Consts.Photo==null)
+        state.setSelection(Consts.SpinnerItem);
+        if(Consts.Photo==null)
         {
-            Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.avator);
-            String avator=Utils.BitMapToString(largeIcon);
-            thumbnail=roundImage.getCircularBorder(Utils.StringToBitMap(avator), 5);;
+            ivImage.setBackgroundResource(R.drawable.avator);
 
-            ivImage.setImageBitmap(thumbnail);
-
-        }else {
-            thumbnail=roundImage.getCircularBorder(Utils.StringToBitMap(Consts.Photo),5);
-            ivImage.setImageBitmap(thumbnail);
-
+        } else
+        {
+            ivImage.setImageBitmap(Consts.Photo);
+            ivImage.setBorderWidth(5);
         }
-
-
     }
     private Map<String, String> SendProfileParams() {
         Map<String, String> params = new HashMap<String, String>();
@@ -446,6 +501,7 @@ try {
         params.put("zipcode", Zip);
         params.put("cellphone", CellNo);
         params.put("companyname", Company_Name);
+        params.put("statecode", String.valueOf(state.getSelectedItemPosition()));
         params.put("photo", Utils.BitMapToString(thumbnail));
         return params;
     }
@@ -534,9 +590,11 @@ try {
                         String status=obj.getString("msg");
                         if(status.equals("success"))
                         {
-                            Toast.makeText(getApplicationContext(), "Password changed successfully!!!", Toast.LENGTH_SHORT).show();
                             Consts.Password=Confirm_password;
                             consts.hideDialog();
+                            profile_layout.setVisibility(View.VISIBLE);
+                            change_psw_layout.setVisibility(View.GONE);
+                            Toast.makeText(getApplicationContext(), "Password changed successfully!!!", Toast.LENGTH_SHORT).show();
                         }else
                         {
                             Toast.makeText(getApplicationContext(), "Something Wrong!!!", Toast.LENGTH_SHORT).show();

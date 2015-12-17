@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,13 +36,15 @@
                     android:background="@color/green"
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="7dp" />
-                <ImageView
-                    android:id="@+id/profile_image"
+                <com.mikhaellopez.circularimageview.CircularImageView
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    android:background="@drawable/avator"
-                    android:gravity="center_horizontal"
-                    android:layout_marginTop="10dp"/>
+                    android:id="@+id/profile_image"
+                    app:border_color="#EEEEEE"
+                    app:border_width="4dp"
+                    app:shadow="true"
+                    app:shadow_radius="10"
+                    app:shadow_color="#8BC34A"/>
                 <TextView
                     android:id="@+id/btnSelectPhoto"
                     android:layout_width="match_parent"
@@ -146,7 +148,7 @@
                     android:layout_height="50dp"
                     android:entries="@array/spinner"
                     android:layout_marginLeft="5dp"
-                    android:gravity="center_vertical"                     />
+                    android:gravity="center_vertical" />
                 <EditText
                     android:id="@+id/zip"
                     android:layout_width="match_parent"

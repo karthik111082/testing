@@ -16,6 +16,7 @@ import com.hik.trendycraftshow.JSON.WebServiceRequest;
 import com.hik.trendycraftshow.Utils.Consts;
 import com.hik.trendycraftshow.Utils.InternetStatus;
 import com.hik.trendycraftshow.Utils.IsTablet;
+import com.hik.trendycraftshow.Utils.Utils;
 import com.hik.trendycraftshow.Utils.Validation;
 
 import org.json.JSONException;
@@ -114,7 +115,7 @@ public class ForgotPassword extends Activity {
                             Consts.City = obj.getString("City");
                             Consts.State = obj.getString("State");
                             Consts.Zip = obj.getString("Zipcode");
-                            Consts.Photo = obj.getString("photo");
+                            MainActivity.consts.setPhoto(Utils.StringToBitMap(obj.getString("photo")));
                             consts.hideDialog();
                             Intent i = new Intent(getApplicationContext(), MainActivity.class);
                             finish();

@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.Shader;
+import android.widget.ImageView;
 
 import com.hik.trendycraftshow.ProfileActivity;
 
@@ -35,13 +36,13 @@ public class RoundImage {
                         targetHeight), null);
         return targetBitmap;
     }
-    public static Bitmap getCircularBorder(Bitmap bitmap, int borderWidth) {
-        if (bitmap == null || bitmap.isRecycled()) {
+    public static Bitmap getCircularBorder(int imgwidth,int imgheight,Bitmap bitmap, int borderWidth) {
+        if (bitmap == null ) {
             return null;
         }
 
-        final int width = ProfileActivity.ivImage.getWidth() + borderWidth;
-        final int height = ProfileActivity.ivImage.getHeight() + borderWidth;
+        final int width = imgwidth + borderWidth;
+        final int height = imgheight + borderWidth;
 
         Bitmap canvasBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         BitmapShader shader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
