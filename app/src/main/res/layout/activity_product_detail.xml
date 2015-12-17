@@ -36,15 +36,24 @@
             android:layout_marginLeft="22dp"
             android:layout_marginTop="10dp"
             android:orientation="vertical">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
                 android:text="FURNITURE"
                 android:textSize="20dp"
                 android:textColor="@color/black"
                />
+    <RadioButton
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:button="@drawable/rate"
+        android:checked="true"
+        android:layout_weight="3.5"/>
+</LinearLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -57,7 +66,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="15 jan 2015-25 jan 2015"
+                android:text="  15 jan 2015-25 jan 2015"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/navmob"
                 android:textSize="15dp"
                 android:textColor="@color/black"
                 />
@@ -65,7 +76,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Location"
+                android:text="  Location"
+                android:drawableLeft="@drawable/navmob"
                 android:textSize="20dp"
                 android:textColor="@color/black"
                 />
@@ -73,8 +85,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Date"
+                android:text="  Date"
                 android:textSize="20dp"
+                android:drawableLeft="@drawable/addtimeperiodmob"
                 android:textColor="@color/black"
                 />
             <LinearLayout

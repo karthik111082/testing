@@ -3,11 +3,14 @@ package com.hik.trendycraftshow;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 public class Wishlist extends NavigationDrawer {
-        ListView wish_list_view;
+        ListView list;
+    RadioButton ads,businessdirec;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +24,25 @@ public class Wishlist extends NavigationDrawer {
             getLayoutInflater().inflate(R.layout.activity_wishlist_mob, container);
         }
 
-        wish_list_view=(ListView)findViewById(R.id.wish_list_view);
+        list=(ListView)findViewById(R.id.list_wish);
+        ads=(RadioButton)findViewById(R.id.ads);
+        businessdirec=(RadioButton)findViewById(R.id.businessdirec);
+        ads.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ads.setChecked(true);
+                businessdirec.setChecked(false);
+            }
+        });
+        businessdirec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ads.setChecked(false);
+                businessdirec.setChecked(true);
+
+            }
+        });
 
     }
 }

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-android:background="@color/white"
+
     tools:context=".PostAdvertismentTrendyMarket">
 
     <LinearLayout
@@ -27,9 +27,9 @@ android:background="@color/white"
                 android:textColor="@color/black"
                 android:textSize="18dp"
                 android:layout_marginLeft="8dp"
-                android:drawableLeft="@drawable/hmecpy"
+                android:drawableLeft="@drawable/cameramob"
                 android:gravity="center_vertical"
-                android:text="Add 4 Photos(99&#xa2;)"/>
+                android:text="  Add 4 Photos(99&#xa2;)"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,7 +43,8 @@ android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/img1"
-                android:background="@color/black"
+
+                android:background="@drawable/addphoto"
                 android:layout_weight="1"
 
                 />
@@ -52,23 +53,26 @@ android:background="@color/white"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="3dp"
                 android:id="@+id/img2"
-                android:background="@color/black"
+
+                android:background="@drawable/addphoto"
                 android:layout_weight="1"
                 />
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="3dp"
+
                 android:id="@+id/img3"
-                android:background="@color/black"
+                android:background="@drawable/addphoto"
                 android:layout_weight="1"
                 />
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="3dp"
+
                 android:id="@+id/img4"
-                android:background="@color/black"
+                android:background="@drawable/addphoto"
                 android:layout_weight="1"
                 />
         </LinearLayout>
@@ -111,12 +115,12 @@ android:background="@color/white"
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
                         android:textSize="18dp"
-                        android:drawableLeft="@drawable/hmecpy"
+                        android:drawableLeft="@drawable/addtitlemob20"
                         android:layout_marginRight="18dp"
 
                         android:entries="@array/category"
                         android:gravity="center_vertical"
-                        android:hint="Add Title"/>
+                        android:hint="  Add Title"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -131,32 +135,13 @@ android:background="@color/white"
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
                         android:textSize="20dp"
-                        android:drawableLeft="@drawable/hmecpy"
+                        android:drawableLeft="@drawable/pricemob20"
                         android:layout_marginRight="18dp"
                         android:entries="@array/category"
                         android:gravity="center_vertical"
-                        android:hint="Price"
+                        android:hint="  Price"
                         android:inputType="numberDecimal"
                         />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="18dp"
-                    android:layout_marginTop="30dp"
-                    android:orientation="horizontal">
-
-
-                    <EditText
-                        android:id="@+id/street_address"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textColor="@color/black"
-                        android:textSize="25dp"
-                        android:layout_marginRight="18dp"
-                        android:entries="@array/category"
-                        android:gravity="center_vertical"
-                        android:hint="  Street Address"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -171,10 +156,11 @@ android:background="@color/white"
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
                         android:textSize="20dp"
+                        android:drawableLeft="@drawable/navmob20"
                         android:layout_marginRight="18dp"
                         android:entries="@array/category"
                         android:gravity="center_vertical"
-                        android:hint="City"/>
+                        android:hint="  City"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -183,13 +169,17 @@ android:background="@color/white"
                     android:layout_marginTop="30dp"
                     android:orientation="horizontal">
 
-                    <Spinner
-                        android:id="@+id/state"
+                    <EditText
+                        android:id="@+id/sate"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/black"
+                        android:textSize="20dp"
+                        android:drawableLeft="@drawable/navmob20"
+                        android:layout_marginRight="18dp"
                         android:entries="@array/spinner"
-                        android:layout_marginLeft="5dp"
-                        android:gravity="center_vertical" />
+                        android:gravity="center_vertical"
+                        android:hint="  State"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -207,7 +197,8 @@ android:background="@color/white"
                         android:layout_marginRight="18dp"
                         android:entries="@array/category"
                         android:gravity="center_vertical"
-                        android:hint="Zip-Code"
+                        android:hint="  Zip-Code"
+                        android:drawableLeft="@drawable/navmob20"
                         android:inputType="number"
                         android:maxLength="5"
                         />
@@ -224,30 +215,25 @@ android:background="@color/white"
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
                         android:textSize="20dp"
-                        android:drawableLeft="@drawable/hmecpy"
+                        android:drawableLeft="@drawable/addtimeperiodmob20"
                         android:layout_marginRight="18dp"
 
                         android:entries="@array/category"
                         android:gravity="center_vertical"
-                        android:text="Add event sale period"/>
+                        android:text="  Add event sale period"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
                     android:layout_marginTop="30dp"
                     android:layout_gravity="center"
                     android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/startdate"
+                    <DatePicker
+                        android:layout_width="120dp"
+                        android:layout_height="50dp"
                         android:textColor="@color/black"
-                        android:textSize="20dp"
-                        android:hint="Select Date"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical|center_horizontal"
+                        android:textSize="25dp"
                         android:background="@color/green"
                         android:startYear="2015"
                         android:endYear="2030"
@@ -257,24 +243,20 @@ android:background="@color/white"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginLeft="20dp"
                         android:text="to"/>
-                    <TextView
-                        android:layout_width="match_parent"
+                    <DatePicker
+                        android:layout_width="120dp"
                         android:layout_height="50dp"
                         android:textColor="@color/black"
-                        android:textSize="20dp"
-                        android:id="@+id/enddate"
-                        android:layout_weight="1"
-                        android:background="@color/green"
-                        android:hint="Select Date"
-                        android:layout_marginLeft="5dp"
                         android:startYear="2015"
                         android:endYear="2030"
-                        android:gravity="center_vertical|center_horizontal"
+                        android:background="@color/green"
+                        android:layout_marginLeft="20dp"
+
+                        android:gravity="end"
                         />
                 </LinearLayout>
-
 
 
                 <TextView
@@ -303,7 +285,7 @@ android:background="@color/white"
             android:layout_width="match_parent"
             android:gravity="center"
             android:layout_marginTop="23dp"
-            android:paddingBottom="30dp"
+            android:paddingBottom="40dp"
             android:layout_height="wrap_content">
 
             <Button

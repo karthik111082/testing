@@ -7,34 +7,7 @@
         android:orientation="vertical"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/green"
-            android:orientation="horizontal">
-            <ImageButton
-                android:id="@+id/back"
-                android:layout_width="30dp"
-                android:layout_height="60dp"
-                android:visibility="visible"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/back"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:text="@string/business_search"
-                android:textStyle="bold"
-                android:textSize="35dp"
-                android:layout_weight="1"
-                android:layout_marginRight="40dp"
-                android:textColor="#ffffff"
-                android:gravity="center_horizontal|center_vertical|center"
-                android:background="@color/green"
-                />
 
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
