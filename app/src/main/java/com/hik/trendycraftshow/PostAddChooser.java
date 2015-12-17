@@ -11,7 +11,7 @@ import com.hik.trendycraftshow.Utils.IsTablet;
 /**
  * Created by DHARMA on 12/16/2015.
  */
-public class PostAddChooser  extends Activity {
+public class PostAddChooser  extends NavigationDrawer {
     IsTablet tablet;
     boolean isTablet;
     ImageButton art,craft,expo,fairs,trendy;
@@ -20,9 +20,9 @@ public class PostAddChooser  extends Activity {
         super.onCreate(savedInstanceState);
         isTablet = tablet.isTablet(getApplicationContext());
         if (isTablet) {
-            setContentView(R.layout.activity_home);
+            getLayoutInflater().inflate(R.layout.activity_home, container);
         } else {
-            setContentView(R.layout.activity_home_mob);
+            getLayoutInflater().inflate(R.layout.activity_home_mob, container);
         }
         art=(ImageButton)findViewById(R.id.art);
         craft=(ImageButton)findViewById(R.id.craft);
