@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="22dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
             <TextView
@@ -102,6 +102,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
                         android:textSize="25dp"
+
                         android:drawableLeft="@drawable/addtitle"
                         android:layout_marginRight="18dp"
                         android:layout_marginLeft="8dp"
@@ -156,17 +157,13 @@
                     android:layout_marginTop="30dp"
                     android:orientation="horizontal">
 
-                    <EditText
+                    <Spinner
                         android:id="@+id/state"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="18dp"
-                        android:layout_marginLeft="8dp"
-                        android:textSize="25dp"
-                        android:drawableLeft="@drawable/nav"
+                        android:layout_height="50dp"
                         android:entries="@array/spinner"
-                        android:gravity="center_vertical"
-                        android:hint="  State"/>
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center_vertical" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -213,34 +210,43 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     android:layout_marginTop="30dp"
                     android:layout_gravity="center"
                     android:orientation="horizontal">
                     <TextView
-                        android:layout_width="250dp"
-                        android:layout_height="50dp"
-                        android:textSize="25dp"
-                        android:background="@color/green"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:id="@+id/pd1"
+                        android:textColor="@color/black"
+                        android:textSize="20dp"
+                        android:hint="Select Date"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:background="@color/green"
                         android:startYear="2015"
                         android:endYear="2030"
+
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="5dp"
                         android:text="to"/>
                     <TextView
-                        android:layout_width="250dp"
+                        android:layout_width="match_parent"
                         android:layout_height="50dp"
+                        android:textColor="@color/black"
+                        android:textSize="20dp"
                         android:id="@+id/pd2"
-                        android:textSize="25dp"
+                        android:layout_weight="1"
                         android:background="@color/green"
-                        android:layout_marginLeft="20dp"
+                        android:hint="Select Date"
+                        android:layout_marginLeft="5dp"
                         android:startYear="2015"
                         android:endYear="2030"
-                        android:gravity="end"
+                        android:gravity="center_vertical|center_horizontal"
                         />
                 </LinearLayout>
 

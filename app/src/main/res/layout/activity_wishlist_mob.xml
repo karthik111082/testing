@@ -18,46 +18,68 @@
             <RadioGroup
                 android:id="@+id/ans1"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginLeft="0dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
                 android:orientation="horizontal">
 
-                <RadioButton
+                <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textColor="#0F9EE8"
-                    android:textStyle="bold"
+                    android:background="@drawable/lefttrue"
                     android:id="@+id/ads"
-                    android:text="1"
-
-                    android:layout_marginRight="0dp"
-                    android:ems="10"
-                    android:checked="true"
+                    android:text="ADS"
                     android:layout_weight="1"
-                    android:button="@drawable/ads"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="0dp"/>
-                <RadioButton
+                    android:textSize="13dp"/>
+                <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textStyle="bold"
+                    android:background="@drawable/rightfalse"
                     android:id="@+id/businessdirec"
-                    android:layout_marginRight="0dp"
-                    android:text="2"
                     android:layout_weight="1"
-                    android:button="@drawable/businessdire"
-
-                    android:textSize="0dp"/>
+                    android:text="business directory"
+                    android:textSize="13dp"/>
             </RadioGroup>
 
 
 
         </LinearLayout>
         <ListView
+            android:visibility="visible"
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/list_wish">
 
         </ListView>
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/gridLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="#e5e5e5">
+            <GridView
+                android:id="@+id/business_grid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="3dp"
+                android:numColumns="auto_fit"
+                android:horizontalSpacing="1dp"
+                android:verticalSpacing="1dp"
+                android:columnWidth="80dp"
+                android:stretchMode="columnWidth"
+                android:layout_above="@+id/showmore"></GridView>
+            <Button
+                android:id="@+id/showmore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@color/green"
+                android:text="Show more"
+                android:visibility="gone"
+                android:textColor="@color/white"/>
+        </RelativeLayout>
     </LinearLayout>
+
 </RelativeLayout>

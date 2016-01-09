@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:background="@color/white"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="30dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
+        android:paddingBottom="50dp"
         android:layout_height="match_parent">
 
 
@@ -13,7 +15,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:layout_marginTop="30dp"
+
             android:layout_height="match_parent">
 
 
@@ -79,6 +81,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:id="@+id/zipcode_c"
+                android:inputType="number"
+                android:maxLength="5"
                 android:background="@drawable/titlestyle1"
                 android:layout_marginTop="10dp"/>
             <TextView
@@ -135,9 +139,10 @@
                 <SeekBar
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="30dp"
                     android:layout_marginRight="20dp"
                     android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:id="@+id/seek_c"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
@@ -155,36 +160,47 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center"
                 android:orientation="horizontal">
-            <EditText
-                android:layout_width="180dp"
-                android:layout_marginLeft="20dp"
-                android:background="@drawable/titlestyle1"
-                android:layout_height="50dp"></EditText>
-                <ImageButton
-                    android:layout_width="50dp"
-                    android:background="@drawable/calender"
-                    android:layout_marginLeft="10dp"
-                    android:layout_height="50dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/pd1"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:hint="Begin Date"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:background="@drawable/rectangleborder"
+                    android:startYear="2015"
+                    android:endYear="2030"
+
+                    />
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:text="to"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
                     android:textColor="@color/black"
-                    android:layout_marginLeft="20dp"
-                    android:text="To"/>
-                <EditText
-                    android:layout_width="180dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/titlestyle1"
-                    android:layout_height="50dp"></EditText>
-                <ImageButton
-                    android:layout_width="50dp"
-                    android:background="@drawable/calender"
-                    android:layout_marginLeft="10dp"
-                    android:layout_height="50dp" />
+                    android:textSize="20dp"
+                    android:id="@+id/pd2"
+                    android:layout_weight="1"
+                    android:hint="End Date"
+                    android:background="@drawable/rectangleborder"
+                    android:layout_marginLeft="5dp"
+                    android:startYear="2015"
+                    android:endYear="2030"
+                    android:gravity="center_vertical|center_horizontal"
+                    />
             </LinearLayout>
+
 
             <Button
                 android:layout_width="match_parent"
@@ -203,4 +219,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</ScrollView>

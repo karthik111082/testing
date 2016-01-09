@@ -18,31 +18,25 @@
             <RadioGroup
                 android:id="@+id/ans1"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginLeft="0dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
                 android:orientation="horizontal">
 
-                <RadioButton
-                    android:layout_width="wrap_content"
+                <ImageButton
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textStyle="bold"
+                    android:background="@drawable/adstab_true"
                     android:id="@+id/ads"
-                    android:checked="true"
-                    android:layout_marginLeft="60dp"
-                    android:text="2"
                     android:layout_weight="1"
-                    android:button="@drawable/ads_tab"
                    android:gravity="end|center_vertical"
                     android:textSize="0dp"/>
-                <RadioButton
-                    android:layout_width="wrap_content"
+                <ImageButton
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textStyle="bold"
+                    android:background="@drawable/businessdirec_false"
                     android:id="@+id/businessdirec"
-                    android:layout_marginRight="60dp"
-                    android:text="2"
                     android:layout_weight="1"
-                    android:button="@drawable/businessdire_tab"
 
                     android:textSize="0dp"/>
             </RadioGroup>
@@ -51,6 +45,7 @@
 
         </LinearLayout>
         <ListView
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/list_wish">

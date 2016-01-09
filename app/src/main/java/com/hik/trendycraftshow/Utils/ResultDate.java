@@ -1,6 +1,7 @@
 package com.hik.trendycraftshow.Utils;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -14,12 +15,13 @@ public class ResultDate {
     public ResultDate(Context context){
         this._context = context;
     }
-    public String CurrentDate()
+    public static String CurrentDate()
     {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat format1 = new SimpleDateFormat("MM-dd-yyyy");
         String formatted = format1.format(cal.getTime());
-        System.out.println(formatted);
+        Log.d("Current Date", formatted);
+
         return formatted;
     }
     public String CurrentDateFormated()
@@ -30,24 +32,33 @@ public class ResultDate {
         System.out.println(formatted);
         return formatted;
     }
-    public String OneWeek()
+    public static String OneWeek()
     {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, -7);
         SimpleDateFormat format1 = new SimpleDateFormat("MM-dd-yyyy");
         String formatted = format1.format(cal.getTime());
-        System.out.println(formatted);
+
         return formatted;
     }
-    public String OneMonth()
+    public static String SixMonth()
     {
         Calendar cal = Calendar.getInstance();
-        SimpleDateFormat month = new SimpleDateFormat("MM");
-        SimpleDateFormat year = new SimpleDateFormat("yyyy");
-        String getMonth = month.format(cal.getTime());
-        String getYear = year.format(cal.getTime());
-        String formatted=getMonth+"-01-"+getYear;
+        cal.add(Calendar.MONTH, 6);
+        SimpleDateFormat format1 = new SimpleDateFormat("MM-dd-yyyy");
+        String formatted = format1.format(cal.getTime());
         System.out.println(formatted);
+        Log.d("Six Month", formatted);
+        return formatted;
+    }
+    public static String OneYear()
+    {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.YEAR, 1);
+        SimpleDateFormat format1 = new SimpleDateFormat("MM-dd-yyyy");
+        String formatted = format1.format(cal.getTime());
+        System.out.println(formatted);
+        Log.d("One Year",formatted);
         return formatted;
     }
 }

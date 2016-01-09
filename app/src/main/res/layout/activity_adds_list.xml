@@ -1,31 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:id="@android:id/tabhost">
+    android:background="@color/white"
+    >
 
     <LinearLayout
-        android:id="@+id/LinearLayout01"
-        android:orientation="vertical"
-        android:layout_height="fill_parent"
-        android:layout_width="fill_parent">
-
-        <TabWidget
-            android:id="@android:id/tabs"
-            android:layout_height="wrap_content"
-            android:layout_width="fill_parent">
-        </TabWidget>
-        <android.support.v4.view.ViewPager
-            android:id="@+id/view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="30dp"
+    android:layout_marginRight="30dp"
+    android:orientation="horizontal">
+    <ImageButton
+        android:id="@+id/listButton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/listviewtrue"
+        android:layout_weight="1"/>
+    <ImageButton
+        android:id="@+id/mapButton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/mapview"
+        android:layout_weight="1"/>
+</LinearLayout>
         <FrameLayout
-            android:id="@android:id/tabcontent"
+            android:id="@+id/list_content"
+            android:layout_marginTop="5dp"
+            android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_width="fill_parent">
-        </FrameLayout>
+            android:layout_marginBottom="100dp"/>
+    </LinearLayout>
+<LinearLayout
+    android:id="@+id/normalView"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_alignParentBottom="true">
+    <ImageButton
+        android:id="@+id/craftButton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/craftshowtrue"
+        android:layout_weight="1"/>
+    <ImageButton
+        android:id="@+id/artButton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/artshows"
+        android:layout_weight="1"/>
+    <ImageButton
+        android:id="@+id/expoButton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/expofalse"
+        android:layout_weight="1"/>
+    <ImageButton
+        android:id="@+id/fairsButton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/fairsandfesti"
+        android:layout_weight="1"/>
+</LinearLayout>
+    <LinearLayout
+        android:id="@+id/trendyView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true">
+        <ImageButton
+            android:id="@+id/craftOnly"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/craftonlytrue"
+            android:layout_weight="1"/>
+        <ImageButton
+            android:id="@+id/artOnly"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/artonlyfalse"
+            android:layout_weight="1"/>
+        <ImageButton
+            android:id="@+id/directSale"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/directsalefalse"
+            android:layout_weight="1"/>
 
     </LinearLayout>
 
-</TabHost>
+
+    </RelativeLayout>

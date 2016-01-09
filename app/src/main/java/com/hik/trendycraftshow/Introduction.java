@@ -8,6 +8,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 
+import com.hik.trendycraftshow.Adapters.IntroAdapter;
 import com.hik.trendycraftshow.Utils.IsTablet;
 
 public class Introduction extends AppCompatActivity {
@@ -26,7 +27,7 @@ public class Introduction extends AppCompatActivity {
             setContentView(R.layout.activity_introduction_mob);
         }
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
-        ImageAdapters adapter = new ImageAdapters(this);
+        IntroAdapter adapter = new IntroAdapter(Introduction.this);
         viewPager.setAdapter(adapter);
         back = (Button) findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {

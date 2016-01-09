@@ -2,7 +2,10 @@ package com.hik.trendycraftshow;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -17,14 +20,21 @@ import android.widget.Toast;
 
 import com.hik.trendycraftshow.JSON.Api;
 import com.hik.trendycraftshow.JSON.WebServiceRequest;
+import com.hik.trendycraftshow.QuickChat.ApplicationSingleton;
 import com.hik.trendycraftshow.Utils.Consts;
+import com.hik.trendycraftshow.Utils.Dbhelper;
 import com.hik.trendycraftshow.Utils.InternetStatus;
 import com.hik.trendycraftshow.Utils.IsTablet;
-import com.hik.trendycraftshow.Utils.Utils;
 import com.hik.trendycraftshow.Utils.Validation;
+import com.quickblox.core.QBEntityCallbackImpl;
+import com.quickblox.core.QBSettings;
+import com.quickblox.users.QBUsers;
+import com.quickblox.users.model.QBUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 public class Registration extends Activity {
     boolean isTablet;
@@ -39,11 +49,14 @@ public class Registration extends Activity {
     ImageButton back,OTPContinue;
     TextView terms;
     Intent intent;
+    Dbhelper mHelper;
+    SQLiteDatabase database;
     InternetStatus internetStatus;
 
 
     private WebServiceRequest.HttpURLCONNECTION signup;
     private WebServiceRequest.HttpURLCONNECTION activate;
+    private WebServiceRequest.HttpURLCONNECTION sendQuickId;
     Api api;
     ProgressDialog pDialog;
     String OTPValue;
@@ -58,6 +71,9 @@ public class Registration extends Activity {
         else{
             setContentView(R.layout.activity_registration_mob);
         }
+        mHelper=new Dbhelper(getApplicationContext());
+        database=mHelper.getWritableDatabase();
+        QBSettings.getInstance().fastConfigInit(ApplicationSingleton.APP_ID, ApplicationSingleton.AUTH_KEY, ApplicationSingleton.AUTH_SECRET);
         SignUpLayout=(LinearLayout)findViewById(R.id.signUpLayout);
         OtpLayout=(LinearLayout)findViewById(R.id.OtpLayout);
         back=(ImageButton)findViewById(R.id.back);
@@ -143,88 +159,43 @@ public class Registration extends Activity {
             @Override
             public void onClick(View v) {
                 //showDialog();
-                if(otp.getText().toString().length()>0)
-                {
-                    if(otp.getText().toString().equals(OTPValue))
-                    {
-                        if(internetStatus.InternetStatus(getApplicationContext()))
-                        {
+                if (otp.getText().toString().length() > 0) {
+                    if (otp.getText().toString().equals(OTPValue)) {
+                        if (internetStatus.InternetStatus(getApplicationContext())) {
+                                new SendOtp().execute();
 
-                            String params = "username=" + Email;
-                            Log.d("parameters", params);
-                            params=params.replaceAll(" ", "%20");
-                            activate = api.ACTIVATE_ACCOUNT(params, new WebServiceRequest.Callback() {
-                                @Override
-                                public void onResult(int responseCode, String responseMessage, Exception exception) {
-
-                                    if (responseCode == 200) {
-                                        try {
-                                            Log.d("response", responseMessage.toString());
-
-                                            JSONObject obj = new JSONObject(responseMessage);
-                                            String status=obj.getString("msg");
-                                            hideDialog();
-                                            if(status.equalsIgnoreCase("Activation Failed"))
-                                            {
-                                                Toast.makeText(getApplicationContext(),"We encountered an error while connecting to the server, please try after sometime!!!",Toast.LENGTH_SHORT).show();
-                                            }else
-                                            {
-
-                                                Intent i=new Intent(getApplicationContext(),NavigationDrawer.class);
-                                                finish();
-                                                Consts.UserName=obj.getString("UserName");
-                                                Consts.Password=obj.getString("Password");
-                                                Consts.FirstName=obj.getString("Firstname");
-                                                Consts.Phone=obj.getString("Phone");
-                                                Consts.Street=obj.getString("Street");
-                                                Consts.City=obj.getString("City");
-                                                Consts.State=obj.getString("State");
-                                                Consts.Zip=obj.getString("Zipcode");
-                                                MainActivity.consts.setPhoto(Utils.StringToBitMap(obj.getString("photo")));
-                                                Consts.UserId=obj.getString("userId");
-                                                Consts.Company_Name=obj.getString("companyName");
-                                                Consts.Cellphone=obj.getString("cellPhone");
-                                                Consts.QuickBloxId=obj.getString("quickId");
-                                                Consts.SpinnerItem=Integer.parseInt(obj.getString("stateCode"));
-
-
-                                                startActivity(i);
-
-                                            }
-
-
-
-                                        } catch (JSONException e) {
-                                            hideDialog();
-                                        }
-                                    }
-                                }
-                            });
-                            activate.execute();
-                        }
-                        else{
-                            Toast.makeText(getApplicationContext(),"Trendy Craft Show requires internet. Please check!!!",Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Trendy Craft Show requires internet. Please check!!!", Toast.LENGTH_SHORT).show();
                         }
 
 
-                    }else{
+                    } else {
                         otp.setError("The activation code doesn't match our records. Please check your email!!!");
                     }
-                }
-                else {
+                } else {
                     otp.setError("Please check your email for activation code!!!");
                 }
             }
         });
 
+
     }
 
-    public void SignUp()
+
+
+    public void SendQuickBloxId(String quickid)
     {
-        String params = "username=" + Email + "&password="+cPwd+ "&firstname="+Fname+ "&phone="+Phone+ "&street="+Street+ "&city="+City+ "&state="+State+ "&zipcode="+Zip+ "&photo="+"0"+ "&cellphone="+CellNo+ "&statecode="+state.getSelectedItemPosition();
+        ContentValues cv = new ContentValues();
+        cv.put(Dbhelper.QuickBloxId, quickid);
+        String sql="update "+Dbhelper.USER_TABLE+" SET "+Dbhelper.QuickBloxId+"="+"'"+quickid+"'"+" WHERE "+Dbhelper.UserName+"="+"'"+Consts.UserName+"'";
+        Log.d("query",sql);
+        database.execSQL(sql);
+        Consts.QuickBloxId=quickid;
+        Log.d("quickid",Consts.QuickBloxId);
+        String params = "username="+Consts.UserName+"&chatid=" + quickid;
         params=params.replaceAll(" ","%20");
         Log.d("parameters", params);
-        signup = api.REGISTRATION(params, new WebServiceRequest.Callback() {
+        signup = api.SEND_CHAT_ID(params, new WebServiceRequest.Callback() {
             @Override
             public void onResult(int responseCode, String responseMessage, Exception exception) {
 
@@ -232,61 +203,35 @@ public class Registration extends Activity {
                     try {
                         JSONObject obj = new JSONObject(responseMessage);
                         Log.d("response", responseMessage.toString());
-                            String status=obj.getString("msg");
-                            hideDialog();
+                        String status = obj.getString("msg");
+
                         if (status.equalsIgnoreCase("User Already Exists")) {
                             Toast.makeText(getApplicationContext(), "User already exists", Toast.LENGTH_SHORT).show();
-                        } if (status.equalsIgnoreCase("signup failed")) {
+                        }
+                        if (status.equalsIgnoreCase("signup failed")) {
                             Toast.makeText(getApplicationContext(), "Server Failed", Toast.LENGTH_SHORT).show();
-                        } if(status.equalsIgnoreCase("success")) {
-                            Consts.UserName=obj.getString("UserName");
-                            Consts.Password=obj.getString("Password");
-                            Consts.FirstName=obj.getString("Firstname");
-                            Consts.Phone=obj.getString("Phone");
-                            Consts.Street=obj.getString("Street");
-                            Consts.City=obj.getString("City");
-                            Consts.State=obj.getString("State");
-                            Consts.Zip=obj.getString("Zipcode");
-                            Consts.Photo=(Utils.StringToBitMap(obj.getString("photo")));
-                            Consts.UserId=obj.getString("userId");
-                            Consts.Company_Name=obj.getString("companyName");
-                            Consts.Cellphone=obj.getString("cellPhone");
-                            Consts.QuickBloxId=obj.getString("quickId");
-                            Consts.SpinnerItem=Integer.parseInt(obj.getString("stateCode"));
-                            Consts.AccessCode = obj.getString("code");
-                            Log.d("ConsValue",Consts.AccessCode);
-                            OTPValue = obj.getString("code");
-                            hideDialog();
-                            OtpLayout.setVisibility(View.GONE);
-                            SignUpLayout.setVisibility(View.GONE);
-                            Congrats.setVisibility(View.VISIBLE);
+                        }
+                        if (status.equalsIgnoreCase("success")) {
 
+                            Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                            finish();
+                            startActivity(i);
 
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Server Failed", Toast.LENGTH_SHORT).show();
                         }
 
 
                     } catch (JSONException e) {
-                        hideDialog();
-                        Log.d("Registration Error",e.toString());
+
+                        Log.d("Registration Error", e.toString());
                     }
                 }
             }
         });
         signup.execute();
     }
-    public void showDialog()
-    {
-        pDialog = new ProgressDialog(Registration.this);
-        pDialog.setMessage("Please wait ...");
-        pDialog.setIndeterminate(false);
-        pDialog.setCancelable(false);
-        pDialog.show();
-    }
-    public void hideDialog() {
-        if (pDialog.isShowing()) {
-            pDialog.dismiss();
-        }
-    }
+
     public void getdata(){
 
         fname.setText(Consts.FirstName);
@@ -398,8 +343,8 @@ public class Registration extends Activity {
 
         if (VName && VEmail && VPass && VcPass && VPhone && VZip && VStreet && VCity &&VState)
         {  if(internetStatus.InternetStatus(getApplicationContext())) {
-            showDialog();
-            SignUp();
+
+            new SignupUser().execute();
         }
         else{
             Toast.makeText(getApplicationContext(),"Trendy Craft Show requires internet. Please check!!!",Toast.LENGTH_SHORT).show();
@@ -418,5 +363,226 @@ public class Registration extends Activity {
         return false;
 
     }
+
+
+    class SignupUser extends AsyncTask<String, String, String> {
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(Registration.this);
+            pDialog.setMessage("Loading ...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+
+        protected String doInBackground(String... args) {
+            try{
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String params = "username=" + Email + "&password="+cPwd+ "&firstname="+Fname+ "&phone="+Phone+ "&street="+Street+ "&city="+City+ "&state="+State+ "&zipcode="+Zip+ "&photo="+"0"+ "&cellphone="+CellNo+ "&statecode="+state.getSelectedItemPosition();
+                        params=params.replaceAll(" ","%20");
+                        Log.d("parameters", params);
+                        signup = api.REGISTRATION(params, new WebServiceRequest.Callback() {
+                            @Override
+                            public void onResult(int responseCode, String responseMessage, Exception exception) {
+
+                                if (responseCode == 200) {
+                                    try {
+                                        JSONObject obj = new JSONObject(responseMessage);
+                                        Log.d("response", responseMessage.toString());
+                                        String status=obj.getString("msg");
+
+                                        if (status.equalsIgnoreCase("User Already Exists")) {
+                                            Toast.makeText(getApplicationContext(), "User already exists", Toast.LENGTH_SHORT).show();
+                                        } if (status.equalsIgnoreCase("signup failed")) {
+                                            Toast.makeText(getApplicationContext(), "Server Failed", Toast.LENGTH_SHORT).show();
+                                        } if(status.equalsIgnoreCase("success")) {
+                                            Consts.UserName=obj.getString("UserName");
+                                            Consts.Password=obj.getString("Password");
+                                            Consts.FirstName=obj.getString("Firstname");
+                                            Consts.Phone=obj.getString("Phone");
+                                            Consts.Street=obj.getString("Street");
+                                            Consts.City=obj.getString("City");
+                                            Consts.State=obj.getString("State");
+                                            Consts.Zip=obj.getString("Zipcode");
+                                            Consts.Photo=obj.getString("photo");
+                                            Consts.UserId=obj.getString("userId");
+                                            Consts.Company_Name=obj.getString("companyName");
+                                            Consts.Cellphone=obj.getString("cellPhone");
+                                            Consts.QuickBloxId=obj.getString("quickId");
+                                            Consts.SpinnerItem=Integer.parseInt(obj.getString("stateCode"));
+                                            Consts.AccessCode = obj.getString("code");
+                                            Log.d("ConsValue",Consts.AccessCode);
+                                            OTPValue = obj.getString("code");
+                                            String sql1="delete from "+ Dbhelper.USER_TABLE;
+                                            database.execSQL(sql1);
+                                            ContentValues values=new ContentValues();
+                                            values.put(Dbhelper.UserName,Consts.UserName);
+                                            values.put(Dbhelper.Password, Consts.Password);
+                                            values.put(Dbhelper.FirstName, Consts.FirstName);
+                                            values.put(Dbhelper.Phone, Consts.Phone);
+                                            values.put(Dbhelper.Street, Consts.Street);
+                                            values.put(Dbhelper.City, Consts.City);
+                                            values.put(Dbhelper.State, Consts.State);
+                                            values.put(Dbhelper.Zip, Consts.Zip);
+                                            values.put(Dbhelper.UserId, Consts.UserId);
+                                            values.put(Dbhelper.Company_Name, Consts.Company_Name);
+                                            values.put(Dbhelper.CellPhone, Consts.Cellphone);
+                                            values.put(Dbhelper.QuickBloxId, Consts.QuickBloxId);
+                                            values.put(Dbhelper.Photo, Consts.Photo);
+                                            values.put(Dbhelper.UserSince, Consts.UserSince);
+                                            database.insert(Dbhelper.USER_TABLE, null, values);
+                                            OtpLayout.setVisibility(View.GONE);
+                                            SignUpLayout.setVisibility(View.GONE);
+                                            Congrats.setVisibility(View.VISIBLE);
+
+
+                                        }
+
+
+                                    } catch (JSONException e) {
+
+                                        Log.d("Registration Error",e.toString());
+                                    }
+                                }
+                            }
+                        });
+                        signup.execute();
+
+                    }
+                });
+
+
+
+
+
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog after getting all products
+            pDialog.dismiss();
+
+
+
+
+        }
+
+    }
+
+
+    class SendOtp extends AsyncTask<String, String, String> {
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(Registration.this);
+            pDialog.setMessage("Loading ...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+
+        protected String doInBackground(String... args) {
+            try{
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String params = "username=" + Email;
+                        Log.d("parameters", params);
+                        params = params.replaceAll(" ", "%20");
+                        activate = api.ACTIVATE_ACCOUNT(params, new WebServiceRequest.Callback() {
+                            @Override
+                            public void onResult(int responseCode, String responseMessage, Exception exception) {
+
+                                if (responseCode == 200) {
+                                    try {
+                                        Log.d("response", responseMessage.toString());
+
+                                        JSONObject obj = new JSONObject(responseMessage);
+                                        String status = obj.getString("msg");
+
+                                        if (status.equalsIgnoreCase("Activation Failed")) {
+                                            Toast.makeText(getApplicationContext(), "We encountered an error while connecting to the server, please try after sometime!!!", Toast.LENGTH_SHORT).show();
+                                        } else {
+
+                                                final QBUser user = new QBUser();
+                                                user.setEmail(Consts.UserName);
+                                                user.setFullName(Consts.FirstName);
+                                                user.setPassword(Consts.QuickPassword);
+
+
+                                                QBUsers.signUp(user, new QBEntityCallbackImpl<QBUser>() {
+                                                    @Override
+                                                    public void onSuccess(QBUser user, Bundle args) {
+                                                        String quickid = String.valueOf(user.getId());
+                                                        Consts.QuickBloxId = quickid;
+                                                        Log.d("Chat id", Consts.QuickBloxId);
+                                                        SendQuickBloxId(quickid);
+
+                                                    }
+
+                                                    @Override
+                                                    public void onError(List<String> errors) {
+                                                        Log.d("error", errors.toString());
+                                                    }
+                                                });
+                                           /* Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                                            finish();
+                                            startActivity(i);*/
+
+
+                                        }
+
+
+                                    } catch (JSONException e) {
+
+                                        Log.d("error", e.toString());
+                                    }
+                                }
+                            }
+                        });
+                        activate.execute();
+
+                    }
+                });
+
+
+
+
+
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog after getting all products
+            pDialog.dismiss();
+
+
+
+
+        }
+
+    }
+
 
 }

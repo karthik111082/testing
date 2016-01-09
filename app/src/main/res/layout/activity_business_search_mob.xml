@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="match_parent"
             android:layout_marginBottom="3dp">
-
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+
                 android:layout_marginTop="20dp"
                 android:textColor="@color/black"
                 android:layout_marginLeft="20dp"
                 android:text="Keyword"/>
             <EditText
+                android:id="@+id/keyword_c"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:id="@+id/keyword_c"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/titlestyle1"
@@ -33,15 +32,15 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+
                 android:layout_marginTop="20dp"
                 android:textColor="@color/black"
                 android:layout_marginLeft="20dp"
                 android:text="Street Address"/>
             <EditText
+                android:id="@+id/street_address"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:id="@+id/sac"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/titlestyle1"
@@ -49,39 +48,42 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+
                 android:layout_marginTop="20dp"
                 android:textColor="@color/black"
                 android:layout_marginLeft="20dp"
                 android:text="City"/>
             <EditText
+                android:id="@+id/city_c"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginLeft="20dp"
-                android:id="@+id/city_c"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/titlestyle1"
                 android:layout_marginTop="10dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+
                 android:layout_marginTop="20dp"
                 android:textColor="@color/black"
                 android:layout_marginLeft="20dp"
                 android:text="Zip code"/>
             <EditText
+                android:id="@+id/zipcode_c"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:id="@+id/zipcode_c"
+                android:inputType="number"
+                android:maxLength="5"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/titlestyle1"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp"
+                />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/black"
                 android:layout_marginLeft="20dp"
@@ -102,17 +104,15 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="18dp"
                         android:layout_weight="1"
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="20dp"
                         android:textColor="@color/black"
                         android:text="0 miles"/>
                     <TextView
+                        android:id="@+id/tx1_c"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="18dp"
-                        android:id="@+id/tx1_c"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:layout_marginTop="20dp"
@@ -121,7 +121,6 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="18dp"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:layout_marginRight="15dp"
@@ -130,13 +129,14 @@
                         android:text="100 miles"/>
                 </LinearLayout>
                 <SeekBar
+                    android:id="@+id/seek_c"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="22dp"
                     android:layout_marginRight="10dp"
-                    android:paddingLeft="10dp"
+
+                    android:paddingLeft="22dp"
                     android:paddingBottom="15dp"
-                    android:id="@+id/seek_c"
                     android:paddingTop="10dp"
                     android:thumb="@drawable/seekbarroundmob"
                     android:layout_marginTop="5dp"/>
@@ -144,19 +144,24 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="16dp"
+                android:visibility="gone"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/black"
                 android:layout_marginLeft="20dp"
                 android:text="Select category"/>
             <Spinner
+                android:id="@+id/category"
+                android:entries="@array/directory"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp"
+                />
 
             <Button
+                android:id="@+id/business_search"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginLeft="20dp"
@@ -166,10 +171,6 @@
                 android:textSize="15dp"
                 android:background="@color/green"
                 android:text="SEARCH NOW"/>
-
-
         </LinearLayout>
-
     </LinearLayout>
-
 </ScrollView>

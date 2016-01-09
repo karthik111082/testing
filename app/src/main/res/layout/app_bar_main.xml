@@ -27,7 +27,7 @@
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="?attr/actionBarSize"
         android:layout_height="match_parent">
 
 
@@ -39,16 +39,34 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#00a05f"
+        android:navigationIcon="@drawable/hamburger"
+       app:navigationIcon="@drawable/hamburger"
         app:popupTheme="@style/AppTheme.PopupOverlay" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="horizontal">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
        android:id="@+id/titletoolbar"
         android:textStyle="bold"
         android:textSize="20dp"
+        android:textAllCaps="false"
         android:layout_weight="1"
+        android:layout_marginLeft="70dp"
         android:textColor="#ffffff"
         android:gravity="center_horizontal|center_vertical|center"
         />
-
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/search"
+        android:background="@drawable/searchmobile"
+        android:visibility="invisible"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="20dp"
+        android:gravity="center_vertical|right"
+        />
+    </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

@@ -1,169 +1,309 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".PostAdvertismentTrendyMarket">
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="100dp"
-            android:orientation="horizontal">
-
-            <android.support.v4.view.ViewPager
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="@color/black"
-                android:textSize="25dp"
-                android:id="@+id/product_viewpager"
-                android:layout_marginLeft="8dp"
-                android:background="@drawable/craft_show_product_detail"
-                android:drawableLeft="@drawable/hmecpy"
-                android:gravity="center_vertical"
-                android:text="Add 4 Photos(99&#xa2;)"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="22dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="match_parent"
+            android:paddingBottom="10dp"
             android:orientation="vertical">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:text="FURNITURE"
-                android:textSize="20dp"
-                android:textColor="@color/black"
-               />
-    <RadioButton
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:button="@drawable/rate"
-        android:checked="true"
-        android:layout_weight="3.5"/>
-</LinearLayout>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-              android:layout_marginTop="5dp"
-                android:text="Craft Show"
-                android:textSize="15dp"
-                android:textColor="@color/black"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="  15 jan 2015-25 jan 2015"
-                android:gravity="center_vertical"
-                android:drawableLeft="@drawable/navmob"
-                android:textSize="15dp"
-                android:textColor="@color/black"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="  Location"
-                android:drawableLeft="@drawable/navmob"
-                android:textSize="20dp"
-                android:textColor="@color/black"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="  Date"
-                android:textSize="20dp"
-                android:drawableLeft="@drawable/addtimeperiodmob"
-                android:textColor="@color/black"
-                />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="match_parent">
-            <RadioButton
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"/>
-                <TextView
+                android:orientation="horizontal">
+
+                <android.support.v4.view.ViewPager
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Seller Online"
-                    android:textSize="20dp"
+                    android:layout_height="350dp"
                     android:textColor="@color/black"
+                    android:textSize="25dp"
+                    android:id="@+id/product_viewpager"
+                    android:layout_marginLeft="0dp"
                     />
             </LinearLayout>
-        </LinearLayout>
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:orientation="horizontal">
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_marginRight="5dp"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/img1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"/>
+                    <RadioButton
+                        android:id="@+id/img2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <RadioButton
+                        android:id="@+id/img3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <RadioButton
+                        android:id="@+id/img4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RadioGroup>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
-
-
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="25dp"
-                    android:layout_marginRight="18dp"
-                    android:layout_marginLeft="22dp"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="15dp"
-                    android:text="OTHER"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="25dp"
-                    android:layout_marginRight="18dp"
-                    android:layout_marginLeft="22dp"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/brief"/>
 
+                    android:layout_marginTop="10dp"
+
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="22dp"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:layout_weight="0.5"
+                            android:id="@+id/title_pr"
+                            android:text="FURNITURE"
+                            android:textAllCaps="true"
+                            android:textSize="15dp"
+                            android:textColor="@color/black"
+                            />
+                        <RadioButton
+                            android:layout_weight="3"
+                            android:layout_width="match_parent"
+                            android:button="@drawable/rate_mob"
+                            android:checked="true"
+                            android:id="@+id/wishlist_pr"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Craft Show"
+                        android:id="@+id/cat_pr"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:layout_marginLeft="22dp"
+                        android:textSize="13dp"
+                        android:textColor="@color/black"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_vertical"
+                        android:id="@+id/postdate_pr"
+                        android:text=" 50 $"
+                        android:layout_marginLeft="22dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:textSize="13dp"
+                        android:textColor="@color/black"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/location_pr"
+                        android:drawableLeft="@drawable/nav2"
+                        android:text="  Location"
+                        android:layout_marginLeft="22dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:textSize="15dp"
+                        android:textColor="@color/black"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="  Date"
+                        android:paddingTop="5dp"
+                        android:layout_marginLeft="22dp"
+                        android:paddingBottom="5dp"
+                        android:id="@+id/posteddate"
+                        android:textSize="15dp"
+                        android:drawableLeft="@drawable/addtimeperiod2"
+                        android:textColor="@color/black"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="  Date"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:layout_marginLeft="22dp"
+                        android:id="@+id/eventdate"
+                        android:textSize="15dp"
+                        android:drawableLeft="@drawable/addtimeperiod2"
+                        android:textColor="@color/black"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="match_parent">
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:id="@+id/status"
+                            android:layout_height="wrap_content"
+                            android:text="Seller Offline"
+                            android:layout_marginLeft="17dp"
+                            android:textSize="15dp"
+                            android:textColor="@color/black"
+                            android:layout_marginTop="10dp"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:id="@+id/ratingbar">
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/rateing1"
+                                android:clickable="false"
+                                android:enabled="false"
+                                android:checked="false"
+                                android:button="@drawable/rate_mob"
+                                android:layout_height="wrap_content" />
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/rateing2"
+                                android:clickable="false"
+                                android:enabled="false"
+                                android:checked="false"
+                                android:button="@drawable/rate_mob"
+                                android:layout_height="wrap_content" />
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:clickable="false"
+                                android:enabled="false"
+                                android:checked="false"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/rateing3"
+                                android:button="@drawable/rate_mob"
+                                android:layout_height="wrap_content" />
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:clickable="false"
+                                android:enabled="false"
+                                android:checked="false"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/rateing4"
+                                android:button="@drawable/rate_mob"
+                                android:layout_height="wrap_content" />
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:clickable="false"
+                                android:enabled="false"
+                                android:layout_marginLeft="2dp"
+                                android:id="@+id/rateing5"
+                                android:button="@drawable/rate_mob"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:id="@+id/total_rating"
+                                android:textSize="15dp"
+                                android:layout_marginLeft="10dp"
+                                android:text="0 Rating"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    android:layout_marginTop="23dp"
-                    android:layout_height="wrap_content">
 
-                   <Button
-                       android:layout_width="match_parent"
-                       android:layout_height="70dp"
-                       android:text="VIEW MAP"
-                       android:textColor="@color/white"
-                       android:textSize="20dp"
-                       android:background="@color/green"
-                       android:layout_weight="1"/>
-
-                    <Button
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:text="Contact"
+                        android:layout_height="wrap_content"
                         android:textSize="20dp"
-                        android:textColor="@color/white"
-                        android:background="@color/green"
-                        android:layout_height="70dp"
-                        />
+                        android:layout_marginRight="18dp"
+                        android:layout_marginLeft="22dp"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="15dp"
+                        android:id="@+id/desctitle_pr"
+                        android:text="OTHER"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:layout_marginRight="18dp"
+                        android:id="@+id/desc_pr"
+                        android:layout_marginLeft="22dp"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/brief"/>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:layout_alignParentBottom="true"
+
+                        android:layout_marginTop="23dp"
+                        android:layout_height="wrap_content">
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:text="BUY NOW"
+                            android:id="@+id/buynow"
+                            android:visibility="gone"
+                            android:textColor="@color/white"
+                            android:textSize="15dp"
+                            android:background="@color/green"
+                            android:layout_weight="1"/>
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:text="VIEW MAP"
+                            android:visibility="visible"
+                            android:id="@+id/viewmap_pr"
+                            android:textColor="@color/white"
+                            android:textSize="15dp"
+                            android:background="@color/green"
+                            android:layout_weight="1"/>
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:id="@+id/contact_pr"
+                            android:text="Contact"
+                            android:layout_marginLeft="2dp"
+                            android:textSize="15dp"
+                            android:textColor="@color/white"
+                            android:background="@color/green"
+                            android:layout_height="70dp"
+                            />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
-</ScrollView>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

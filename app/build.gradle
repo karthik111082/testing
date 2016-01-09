@@ -1,5 +1,10 @@
 apply plugin: 'com.android.application'
 
+
+repositories {
+    mavenCentral()
+    //maven { url 'http://maven.stickerpipe.com/artifactory/stickerfactory' }
+}
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
@@ -10,6 +15,7 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -19,8 +25,10 @@ android {
     }
     dexOptions {
         preDexLibraries = false
+        javaMaxHeapSize "4g"
 
     }
+
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES.txt'
         exclude 'META-INF/LICENSE.txt'
@@ -39,12 +47,28 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.1.0'
-    compile 'org.apache.httpcomponents:httpmime:4.4.1'
+    compile project(':pull-to-refresh')
+    compile project(':ImageCropper')
+    compile project(':ViewPagerIndicator-Library')
+    //compile 'org.apache.httpcomponents:httpmime:4.4.1'
+    compile files('libs/PayPal_MPL.jar')
+    compile files('libs/PayPalAndroidSDK-2.8.5.jar')
+    compile files('libs/quickblox(1).jar')
+    compile files('libs/quickblox(2).jar')
+    compile files('libs/quickblox(3).jar')
+    compile files('libs/quickblox(4).jar')
+    compile files('libs/quickblox(5).jar')
+    compile files('libs/quickblox(6).jar')
+    compile files('libs/quickblox(7).jar')
+    compile files('libs/quickblox(8).jar')
+    compile files('libs/quickblox(9).jar')
+
     compile 'com.google.android.gms:play-services-plus:7.8.0'
+    compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
     compile 'com.mikhaellopez:circularimageview:2.1.1'
-
-
-
+    compile 'com.google.android.gms:play-services-maps:8.4.0'
+    compile 'com.google.android.gms:play-services:8.4.0'
+    compile 'com.squareup.picasso:picasso:2.4.0'
+    compile 'com.google.android.gms:play-services-ads:8.4.0'
 }

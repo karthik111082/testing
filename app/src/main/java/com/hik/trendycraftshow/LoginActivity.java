@@ -35,6 +35,9 @@ public class LoginActivity extends Activity {
         } else {
             setContentView(R.layout.activity_main_login_mob);
         }
+
+
+
         login=(Button)findViewById(R.id.sign_in);
         intro=(TextView)findViewById(R.id.intro);
         signup=(Button)findViewById(R.id.sign_up);
@@ -43,9 +46,14 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                finish();
-                startActivity(i);
+                if(internetStatus.InternetStatus(getApplicationContext())) {
+                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    finish();
+                    startActivity(i);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Trendy Craft Show requires internet. Please check!!!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         signup.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +75,7 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(getApplicationContext(), NavigationDrawer.class);
+                Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                 Consts.isGuest=true;
                 finish();
                 startActivity(i);

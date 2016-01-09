@@ -46,7 +46,7 @@
         <item
             android:id="@+id/nav_advertisment"
             android:icon="@drawable/postadvertisment"
-            android:title="POST ADVERTISMENT" />
+            android:title="POST ADVERTISEMENT" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/logout"

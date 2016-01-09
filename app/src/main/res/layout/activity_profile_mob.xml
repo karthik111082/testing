@@ -14,7 +14,6 @@
             android:layout_height="match_parent"
             android:background="@color/white"
             android:orientation="vertical"
-            android:layout_marginTop="15dp"
             android:visibility="visible"
             >
 
@@ -44,7 +43,8 @@
                     app:border_width="4dp"
                     app:shadow="true"
                     app:shadow_radius="10"
-                    app:shadow_color="#8BC34A"/>
+                    app:shadow_color="#8BC34A"
+                    android:background="@color/green"/>
                 <TextView
                     android:id="@+id/btnSelectPhoto"
                     android:layout_width="match_parent"
@@ -55,7 +55,7 @@
                     android:gravity="center_horizontal"
                     android:background="@color/green"
                     android:layout_marginBottom="5dp"
-                    android:layout_marginTop="7dp" />
+                    />
 
             </LinearLayout>
             <LinearLayout
@@ -70,7 +70,22 @@
                 android:paddingTop="15dp"
                 >
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="50dp">
+    <TextView
 
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:padding="5dp"
+        android:text="E-mail"
+        android:textSize="16dp"
+
+        android:textColor="#000000"
+        android:gravity="center_vertical"
+
+        />
 
                 <TextView
                     android:id="@+id/email"
@@ -78,15 +93,20 @@
                     android:layout_height="50dp"
                     android:padding="5dp"
                     android:hint="Email"
+                    android:textSize="16dp"
+
+                    android:textColor="#000000"
                     android:gravity="center_vertical"
                     android:textStyle="bold"
                     />
-
+</LinearLayout>
                 <EditText
                     android:id="@+id/cname"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:padding="5dp"
+                    android:textSize="16dp"
+
                     android:drawableLeft="@drawable/companyicon20"
                     android:hint="@string/companyname"
                     android:gravity="center_vertical"
@@ -100,6 +120,7 @@
                     android:drawableLeft="@drawable/phicon20"
                     android:hint="@string/home_number"
                     android:inputType="phone"
+                    android:textSize="16dp"
                     android:maxLength="10"
                     android:gravity="center_vertical"
                     />
@@ -107,6 +128,7 @@
                     android:id="@+id/cell_phoneno"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:textSize="16dp"
                     android:padding="5dp"
                     android:hint="@string/phone_number"
                     android:drawableLeft="@drawable/mobicon20"
@@ -121,7 +143,8 @@
                     android:layout_height="70dp"
                     android:paddingTop="15dp"
                     android:gravity="center_vertical"
-                    android:hint="@string/address"
+                    android:text="Your Address"
+                    android:textSize="16dp"
                     android:drawableLeft="@drawable/locationicon30"
                     android:textStyle="bold"
                     />
@@ -133,6 +156,7 @@
                     android:padding="5dp"
                     android:drawableLeft="@drawable/locationicon20"
                     android:hint="@string/street_address"
+                    android:textSize="16dp"
                     android:gravity="center_vertical"
 
                     />
@@ -144,6 +168,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:padding="5dp"
+                    android:textSize="16dp"
                     android:drawableLeft="@drawable/locationicon20"
                     android:hint="@string/city"
                     android:gravity="center_vertical"
@@ -153,12 +178,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:entries="@array/spinner"
+                    android:textSize="16dp"
                     android:layout_marginLeft="5dp"
                     android:gravity="center_vertical" />
                 <EditText
                     android:id="@+id/zip"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:textSize="16dp"
                     android:hint="@string/zip"
                     android:drawableLeft="@drawable/locationicon20"
                     android:layout_marginLeft="5dp"
@@ -187,26 +214,26 @@
                     <Button
                         android:id="@+id/save_profile"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="35dp"
                         android:gravity="center"
                         android:layout_gravity="center_horizontal"
                         android:background="@color/green"
                         android:text="@string/save"
                         android:textColor="@color/white"
-                        android:textSize="10dp"
                         android:padding="5dp"
+                        android:textAllCaps="false"
                         android:layout_marginTop="10dp"/>
                     <Button
                         android:id="@+id/cancel_profile"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="35dp"
                         android:gravity="center"
                         android:layout_gravity="center_horizontal"
                         android:background="@color/green"
                         android:text="@string/cancel"
                         android:textColor="@color/white"
-                        android:textSize="10dp"
                         android:padding="5dp"
+                        android:textAllCaps="false"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"/>
                 </LinearLayout>
@@ -239,6 +266,7 @@
                 android:drawableLeft="@drawable/lock20"
                 android:hint="@string/current_password"
                 android:gravity="center_vertical"
+                android:textSize="16dp"
                 android:layout_marginBottom="10dp"
                 android:inputType="textPassword"
                 />
@@ -247,6 +275,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:drawableLeft="@drawable/lock20"
+                android:textSize="16dp"
                 android:hint="@string/new_password"
                 android:gravity="center_vertical"
                 android:layout_marginBottom="10dp"
@@ -261,6 +290,7 @@
                 android:drawableLeft="@drawable/lock20"
                 android:gravity="center_vertical"
                 android:layout_marginBottom="30dp"
+                android:textSize="16dp"
                 android:inputType="textPassword"
 
                 />
@@ -278,7 +308,9 @@
                     android:layout_gravity="center"
                     android:text="@string/confirm_password"
                     android:textColor="@color/white"
-                    android:background="@color/green"/>
+                    android:background="@color/green"
+                    android:textAllCaps="false"
+                    />
 
             </LinearLayout>
 

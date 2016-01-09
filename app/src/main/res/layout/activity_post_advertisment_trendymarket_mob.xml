@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
 
     tools:context=".PostAdvertismentTrendyMarket">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
         android:orientation="vertical">
 
 
@@ -17,7 +17,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="18dp"
+            android:layout_marginLeft="12dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
@@ -26,10 +26,10 @@
                 android:layout_height="match_parent"
                 android:textColor="@color/black"
                 android:textSize="18dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="4dp"
                 android:drawableLeft="@drawable/cameramob"
                 android:gravity="center_vertical"
-                android:text="  Add 4 Photos(99&#xa2;)"/>
+                android:text="  Add 4 Photos (99&#xa2;)"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,7 +43,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/img1"
-
                 android:background="@drawable/addphoto"
                 android:layout_weight="1"
 
@@ -86,18 +85,18 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="22dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginTop="15dp"
                     android:orientation="horizontal">
 
                     <Spinner
                         android:id="@+id/category"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="50dp"
                         android:textColor="@color/black"
-                        android:textSize="25dp"
+                        android:textSize="16dp"
                         android:layout_marginRight="18dp"
-                        android:layout_marginLeft="8dp"
+
                         android:entries="@array/trendycat"
                         android:gravity="center_vertical"
                         android:text="Choose Category"/>
@@ -106,7 +105,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="18dp"
-                    android:layout_marginTop="30dp"
+
                     android:orientation="horizontal">
 
                     <EditText
@@ -114,10 +113,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:drawableLeft="@drawable/addtitlemob20"
                         android:layout_marginRight="18dp"
-
                         android:entries="@array/category"
                         android:gravity="center_vertical"
                         android:hint="  Add Title"/>
@@ -126,7 +124,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="18dp"
-                    android:layout_marginTop="30dp"
+
                     android:orientation="horizontal">
 
                     <EditText
@@ -134,12 +132,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
-                        android:textSize="20dp"
+                        android:textSize="16dp"
                         android:drawableLeft="@drawable/pricemob20"
                         android:layout_marginRight="18dp"
                         android:entries="@array/category"
                         android:gravity="center_vertical"
-                        android:hint="  Price"
+                        android:hint=" My Price"
                         android:inputType="numberDecimal"
                         />
                 </LinearLayout>
@@ -147,7 +145,83 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="18dp"
-                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:layout_marginLeft="2dp"
+                        android:drawableLeft="@drawable/pricemob20"
+                        android:entries="@array/category"
+                        android:gravity="center_vertical"
+                        android:text=" Billed to Buyers"
+                        android:inputType="numberDecimal"
+                        />
+                        <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/blue"
+                        android:textSize="10dp"
+                            android:layout_marginLeft="23dp"
+                        android:entries="@array/category"
+                        android:gravity="center_vertical"
+                        android:text="Includes transaction fees (2.9%+$ 0.30)"
+                        android:inputType="numberDecimal"
+                        />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2">
+                        <TextView
+                            android:id="@+id/pricewithtax"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textColor="@color/black"
+                            android:textSize="20dp"
+                            android:padding="2dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/rectangleborder"
+                            android:layout_marginRight="18dp"
+                            android:entries="@array/category"
+                            android:gravity="center_vertical"
+                            android:hint="$"
+                            android:inputType="numberDecimal"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+
+                    android:orientation="horizontal">
+
+
+                    <EditText
+                        android:id="@+id/street_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:drawableLeft="@drawable/navmob20"
+                        android:layout_marginRight="18dp"
+                        android:entries="@array/category"
+                        android:gravity="center_vertical"
+                        android:hint="  Street Address"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+
                     android:orientation="horizontal">
 
                     <EditText
@@ -155,7 +229,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
-                        android:textSize="20dp"
+                        android:textSize="16dp"
                         android:drawableLeft="@drawable/navmob20"
                         android:layout_marginRight="18dp"
                         android:entries="@array/category"
@@ -165,27 +239,24 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="18dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginRight="18dp"
                     android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/sate"
+                    <Spinner
+                        android:id="@+id/state"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textColor="@color/black"
-                        android:textSize="20dp"
-                        android:drawableLeft="@drawable/navmob20"
-                        android:layout_marginRight="18dp"
+                        android:layout_height="50dp"
+                        android:textSize="16dp"
                         android:entries="@array/spinner"
-                        android:gravity="center_vertical"
-                        android:hint="  State"/>
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center_vertical" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="18dp"
-                    android:layout_marginTop="30dp"
+
                     android:orientation="horizontal">
 
                     <EditText
@@ -193,7 +264,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
-                        android:textSize="20dp"
+                        android:textSize="16dp"
                         android:layout_marginRight="18dp"
                         android:entries="@array/category"
                         android:gravity="center_vertical"
@@ -207,14 +278,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="18dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="15dp"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/black"
-                        android:textSize="20dp"
+                        android:textSize="18dp"
                         android:drawableLeft="@drawable/addtimeperiodmob20"
                         android:layout_marginRight="18dp"
 
@@ -224,16 +295,21 @@
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="18dp"
                     android:layout_gravity="center"
                     android:orientation="horizontal">
-                    <DatePicker
-                        android:layout_width="120dp"
-                        android:layout_height="50dp"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/startdate"
                         android:textColor="@color/black"
-                        android:textSize="25dp"
+                        android:textSize="16dp"
+                        android:hint="Begin Date"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
                         android:background="@color/green"
                         android:startYear="2015"
                         android:endYear="2030"
@@ -243,18 +319,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="5dp"
                         android:text="to"/>
-                    <DatePicker
-                        android:layout_width="120dp"
-                        android:layout_height="50dp"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:id="@+id/enddate"
+                        android:layout_weight="1"
+                        android:background="@color/green"
+                        android:hint="End Date"
+                        android:layout_marginLeft="5dp"
                         android:startYear="2015"
                         android:endYear="2030"
-                        android:background="@color/green"
-                        android:layout_marginLeft="20dp"
-
-                        android:gravity="end"
+                        android:gravity="center_vertical|center_horizontal"
                         />
                 </LinearLayout>
 
@@ -262,7 +341,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
+                    android:textSize="16dp"
                     android:layout_marginRight="18dp"
                     android:layout_marginLeft="22dp"
                     android:textColor="@color/black"
@@ -272,7 +351,7 @@
                     android:id="@+id/brief_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
+                    android:textSize="16dp"
                     android:layout_marginRight="18dp"
                     android:layout_marginLeft="22dp"
                     android:textColor="@color/black"
@@ -285,28 +364,28 @@
             android:layout_width="match_parent"
             android:gravity="center"
             android:layout_marginTop="23dp"
-            android:paddingBottom="40dp"
+            android:paddingBottom="4dp"
             android:layout_height="wrap_content">
 
             <Button
                 android:id="@+id/cancel_advertisement"
                 android:layout_width="130dp"
-                android:layout_height="60dp"
+                android:layout_height="40dp"
                 android:text="Cancel"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="25dp"
-                android:background="@drawable/roundrectaglebutton"/>
+                android:background="@color/green"
+                />
             <Button
                 android:id="@+id/submit_advertisement"
                 android:layout_width="130dp"
-                android:layout_height="60dp"
+                android:layout_height="40dp"
                 android:layout_marginLeft="20dp"
                 android:text="Submit"
                 android:textAllCaps="false"
-                android:textSize="25dp"
                 android:textColor="@color/white"
-                android:background="@drawable/roundrectaglebutton"/>
+                android:background="@color/green"
+                />
         </LinearLayout>
     </LinearLayout>
         </ScrollView>

@@ -81,6 +81,8 @@ public class PaymentAdapter extends BaseAdapter {
 				mHolder = new Holder();
 
 				mHolder.paypalid = (TextView) child.findViewById(R.id.paypalid);
+				mHolder.defaultText = (TextView) child.findViewById(R.id.defaultmsg);
+				mHolder.deleteText = (TextView) child.findViewById(R.id.deletetext);
 				mHolder.statusmsg = (TextView) child.findViewById(R.id.defaulttext);
 				mHolder.defaultButton = (Button) child.findViewById(R.id.setdefault);
 				mHolder.deleteButton = (ImageButton) child.findViewById(R.id.delete);
@@ -95,11 +97,15 @@ public class PaymentAdapter extends BaseAdapter {
 			{
 				mHolder.statusmsg.setVisibility(View.VISIBLE);
 				mHolder.deleteButton.setVisibility(View.INVISIBLE);
+				mHolder.deleteText.setVisibility(View.INVISIBLE);
+				mHolder.defaultText.setVisibility(View.INVISIBLE);
 				mHolder.defaultButton.setVisibility(View.INVISIBLE);
 			}else{
 				mHolder.statusmsg.setVisibility(View.INVISIBLE);
 				mHolder.deleteButton.setVisibility(View.VISIBLE);
 				mHolder.defaultButton.setVisibility(View.VISIBLE);
+				mHolder.deleteText.setVisibility(View.VISIBLE);
+				mHolder.defaultText.setVisibility(View.VISIBLE);
 			}
 			mHolder.defaultButton.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -122,6 +128,8 @@ public class PaymentAdapter extends BaseAdapter {
 	public class Holder {
 		TextView paypalid;
 		TextView statusmsg;
+		TextView defaultText;
+		TextView deleteText;
 		Button defaultButton;
 		ImageButton deleteButton;
 

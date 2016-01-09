@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/ImageCropper/ImageCropper.iml" filepath="$PROJECT_DIR$/ImageCropper/ImageCropper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ViewPagerIndicator-Library/ViewPagerIndicator-Library.iml" filepath="$PROJECT_DIR$/ViewPagerIndicator-Library/ViewPagerIndicator-Library.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/testing.iml" filepath="$PROJECT_DIR$/testing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pull-to-refresh/pull-to-refresh.iml" filepath="$PROJECT_DIR$/pull-to-refresh/pull-to-refresh.iml" />
       <module fileurl="file://$PROJECT_DIR$/testing.iml" filepath="$PROJECT_DIR$/testing.iml" />
     </modules>
   </component>

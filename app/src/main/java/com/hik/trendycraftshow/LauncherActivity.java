@@ -10,12 +10,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.quickblox.auth.QBAuth;
+import com.quickblox.auth.model.QBSession;
+import com.quickblox.core.QBEntityCallbackImpl;
+
+import java.util.List;
+
 public class LauncherActivity extends Activity {
-    private final int SPLASH_DISPLAY_LENGTH = 2000;
+
+    private final int SPLASH_DISPLAY_LENGTH = 3000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
+        initChat();
+
          /* New Handler to start the Menu-Activity
          * and close this splash-Screen after some seconds.*/
         new Handler().postDelayed(new Runnable() {
@@ -39,5 +48,22 @@ public class LauncherActivity extends Activity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             return inflater.inflate(R.layout.payment_history_tabsactivity,null);
         }
+    }
+    public void initChat()
+    {
+        QBAuth.createSession(new QBEntityCallbackImpl<QBSession>() {
+
+            @Override
+            public void onSuccess(QBSession session, Bundle params) {
+                // You have successfully created the session
+                //
+                // Now you can use QuickBlox API!
+            }
+
+            @Override
+            public void onError(List<String> errors) {
+
+            }
+        });
     }
 }

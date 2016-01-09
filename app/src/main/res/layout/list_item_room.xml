@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+<LinearLayout
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    android:id="@+id/roomImagelayout"
+    android:gravity="left"
+    android:orientation="vertical">
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/roomImage"
+        app:border_color="#EEEEEE"
+        app:border_width="4dp"
+        app:shadow="true"
+        app:shadow_radius="5"
+        app:shadow_color="#8BC34A"
+        android:background="@color/white"/>
+</LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:layout_marginLeft="5dp"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/roomName"
+        android:layout_toRightOf="@+id/roomImagelayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textStyle="bold"
+        android:textSize="16dp" />
+    <TextView
+        android:id="@+id/lastMessage"
+        android:layout_below="@+id/roomName"
+        android:layout_toRightOf="@+id/roomImagelayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/textViewGroupType"
+        android:layout_below="@+id/lastMessage"
+        android:layout_toRightOf="@+id/roomImagelayout" />
+</LinearLayout>
+</LinearLayout>

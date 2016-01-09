@@ -22,7 +22,7 @@
                 android:background="@color/green"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:layout_marginTop="25dp">
+               >
                 <TextView
                     android:id="@+id/name"
                     android:layout_width="match_parent"
@@ -38,6 +38,7 @@
                 <com.mikhaellopez.circularimageview.CircularImageView
                     android:layout_width="220dp"
                     android:layout_height="220dp"
+                    android:background="@color/green"
                     android:id="@+id/profile_image_mysales"
                     app:border_color="#EEEEEE"
                     app:border_width="4dp"

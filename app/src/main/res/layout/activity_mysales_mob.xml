@@ -21,14 +21,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/green"
+                android:paddingBottom="16dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:layout_marginTop="25dp">
+                >
                 <TextView
                     android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Karthik Dhanasekaran"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="20dp"
                     android:gravity="center_horizontal"
@@ -41,8 +42,10 @@
                     android:layout_height="150dp"
                     android:id="@+id/profile_image_mysales"
                     app:border_color="#EEEEEE"
+                    android:background="@color/green"
                     app:border_width="4dp"
                     app:shadow="true"
+                    android:layout_marginTop="6dp"
                     app:shadow_radius="10"
                     app:shadow_color="#8BC34A"/>
 
@@ -57,8 +60,9 @@
                     android:id="@+id/tatal_sale"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="$2548.50"
+                    android:text="$ "
                     android:layout_weight="1"
+
                     android:gravity="center"
                     android:textSize="15dp"
                     android:textColor="@color/black"
@@ -70,7 +74,7 @@
                     android:id="@+id/member_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="30 NOV 2015"
+                    android:text=""
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textSize="15dp"
@@ -93,7 +97,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textSize="15dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_marginTop="3dp"
 
                     />
@@ -104,7 +108,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textSize="15dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_marginTop="3dp"
 
 

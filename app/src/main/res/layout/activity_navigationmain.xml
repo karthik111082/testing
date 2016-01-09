@@ -21,6 +21,8 @@
         android:background="#00a05f"
         android:fitsSystemWindows="true"
         app:itemTextColor="#ffffff"
+
+        app:itemIconTint="#ffffff"
         app:menu="@menu/activity_main_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -41,7 +42,7 @@
                     android:visibility="visible"
                     android:layout_marginLeft="10dp"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/back"
+                    android:background="@drawable/backicon"
                     />
                 <TextView
                     android:layout_width="match_parent"
@@ -81,6 +82,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:padding="5dp"
+                            android:drawableLeft="@drawable/usericon20"
                             android:hint="@string/first_last_name"
                             />
 
@@ -91,6 +93,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:padding="5dp"
+                            android:drawableLeft="@drawable/mailicon20"
                             android:hint="@string/emailid"
                             android:inputType="textEmailAddress"
                             />
@@ -102,6 +105,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:padding="5dp"
+                            android:drawableLeft="@drawable/lock20"
                             android:hint="@string/password"
                             android:inputType="textPassword"
                             />
@@ -113,6 +117,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:padding="5dp"
+                            android:drawableLeft="@drawable/lockicon20"
                             android:hint="@string/confirmpassword"
                             android:inputType="textPassword"
                             />
@@ -124,12 +129,14 @@
                             android:padding="5dp"
                             android:hint="@string/home_number"
                             android:inputType="phone"
+                            android:drawableLeft="@drawable/phicon20"
                             android:maxLength="10"
                             />
                     <EditText
                         android:id="@+id/phoneno_cell"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
+                        android:drawableLeft="@drawable/mobicon20"
                         android:padding="5dp"
                         android:hint="@string/phone_number"
                         android:inputType="phone"
@@ -142,6 +149,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:padding="5dp"
+                            android:drawableLeft="@drawable/locationicon20"
                             android:hint="@string/street_address"
                             />
 
@@ -150,6 +158,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:padding="5dp"
+                            android:drawableLeft="@drawable/locationicon20"
                             android:hint="@string/city"
                             />
                     <Spinner
@@ -168,7 +177,7 @@
                         android:hint="@string/zip"
                         android:layout_marginLeft="5dp"
                         android:padding="5dp"
-
+                        android:drawableLeft="@drawable/locationicon20"
                         android:inputType="number"
                         android:maxLength="5"
                         />
@@ -199,27 +208,22 @@
                 android:layout_marginTop="5dp">
                 <TextView
                     android:layout_width="wrap_content"
-
                     android:layout_height="wrap_content"
-
-                    android:gravity="center"
+                    android:textSize="12dp"
                     android:text="@string/terms"
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:id="@+id/terms"
-
-                    android:gravity="center"
+                    android:textSize="12dp"
                     android:textColor="@color/blue"
                     android:text=" Terms and Privacy "
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-                    android:gravity="center"
+                    android:textSize="12dp"
                     android:text="Policies."
                     />
             </LinearLayout>
@@ -340,6 +344,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+
                 android:background="@drawable/bg"
                 >
 
@@ -352,7 +357,7 @@
                     />
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="270dp"
+                    android:layout_height="250dp"
                     android:padding="10dp"
                     android:layout_margin="20dp"
                     android:background="@drawable/continuebg"
@@ -394,7 +399,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:textStyle="bold"
-                    android:layout_margin="20dp"
+
+                    android:layout_margin="5dp"
                     />
 
 
@@ -412,4 +418,5 @@
         android:layout_alignParentBottom="true"
         android:gravity="center_horizontal"
         android:text="Copyright &#169; 2015, William Fuller. All Rights Reserved."/>
+
 </RelativeLayout>

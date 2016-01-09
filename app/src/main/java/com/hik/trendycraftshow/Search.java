@@ -1,6 +1,5 @@
 package com.hik.trendycraftshow;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
@@ -15,7 +14,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.hik.trendycraftshow.ListAdapters.ProductListAdapter;
+import com.hik.trendycraftshow.Utils.Consts;
+import com.hik.trendycraftshow.Utils.GPSTracker;
 import com.hik.trendycraftshow.Utils.IsTablet;
 
 import java.util.Calendar;
@@ -30,11 +33,19 @@ public class Search extends NavigationDrawer {
     EditText keyword,streetaddress,city,zipcode;
     SeekBar seek;
     Button search;
-    ImageButton img1,img2;
-    EditText et1,et2;
-    TextView tx;
+    boolean isListView;
+    Button SearchBtn;
+    int Distance=0,catid;
+    final String minPrice="",maxPrice="";
+    String Keywords="",Street="",City="",Zip="",Startdate="",Enddate="";
+    boolean isStartdate=false;
+    TextView distance,startdate,enddate;
     Calendar calendar;
     private int year, month, day;
+    double latitude;
+    double longitude;
+    GPSTracker gps;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,30 +53,59 @@ public class Search extends NavigationDrawer {
         isTablet = tablet.isTablet(getApplicationContext());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         title=(TextView)findViewById(R.id.titletoolbar);
-        title.setText("SEARCH");
+        title.setText("Search");
         if (isTablet) {
             getLayoutInflater().inflate(R.layout.activity_search, container);
         } else {
             getLayoutInflater().inflate(R.layout.activity_search_mob, container);
         }
+        GpsLocation();
+        catid=getIntent().getExtras().getInt("catid");
+        isListView=getIntent().getExtras().getBoolean("isListView");
         keyword=(EditText)findViewById(R.id.keyword_c);
         streetaddress=(EditText)findViewById(R.id.sac);
         city=(EditText)findViewById(R.id.city_c);
         zipcode=(EditText)findViewById(R.id.zipcode_c);
         seek=(SeekBar)findViewById(R.id.seek_c);
-       search=(Button)findViewById(R.id.search_c);
-        img1=(ImageButton)findViewById(R.id.date1);
-        img2=(ImageButton)findViewById(R.id.date2);
-        et1=(EditText)findViewById(R.id.etd1);
-        et2=(EditText)findViewById(R.id.etd2);
-        tx=(TextView)findViewById(R.id.tx1_c);
+        search=(Button)findViewById(R.id.search_c);
+        startdate=(TextView)findViewById(R.id.pd1);
+        enddate=(TextView)findViewById(R.id.pd2);
+        distance=(TextView)findViewById(R.id.tx1_c);
+        SearchBtn=(Button)findViewById(R.id.search_c);
+        SearchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Keywords=keyword.getText().toString();
+                Street=streetaddress.getText().toString();
+                City=city.getText().toString();
+                Zip=zipcode.getText().toString();
+                Intent i=new Intent(getApplicationContext(), ProductListAdapter.class);
+                finish();
+                i.putExtra("catid", catid);
+                i.putExtra("keyword",Keywords);
+                i.putExtra("street",Street);
+                i.putExtra("city",City);
+                i.putExtra("zip",Zip);
+                i.putExtra("distance",String.valueOf(Distance));
+                i.putExtra("startdate",Startdate);
+                i.putExtra("enddate",Enddate);
+                i.putExtra("minprice",minPrice);
+                i.putExtra("maxprice",maxPrice);
+                i.putExtra("isListView",isListView);
+                i.putExtra("isSearch",true);
+                i.putExtra("latitude",latitude);
+                i.putExtra("longitude",longitude);
+                startActivity(i);
+
+            }
+        });
 
 
         seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-                tx.setText(String.valueOf(progress)+" $");
+                Distance=progress;
+                distance.setText(String.valueOf(progress)+" MILES");
 
             }
 
@@ -79,10 +119,18 @@ public class Search extends NavigationDrawer {
 
             }
         });
-        img1.setOnTouchListener(new View.OnTouchListener() {
+        startdate.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-
+                isStartdate=true;
+                showDialog(999);
+                return true;
+            }
+        });
+        enddate.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                isStartdate=false;
                 showDialog(999);
                 return true;
             }
@@ -101,10 +149,12 @@ public class Search extends NavigationDrawer {
     protected Dialog onCreateDialog(int id) {
         // TODO Auto-generated method stub
         if (id == 999) {
+            DatePickerDialog dialog;
             //return new DatePickerDialog(this, myDateListener, year, month, day);
 
-            DatePickerDialog dialog = new DatePickerDialog(this, myDateListener, year, month, day);
-            dialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+     dialog = new DatePickerDialog(this, myDateListener, year, month, day);
+
+
 
             return dialog;
         }
@@ -123,18 +173,50 @@ public class Search extends NavigationDrawer {
     };
 
     private void showDate(int year, int month, int day) {
-        et1.setText(new StringBuilder().append(month).append("/")
-                .append(day).append("/").append(year));
+        if(isStartdate) {
+            startdate.setText(new StringBuilder().append(String.format("%02d", month)).append("-").append(String.format("%02d", day)).append("-").append(year));
+            Startdate=startdate.getText().toString();
+        }
+        else
+        {
+            enddate.setText(new StringBuilder().append(String.format("%02d", month)).append("-").append(String.format("%02d", day)).append("-").append(year));
+            Enddate=enddate.getText().toString();
+            if(Consts.SearchEndDate(Startdate, Enddate))
+            {
+
+            }else{
+                enddate.setText(Startdate);
+                Toast.makeText(getApplicationContext(), "The ad will be available for maximum period of 30 days from the start date!!!", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode== KeyEvent.KEYCODE_BACK) {
-            Intent i=new Intent(getApplicationContext(),MainActivity.class);
-            finish();
-            startActivity(i);
+
         }
         return false;
 
     }
+    public void GpsLocation()
+    {
+        gps = new GPSTracker(Search.this);
 
+        // check if GPS enabled
+        if(gps.canGetLocation()) {
+
+            latitude = gps.getLatitude();
+            longitude = gps.getLongitude();
+
+
+            // \n is for new line
+
+        }else{
+            // can't get location
+            // GPS or Network is not enabled
+            // Ask user to enable GPS/network in settings
+            gps.showSettingsAlert();
+
+        }
+    }
 }

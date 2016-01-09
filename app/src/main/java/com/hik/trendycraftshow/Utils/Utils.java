@@ -2,20 +2,10 @@ package com.hik.trendycraftshow.Utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-
-import android.os.Environment;
 import android.util.Base64;
 import android.util.Log;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
 
 
 /**
@@ -35,7 +25,10 @@ public class Utils {
 
     }
 
+    public  static  final  String sand_box_id="APP-80W284485P519543T";
+    public  static  final  String paypal_liv_id="APP-4PF21121TJ685590H";
 
+    public  static  final  String paypal_sdk_id="AeaML0qOLHEh4yXN9SHYKeTMCt5ooMKqn9-Mnqp5SiyQrcdsQ4_QONzcs9RoLdqRK6IHi2XH2FlJ1zrj";
 
 
 

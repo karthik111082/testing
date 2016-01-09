@@ -1,13 +1,12 @@
 package com.hik.trendycraftshow;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hik.trendycraftshow.Utils.IsTablet;
 
@@ -23,7 +22,7 @@ public class PostAddChooser  extends NavigationDrawer {
         super.onCreate(savedInstanceState);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         title = (TextView) findViewById(R.id.titletoolbar);
-        title.setText("MY PROFILE");
+        title.setText("Post Advertisement");
         isTablet = tablet.isTablet(getApplicationContext());
         if (isTablet) {
             getLayoutInflater().inflate(R.layout.activity_postadd_chooser, container);
@@ -38,51 +37,67 @@ public class PostAddChooser  extends NavigationDrawer {
         art.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Clicked","clicked");
-                Intent i=new Intent(getApplicationContext(),PostAdvertisment.class);
-                i.putExtra("category", 2);
-                finish();
-                startActivity(i);
+                if(internetStatus.InternetStatus(PostAddChooser.this)) {
+                    Intent i = new Intent(getApplicationContext(), PostAdvertisment.class);
+                    i.putExtra("category", 2);
+                    finish();
+                    startActivity(i);
+                }else {
+                    Toast.makeText(getApplicationContext(), "Trendy Craft Show requires internet. Please check!!!", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
         craft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(internetStatus.InternetStatus(PostAddChooser.this)) {
                 Intent i=new Intent(getApplicationContext(),PostAdvertisment.class);
                 i.putExtra("category", 1);
                 finish();
                 startActivity(i);
-
+                }else {
+                    Toast.makeText(getApplicationContext(), "Trendy Craft Show requires internet. Please check!!!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         expo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                    if(internetStatus.InternetStatus(PostAddChooser.this)) {
                 Intent i = new Intent(getApplicationContext(), PostAdvertisment.class);
                 i.putExtra("category", 3);
                 finish();
                 startActivity(i);
-
+                    }else {
+                        Toast.makeText(getApplicationContext(), "Trendy Craft Show requires internet. Please check!!!", Toast.LENGTH_SHORT).show();
+                    }
             }
         });
         fairs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(internetStatus.InternetStatus(PostAddChooser.this)) {
                 Intent i=new Intent(getApplicationContext(),PostAdvertisment.class);
                 i.putExtra("category", 4);
                 finish();
                 startActivity(i);
-
+                }else {
+                    Toast.makeText(getApplicationContext(), "Trendy Craft Show requires internet. Please check!!!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         trendy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(getApplicationContext(),PostAdvertismentTrendyMarket.class);
-                finish();
-                startActivity(i);
-
+                    if(internetStatus.InternetStatus(PostAddChooser.this)) {
+                    Intent i=new Intent(getApplicationContext(),PostAdvertismentTrendyMarket.class);
+                    finish();
+                    startActivity(i);
+                    }else {
+                        Toast.makeText(getApplicationContext(), "Trendy Craft Show requires internet. Please check!!!", Toast.LENGTH_SHORT).show();
+                    }
             }
         });
 

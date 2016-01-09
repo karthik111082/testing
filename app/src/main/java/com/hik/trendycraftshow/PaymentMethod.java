@@ -1,6 +1,5 @@
 package com.hik.trendycraftshow;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -16,9 +15,8 @@ import com.hik.trendycraftshow.Adapters.PaymentAdapter;
 import com.hik.trendycraftshow.JSON.Api;
 import com.hik.trendycraftshow.JSON.WebServiceRequest;
 import com.hik.trendycraftshow.Utils.Consts;
-import com.hik.trendycraftshow.Utils.DisplayAdapter;
+import com.hik.trendycraftshow.Utils.InternetStatus;
 import com.hik.trendycraftshow.Utils.IsTablet;
-import com.hik.trendycraftshow.Utils.Utils;
 import com.hik.trendycraftshow.Utils.Validation;
 
 import org.json.JSONArray;
@@ -45,7 +43,7 @@ public class PaymentMethod extends NavigationDrawer {
     ArrayList<String> paypalids=new ArrayList<>();
     ArrayList<String> defaultstatus=new ArrayList<>();
     PaymentAdapter adapter;
-
+InternetStatus internetStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +58,7 @@ public class PaymentMethod extends NavigationDrawer {
         } else {
             getLayoutInflater().inflate(R.layout.activity_payment_method_mob, container);
         }
-
+        internetStatus=new InternetStatus();
         payment_list=(ListView)findViewById(R.id.paymentmethod_listview);
         addpaypal=(Button)findViewById(R.id.add);
         paypal_emailid=(EditText)findViewById(R.id.paypal_emailid);
@@ -68,8 +66,9 @@ public class PaymentMethod extends NavigationDrawer {
         add_layout=(LinearLayout)findViewById(R.id.add_layout);
 
         addemail_layout=(LinearLayout)findViewById(R.id.addemail_layout);
-        title.setText("PAYMENT METHOD");
+        title.setText("My Payment Method");
         consts=new Consts(getApplicationContext());
+        if(internetStatus.InternetStatus(PaymentMethod.this))
         GetPaypalAccounts();
         addpaypal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,8 +91,14 @@ public class PaymentMethod extends NavigationDrawer {
                         {
                             status=true;
                         }
-                        sendPaypalId();
-                        consts.showDialog(PaymentMethod.this);
+                        if(internetStatus.InternetStatus(PaymentMethod.this)) {
+                            sendPaypalId();
+                            consts.showDialog(PaymentMethod.this);
+                        }
+                        else
+                        {
+                            Toast.makeText(getApplicationContext(), "Trendy Craft Show requires internet. Please check!!!", Toast.LENGTH_SHORT).show();
+                        }
                     }else
                     {
                         paypal_emailid.setError("Invalid email address. Please Check!!!");
@@ -192,7 +197,7 @@ public class PaymentMethod extends NavigationDrawer {
                         addemail_layout.setVisibility(View.GONE);
                         add_layout.setVisibility(View.VISIBLE);
                         consts.hideDialog();
-                        Toast.makeText(getApplicationContext(), "Please enter valid email-address!!!", Toast.LENGTH_SHORT).show();
+
 
 
                     } catch (JSONException e) {

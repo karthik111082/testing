@@ -18,32 +18,29 @@
             <RadioGroup
                 android:id="@+id/ans1"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginLeft="0dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
                 android:orientation="horizontal">
 
 
-                <RadioButton
-                    android:layout_width="wrap_content"
+                <ImageButton
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textStyle="bold"
-                    android:id="@+id/ads"
-                    android:checked="true"
-                    android:layout_marginLeft="40dp"
+                    android:id="@+id/order"
                     android:text="2"
+                    android:background="@drawable/order_true_tab"
                     android:layout_weight="1"
-                    android:button="@drawable/orderhistory_tab"
                     android:gravity="end|center_vertical"
                     android:textSize="0dp"/>
-                <RadioButton
-                    android:layout_width="wrap_content"
+                <ImageButton
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textStyle="bold"
-                    android:id="@+id/businessdirec"
-                    android:layout_marginRight="50dp"
+                    android:id="@+id/payment"
                     android:text="2"
+                    android:background="@drawable/payment_false_tab"
                     android:layout_weight="1"
-                    android:button="@drawable/paymenthistory_tab"
                     android:textSize="0dp"/>
             </RadioGroup>
 
@@ -53,7 +50,8 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/list_wish">
+            android:layout_marginTop="10dp"
+            android:id="@+id/list">
 
         </ListView>
     </LinearLayout>
