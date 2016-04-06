@@ -16,6 +16,7 @@ import com.hik.trendycraftshow.Utils.IsTablet;
 public class AddsListActivity extends NavigationDrawer implements View.OnClickListener{
     InternetStatus internet;
     Boolean internetstatus = false;
+    String test;
     IsTablet tablet;
     public FrameLayout listContainer;
     ImageButton craftButton,artButton,expoButton,fairsButton,artOnly,craftOnly,directSale;
